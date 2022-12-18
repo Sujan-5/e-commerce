@@ -8,11 +8,10 @@ const userSchema = new mongoose.Schema({
   lastName: { type: String, required: true },
   email: { type: String, required: true },
   password: { type: String, required: true },
+  verified: { type: Boolean, default: false },
 });
 
 userSchema.methods.generateAuthToken = async function () {
-  const user = this;
-
   const token = jwt.sign({ _id: user._id }, process.env.JWTPRIVATEKEY, {
     expiresIn: '7d',
   });
@@ -21,8 +20,6 @@ userSchema.methods.generateAuthToken = async function () {
 
   return token;
 };
-
-const User = mongoose.model('user', userSchema);
 
 const validate = (data) => {
   const schema = Joi.object({
@@ -33,5 +30,6 @@ const validate = (data) => {
   });
   return schema.validate(data);
 };
+const User = mongoose.model('user', userSchema);
 
 module.exports = { User, validate };

@@ -1,4 +1,6 @@
 const router = require('express').Router();
+
+//mongodb user model
 const { User } = require('../models/user');
 const bcrypt = require('bcrypt');
 const Joi = require('joi');
@@ -10,7 +12,8 @@ router.post('/', async (req, res) => {
       return res.status(400).send({ message: error.details[0].message });
 
     const user = await User.findOne({ email: req.body.email });
-    if (!user) return res.status(401).send({ message: 'User not found' });
+    if (!user)
+      return res.status(401).send({ message: 'Invalid Email or Password' });
 
     const validPassword = await bcrypt.compare(
       req.body.password,
@@ -19,9 +22,8 @@ router.post('/', async (req, res) => {
     if (!validPassword)
       return res.status(401).send({ message: 'Invalid Email or Password' });
 
-    const token = await user.generateAuthToken();
-    const { password, ...others } = user._doc;
-    res.status(200).send({ data: token, ...others });
+    const token = user.generateAuthToken();
+    res.status(200).send({ data: token, message: 'logged in successfully' });
   } catch (error) {
     res.status(500).send({ message: 'Internal Server Error' });
   }

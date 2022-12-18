@@ -4,6 +4,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import styles from './styles.module.css';
 
 const Signup = () => {
+  const [passShow, setPassShow] = useState(false);
+  const navigate = useNavigate();
+
   const [data, setData] = useState({
     firstName: '',
     lastName: '',
@@ -11,7 +14,7 @@ const Signup = () => {
     password: '',
   });
   const [error, setError] = useState('');
-  const navigate = useNavigate();
+  const [msg, setMsg] = useState('');
 
   const handleChange = ({ currentTarget: input }) => {
     setData({ ...data, [input.name]: input.value });
@@ -20,10 +23,10 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = 'http://localhost:8080/api/users';
+      const url = 'http://localhost:8080/api/users/register';
       const { data: res } = await axios.post(url, data);
-      navigate('/login');
-      console.log(res.message);
+      navigate('/otpform');
+      setMsg(res.message);
     } catch (error) {
       if (
         error.response &&
@@ -76,7 +79,7 @@ const Signup = () => {
               className={styles.input}
             />
             <input
-              type="password"
+              type={!passShow ? 'password' : 'text'}
               placeholder="Password"
               name="password"
               onChange={handleChange}
@@ -84,7 +87,16 @@ const Signup = () => {
               required
               className={styles.input}
             />
+            <div
+              className={styles.showpass}
+              onClick={() => setPassShow(!passShow)}
+            >
+              {!passShow ? 'Show' : 'Hide'}
+            </div>
+
             {error && <div className={styles.error_msg}>{error}</div>}
+            {msg && <div className={styles.success_msg}>{msg}</div>}
+
             <button type="submit" className={styles.green_btn}>
               Sign Up
             </button>

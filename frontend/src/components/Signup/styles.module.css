@@ -3,6 +3,8 @@
   min-height: 100vh;
   /* background-color: #b5b0b0; */
   background-image: url(/src/img/farm.png);
+  background-repeat: no-repeat;
+  background-size: cover;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -69,7 +71,22 @@
   font-size: 14px;
 }
 
-.error_msg {
+.showpass {
+  position: absolute;
+  right: 27%;
+  top: 58%;
+  padding: 7px 10px;
+  margin-right: 5px;
+  margin-top: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #2a4365;
+  background-color: #edf5f3;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.error_msg.success_msg {
   width: 370px;
   padding: 15px;
   margin: 5px 0;
@@ -78,6 +95,9 @@
   color: white;
   border-radius: 5px;
   text-align: center;
+}
+.success_msg {
+  background-color: #ffffff;
 }
 
 .white_btn,

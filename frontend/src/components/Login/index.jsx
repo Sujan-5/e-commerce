@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import styles from './styles.module.css';
 
 const Login = () => {
+  const [passShow, setPassShow] = useState(false);
+
   const [data, setData] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
 
@@ -45,7 +47,8 @@ const Login = () => {
               className={styles.input}
             />
             <input
-              type="password"
+              type={!passShow ? 'password' : 'text'}
+              // type="password"
               placeholder="Password"
               name="password"
               onChange={handleChange}
@@ -53,6 +56,15 @@ const Login = () => {
               required
               className={styles.input}
             />
+            <Link to="/forgot-password" style={{ alignSelf: 'flex-start' }}>
+              <p style={{ padding: '0 12px' }}>Forgot Password ?</p>
+            </Link>
+            <div
+              className={styles.showpass}
+              onClick={() => setPassShow(!passShow)}
+            >
+              {!passShow ? 'Show' : 'Hide'}
+            </div>
             {error && <div className={styles.error_msg}>{error}</div>}
             <button type="submit" className={styles.green_btn}>
               Login
