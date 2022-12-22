@@ -22,13 +22,9 @@ transporter.verify((error, success) => {
   if (error) {
     console.log(error);
   } else {
-    console.log('Ready for messages');
-    console.log(success);
+    // console.log(success);
   }
 });
-
-//signup
-// router.post('/signup', (req, res));
 
 const sendOTPVerificationEmail = async ({ _id, email }, res) => {
   try {
