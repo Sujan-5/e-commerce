@@ -1,5 +1,8 @@
 import { Box, styled, Typography } from '@mui/material';
 import React from 'react';
+// import { Swiper, SwiperSlide } from 'swiper/react';
+// import 'swiper/css';
+// import { StaticImage } from 'gatsby-plugin-image';
 
 const Banner = styled(Box)(({ theme }) => ({
   display: 'flex',
@@ -61,11 +64,29 @@ const Feed = () => {
     <Banner>
       <BannerImage src="/images/banner/milkB.png" />
       <BannerContent>
-        <Typography variant="h6">Huge Collection</Typography>
+        <Typography variant="h6">Fresh, Local, Delivered</Typography>
         <BannerTitle variant="h2">Milk</BannerTitle>
         <BannerDescription variant="subtitle">Fresh Everyday</BannerDescription>
       </BannerContent>
     </Banner>
+    // <div>
+    //   <Swiper
+    //     spaceBetween={50}
+    //     slidesPerView={3}
+    //     onSlideChange={() => console.log('slide change')}
+    //     onSwiper={(swiper) => console.log(swiper)}
+    //   >
+    //     <SwiperSlide>
+    //       <div className="image">
+    //         <StaticImage src="./images/paneer"></StaticImage>
+    //       </div>
+    //     </SwiperSlide>
+    //     <SwiperSlide>Slide 2</SwiperSlide>
+    //     <SwiperSlide>Slide 3</SwiperSlide>
+    //     <SwiperSlide>Slide 4</SwiperSlide>
+    //     ...
+    //   </Swiper>
+    // </div>
   );
 };
 

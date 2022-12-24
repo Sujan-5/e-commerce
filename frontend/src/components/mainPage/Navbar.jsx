@@ -82,9 +82,9 @@ const Navbar = () => {
           />
         </Search>
         <Dark>
+          <WbSunny style={{ color: '#FFAE42' }} />
+          <Switch style={{ color: 'black' }} />
           <DarkMode />
-          <Switch />
-          <WbSunny />
         </Dark>
         <Icons>
           <Badge>

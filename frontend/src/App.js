@@ -22,6 +22,7 @@ function App() {
     //   <Route path="/" exact element={<Navigate replace to="/login" />} />
 
     //   <Route path="/otpform" exact element={<OtpForm />} />
+    // <Route path="/Navbar" exact element={<Navbar />} />
     //   <Route path="/forgot-password" element={<ForgotPassword />} />
     // </Routes>
 
