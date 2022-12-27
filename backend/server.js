@@ -2,32 +2,37 @@ const dotenv = require('dotenv');
 dotenv.config();
 const express = require('express');
 const app = express();
-const cors = require('cors');
+// const cors = require('cors');
 const connection = require('./database');
-const userRoutes = require('./routes/users');
-const authRoutes = require('./routes/auth');
-const product = require('./routes/product');
 const errorMiddleware = require('./Middleware/error');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
 
-// Handling Uncaught Exception
+// Handling Uncaught Exception********************************************************************************
 process.on('uncaughtException', (err) => {
   console.log(`Error: ${err.message}`);
   console.log(`Shutting down the server due to Uncaught Exception`);
   process.exit(1);
 });
 
-//connection
+//connection**************************************************************************************************
 connection();
 
-//middlewares
+//middlewares************************************************************************************************
 app.use(express.json());
-app.use(cors());
 
-app.use('/api/users', userRoutes);
-app.use('/api/auth', authRoutes);
+// app.use(cors());
+app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+//for routes************************************************************************************************
+const product = require('./routes/product');
+const user = require('./routes/users');
+
 app.use('/api/v1', product);
+app.use('/api/log', user);
 
-//Errors Middleware
+//Errors Middleware******************************************************************************************
 app.use(errorMiddleware);
 
 const server = app.listen(process.env.PORT, () => {

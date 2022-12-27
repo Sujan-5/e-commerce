@@ -1,8 +1,9 @@
 const Product = require('../models/product');
 const ErrorHandler = require('../utils/errorhandler');
 const catchAsyncError = require('../Middleware/catchAsyncErrors');
+const features = require('../utils/features');
 
-//create new product = /api/v1/product/new for ADMIN
+//create new product = /api/v1/product/new for ADMIN **************************************************************************************************************
 exports.newProduct = catchAsyncError(async (req, res, next) => {
   const product = await Product.create(req.body);
 
@@ -12,17 +13,25 @@ exports.newProduct = catchAsyncError(async (req, res, next) => {
   });
 });
 
-//Get all products => /api/v1/products
+//Get all products => /api/v1/products **************************************************************************************************************
 exports.getProducts = catchAsyncError(async (req, res, next) => {
-  const products = await Product.find();
+  const resPerPage = 2;
+  const productCount = await Product.countDocuments();
+
+  const keyFeature = new features(Product.find(), req.query)
+    .search()
+    .filter()
+    .pagination(resPerPage);
+  const products = await keyFeature.query;
   res.status(200).json({
     sucess: true,
     count: products.length,
     products,
+    productCount,
   });
 });
 
-//update Products (ADMIN)
+//update Products (ADMIN)**************************************************************************************************************
 exports.updateProduct = catchAsyncError(async (req, res, next) => {
   let product = await Product.findById(req.params.id);
 
@@ -40,7 +49,7 @@ exports.updateProduct = catchAsyncError(async (req, res, next) => {
   });
 });
 
-//Delete product details
+//single product details **************************************************************************************************************
 exports.singleProduct = catchAsyncError(async (req, res, next) => {
   const product = await Product.findById(req.params.id);
 
@@ -54,7 +63,7 @@ exports.singleProduct = catchAsyncError(async (req, res, next) => {
   });
 });
 
-//Delete product details
+//Delete product details **************************************************************************************************************
 exports.deleteProduct = catchAsyncError(async (req, res, next) => {
   const product = await Product.findById(req.params.id);
 
