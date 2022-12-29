@@ -7,7 +7,7 @@ const Promotion = styled(Box)(({ theme }) => ({
   },
   display: 'flex',
   justifyContent: 'center',
-  alignItems: 'center',
+  alignitems: 'center',
   padding: '10px 0px 10px 0px',
   overflow: 'hidden',
   backgroundColor: 'lightblue',
@@ -52,7 +52,7 @@ const Promotions = () => {
   return (
     <Promotion>
       <Slide direction={show ? 'left' : 'right'} in={show}>
-        <Box display={'flex'} justifyContent="center" alightItems={'center'}>
+        <Box display={'flex'} justifyContent="center" alightitems={'center'}>
           <MessagePromo>{messages[messageIndex]}</MessagePromo>
         </Box>
       </Slide>

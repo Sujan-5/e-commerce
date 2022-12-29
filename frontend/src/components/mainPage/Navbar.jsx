@@ -71,7 +71,7 @@ const Navbar = () => {
           sx={{ display: { xs: 'none', sm: 'block' } }}
           color={'black'}
         >
-          CityWide
+          City<b style={{ color: 'red' }}>Wide</b>
         </Typography>
         <LocationCity sx={{ display: { xs: 'block', sm: 'none' } }} />
 

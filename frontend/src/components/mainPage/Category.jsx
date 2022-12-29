@@ -1,52 +1,50 @@
 import React from 'react';
-import {
-  Box,
-  styled,
-  ImageList,
-  ImageListItem,
-  ImageListItemBar,
-} from '@mui/material';
+import { Box, styled, Stack, Typography } from '@mui/material';
 
-const Categories = styled(Box)(({ theme }) => ({
-  padding: '2px 8px',
+import milkImage from '../../displayProductImages/milk.jpg';
+import fruits from '../../displayProductImages/fruits.jpg';
+import snacks from '../../displayProductImages/snacks.jpg';
 
-  [theme.breakpoints.down('sm')]: {
-    flexDirection: 'column',
-    alignItems: 'centre',
-  },
-}));
+const StyledBox = styled(Box)({
+  height: 250,
+  width: '100%',
+  cursor: 'pointer',
+  backgroundRepeat: 'no-repeat',
+  backgroundPosition: 'center',
+  backgroundSize: 'cover',
+});
 
+const StyledTypography = styled(Typography)({
+  margin: '20% 50px 25% 50px',
+  background: 'white',
+  opacity: '0.8',
+});
 const Category = () => {
   return (
-    <Categories flex={4} p={2}>
-      <ImageList variant="quilted" sx={{ width: 500, height: 450 }} cols={3}>
-        {itemData.map((item) => (
-          <ImageListItem key={item.img}>
-            <img
-              src={`${item.img}?w=248&h=248&fit=crop&auto=format&dpr=2`}
-              alt={item.title}
-              loading="lazy"
-            />
-            <ImageListItemBar title={item.title} />
-          </ImageListItem>
-        ))}
-      </ImageList>
-    </Categories>
+    <Box>
+      <Stack
+        direction={{ xs: 'column', sm: 'row' }}
+        spacing={{ xs: 1, sm: 2, md: 3 }}
+        mt={1}
+      >
+        <StyledBox sx={{ backgroundImage: `url(${milkImage})` }}>
+          <StyledTypography align="center" variant="h4">
+            Milk
+          </StyledTypography>
+        </StyledBox>
+        <StyledBox sx={{ backgroundImage: `url(${fruits})` }}>
+          <StyledTypography align="center" variant="h4">
+            Fruits
+          </StyledTypography>
+        </StyledBox>
+        <StyledBox sx={{ backgroundImage: `url(${snacks})` }}>
+          <StyledTypography align="center" variant="h4">
+            Snacks
+          </StyledTypography>
+        </StyledBox>
+      </Stack>
+    </Box>
   );
 };
-const itemData = [
-  {
-    title: 'Milk',
-    img: 'https://images.pexels.com/photos/248412/pexels-photo-248412.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-  },
-  {
-    title: 'Dahi',
-    img: 'https://nanakfoods.com/files/product-photo-gallery/dahi-368.png',
-  },
-  {
-    title: 'Ghee',
-    img: 'https://cdn.apartmenttherapy.info/image/upload/f_jpg,q_auto:eco,c_fill,g_auto,w_1500,ar_4:3/k%2Farchive%2F143f3f127ade44d817efbf645606142e56c66317',
-  },
-];
 
 export default Category;

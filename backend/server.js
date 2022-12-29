@@ -2,7 +2,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 const express = require('express');
 const app = express();
-// const cors = require('cors');
+const cors = require('cors');
 const connection = require('./database');
 const errorMiddleware = require('./Middleware/error');
 const cookieParser = require('cookie-parser');
@@ -21,7 +21,7 @@ connection();
 //middlewares************************************************************************************************
 app.use(express.json());
 
-// app.use(cors());
+app.use(cors());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 

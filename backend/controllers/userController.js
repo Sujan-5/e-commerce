@@ -43,6 +43,12 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHandler('Invalid email or password', 401));
   }
 
+  res.cookie('jwt', 'Hello World', {
+    httpOnly: true,
+    secure: true,
+    // sameSite: 'None',
+    maxAge: 246060 * 1000,
+  });
   tokenSend(user, 200, res);
 });
 

@@ -5,7 +5,8 @@ import styles from './styles.module.css';
 
 const Signup = () => {
   const [passShow, setPassShow] = useState(false);
-  const navigate = useNavigate();
+  const [avatar, setAvatar] = useState('/logo192.png');
+  const [avatarPreview, setAvatarPreview] = useState('/logo192.png');
 
   const [data, setData] = useState({
     firstName: '',
@@ -15,6 +16,7 @@ const Signup = () => {
   });
   const [error, setError] = useState('');
   const [msg, setMsg] = useState('');
+  const navigate = useNavigate();
 
   const handleChange = ({ currentTarget: input }) => {
     setData({ ...data, [input.name]: input.value });
@@ -23,9 +25,9 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = 'http://localhost:8080/api/users/register';
+      const url = 'http://localhost:8080/api/log/register';
       const { data: res } = await axios.post(url, data);
-      navigate('/otpform');
+      navigate('/login');
       setMsg(res.message);
     } catch (error) {
       if (
@@ -35,6 +37,22 @@ const Signup = () => {
       ) {
         setError(error.response.data.message);
       }
+    }
+  };
+
+  const registerDataChange = (e) => {
+    if (e.target.name === 'avatar') {
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        if (reader.readyState === 2) {
+          setAvatarPreview(reader.result);
+          setAvatar(reader.result);
+        }
+      };
+      reader.readAsDataURL(e.target.files[0]);
+    } else {
+      setData({ ...data, [e.target.name]: e.targe.value });
     }
   };
   return (
@@ -87,6 +105,15 @@ const Signup = () => {
               required
               className={styles.input}
             />
+            <div className={styles.avatarImg}>
+              <img src={avatarPreview} alt="Avatar Preview" />
+              <input
+                type="file"
+                name={avatar}
+                accept="image/*"
+                onChange={registerDataChange}
+              ></input>
+            </div>
             <div
               className={styles.showpass}
               onClick={() => setPassShow(!passShow)}

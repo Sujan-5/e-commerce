@@ -2,7 +2,7 @@
   width: 100%;
   min-height: 100vh;
   /* background-color: #b5b0b0; */
-  background-image: url(/src/img/farm.png);
+  background-image: url(../../../public/images/login&signup/farm.png);
   background-repeat: no-repeat;
   background-size: cover;
   display: flex;
@@ -77,13 +77,38 @@
   top: 58%;
   padding: 7px 10px;
   margin-right: 5px;
-  margin-top: 12px;
+  margin-top: -40px;
   font-size: 14px;
   font-weight: 600;
   color: #2a4365;
   background-color: #edf5f3;
   border-radius: 5px;
   cursor: pointer;
+}
+.avatarImg > img {
+  width: 3vmax;
+  border-radius: 80%;
+  margin-right: 9vmax;
+  margin-top: 1vmax;
+}
+.avatarImg > input {
+  display: flex;
+  padding: 0%;
+  margin-left: 7vmax;
+  margin-bottom: 1vmax;
+}
+
+.avatarImg > input::file-selector-button {
+  cursor: pointer;
+  width: 100%;
+  z-index: 2;
+  height: 5vh;
+  border: none;
+  margin: 0%;
+  transition: all 0.5s;
+  padding: 0 1vmax;
+  color: rgb(255, 250, 250);
+  background-color: rgb(30, 30, 30);
 }
 
 .error_msg.success_msg {

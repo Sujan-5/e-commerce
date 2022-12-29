@@ -1,25 +1,27 @@
 import { Box, styled, Typography } from '@mui/material';
 import React from 'react';
-// import { Swiper, SwiperSlide } from 'swiper/react';
-// import 'swiper/css';
-// import { StaticImage } from 'gatsby-plugin-image';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Scrollbar, Thumbs } from 'swiper';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
 
 const Banner = styled(Box)(({ theme }) => ({
   display: 'flex',
   justifyContent: 'center',
-  marginTop: 3,
   width: '100%',
   height: '100%',
   padding: '2px 8px',
-
-  backgroundColor: 'lightgray',
+  padding: '0px 0px',
+  backgroundColor: '#D3D3D3',
   [theme.breakpoints.down('sm')]: {
-    flexDirection: 'column',
-    alignItems: 'centre',
+    display: 'flex',
   },
 }));
 
 const BannerContent = styled(Box)(() => ({
+  flex: 1,
   display: 'flex',
   justifyContent: 'centre',
   flexDirection: 'column',
@@ -27,16 +29,17 @@ const BannerContent = styled(Box)(() => ({
   maxWidth: '420',
 }));
 
-const BannerTitle = styled(Typography)(({ theme }) => ({
+const Title = styled(Typography)(({ theme }) => ({
   lineHeight: 1.5,
   fontSize: '70px',
   marginBottom: '20px',
+  marginRight: '100px',
   [theme.breakpoints.down('sm')]: {
-    fontSize: '42px',
+    fontSize: '35px',
   },
 }));
 
-const BannerDescription = styled(Typography)(({ theme }) => ({
+const Description = styled(Typography)(({ theme }) => ({
   lineHeight: 1.25,
   letterSpacing: 1.25,
   marginBottom: '20px',
@@ -47,47 +50,80 @@ const BannerDescription = styled(Typography)(({ theme }) => ({
   },
 }));
 
-const BannerImage = styled('img')(({ src, theme }) => ({
+const Image = styled('img')(({ src, theme }) => ({
+  flex: 1,
   src: `url(${src})`,
-  width: '350px',
+  width: '100%',
+  height: '50vh',
+  objectFit: 'contain',
   [theme.breakpoints.down('md')]: {
-    width: '350px',
+    width: '200px',
   },
   [theme.breakpoints.down('sm')]: {
-    width: '320px',
-    height: '300px',
+    width: '200px',
+    height: '180px',
   },
 }));
+
+const Wrapper = styled('div')`
+  display: flex;
+  justifycontent: center;
+`;
 
 const Feed = () => {
   return (
     <Banner>
-      <BannerImage src="/images/banner/milkB.png" />
-      <BannerContent>
-        <Typography variant="h6">Fresh, Local, Delivered</Typography>
-        <BannerTitle variant="h2">Milk</BannerTitle>
-        <BannerDescription variant="subtitle">Fresh Everyday</BannerDescription>
-      </BannerContent>
+      <Swiper
+        modules={[Navigation, Pagination, Scrollbar, Thumbs]}
+        autoplay={{ delay: 4000 }}
+        spaceBetween={0}
+        slidesPerView={1}
+        navigation
+        pagination={{ clickable: true }}
+        loop={true}
+        grabCursor
+        sx={{ display: 'flex' }}
+      >
+        {sliderItems.map((product) => (
+          <SwiperSlide key={product.id}>
+            <Wrapper>
+              <Image src={product.img} />
+              <BannerContent>
+                <Typography fontSize={{ xs: '9px', sm: '18px' }}>
+                  Fresh, Local, Delivered
+                </Typography>
+                <Title variant="h2">{product.title}</Title>
+                <Description fontSize={{ xs: '9px', sm: '18px' }}>
+                  {product.desc}
+                </Description>
+              </BannerContent>
+            </Wrapper>
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </Banner>
-    // <div>
-    //   <Swiper
-    //     spaceBetween={50}
-    //     slidesPerView={3}
-    //     onSlideChange={() => console.log('slide change')}
-    //     onSwiper={(swiper) => console.log(swiper)}
-    //   >
-    //     <SwiperSlide>
-    //       <div className="image">
-    //         <StaticImage src="./images/paneer"></StaticImage>
-    //       </div>
-    //     </SwiperSlide>
-    //     <SwiperSlide>Slide 2</SwiperSlide>
-    //     <SwiperSlide>Slide 3</SwiperSlide>
-    //     <SwiperSlide>Slide 4</SwiperSlide>
-    //     ...
-    //   </Swiper>
-    // </div>
   );
 };
+
+const sliderItems = [
+  {
+    id: 1,
+    title: 'Milk',
+    img: '/images/banner/milkB.png',
+    desc: 'Fresh Everyday',
+  },
+  {
+    id: 2,
+    title: 'Dahi',
+    img: 'https://nanakfoods.com/files/product-photo-gallery/dahi-368.png',
+    desc: 'Fresh Everyday',
+  },
+  {
+    id: 3,
+    title: 'Ghee',
+    img: 'https://cdn.apartmenttherapy.info/image/upload/f_jpg,q_auto:eco,c_fill,g_auto,w_1500,ar_4:3/k%2Farchive%2F143f3f127ade44d817efbf645606142e56c66317',
+    desc: 'Fresh Everyday',
+  },
+];
 
 export default Feed;
