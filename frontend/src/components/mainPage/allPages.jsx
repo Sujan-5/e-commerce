@@ -1,9 +1,10 @@
 import React from 'react';
-import Navbar from './Navbar';
-import Feed from './Feed';
+import Navbar from './HomePage/Navbar';
+import Feed from './HomePage/Feed';
 import { Box, Container } from '@mui/material';
-import Promotions from './Promotions';
-import Category from './/Category';
+import Promotions from './HomePage/Promotions';
+import Category from './HomePage/Category';
+import Footer from './HomePage/Footer';
 
 const allPages = () => {
   return (
@@ -14,6 +15,7 @@ const allPages = () => {
       <Container>
         <Category />
       </Container>
+      <Footer />
     </Box>
   );
 };

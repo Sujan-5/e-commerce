@@ -9,6 +9,7 @@ import {
   InputBase,
   Menu,
   MenuItem,
+  Link,
 } from '@mui/material';
 import {
   LocationCity,
@@ -66,13 +67,16 @@ const Navbar = () => {
   return (
     <AppBar position="sticky">
       <StyledToolbar>
-        <Typography
-          variant="h6"
-          sx={{ display: { xs: 'none', sm: 'block' } }}
-          color={'black'}
-        >
-          City<b style={{ color: 'red' }}>Wide</b>
-        </Typography>
+        <Link to="/home" sx={{ textDecoration: 'none' }}>
+          <Typography
+            variant="h6"
+            sx={{ display: { xs: 'none', sm: 'block' } }}
+            color={'black'}
+          >
+            City<b style={{ color: 'red' }}>Wide</b>
+            {/* <img src="/images/banner/logo.png" alt='logo' /> */}
+          </Typography>
+        </Link>
         <LocationCity sx={{ display: { xs: 'block', sm: 'none' } }} />
 
         <Search>

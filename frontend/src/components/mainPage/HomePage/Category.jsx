@@ -1,12 +1,12 @@
 import React from 'react';
 import { Box, styled, Stack, Typography } from '@mui/material';
 
-import milkImage from '../../displayProductImages/milk.jpg';
-import fruits from '../../displayProductImages/fruits.jpg';
-import snacks from '../../displayProductImages/snacks.jpg';
+import milkImage from '../../../displayProductImages/milk.jpg';
+import fruits from '../../../displayProductImages/fruits.jpg';
+import snacks from '../../../displayProductImages/snacks.jpg';
 
 const StyledBox = styled(Box)({
-  height: 250,
+  height: 200,
   width: '100%',
   cursor: 'pointer',
   backgroundRepeat: 'no-repeat',
@@ -25,6 +25,9 @@ const Category = () => {
       <Stack
         direction={{ xs: 'column', sm: 'row' }}
         spacing={{ xs: 1, sm: 2, md: 3 }}
+        height={{ xs: '10%', sm: '100%' }}
+        width={{ xs: '100%', sm: '100%' }}
+        sx={{ display: 'flex' }}
         mt={1}
       >
         <StyledBox sx={{ backgroundImage: `url(${milkImage})` }}>

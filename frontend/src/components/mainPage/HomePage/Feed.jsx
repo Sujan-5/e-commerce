@@ -1,7 +1,7 @@
 import { Box, styled, Typography } from '@mui/material';
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Scrollbar, Thumbs } from 'swiper';
+import { Autoplay, Navigation, Pagination, Scrollbar, Thumbs } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -10,10 +10,10 @@ import 'swiper/css/scrollbar';
 const Banner = styled(Box)(({ theme }) => ({
   display: 'flex',
   justifyContent: 'center',
-  width: '100%',
+  width: '98.9 %',
   height: '100%',
   padding: '2px 8px',
-  padding: '0px 0px',
+
   backgroundColor: '#D3D3D3',
   [theme.breakpoints.down('sm')]: {
     display: 'flex',
@@ -74,14 +74,18 @@ const Feed = () => {
   return (
     <Banner>
       <Swiper
-        modules={[Navigation, Pagination, Scrollbar, Thumbs]}
-        autoplay={{ delay: 4000 }}
+        modules={[Navigation, Pagination, Scrollbar, Thumbs, Autoplay]}
+        autoplay={{
+          delay: 10000,
+          disableOnInteraction: false,
+          pauseOnMouseEnter: true,
+        }}
         spaceBetween={0}
         slidesPerView={1}
         navigation
         pagination={{ clickable: true }}
         loop={true}
-        grabCursor
+        effect={'slide'}
         sx={{ display: 'flex' }}
       >
         {sliderItems.map((product) => (

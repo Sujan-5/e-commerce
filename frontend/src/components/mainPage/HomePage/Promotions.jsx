@@ -8,7 +8,7 @@ const Promotion = styled(Box)(({ theme }) => ({
   display: 'flex',
   justifyContent: 'center',
   alignitems: 'center',
-  padding: '10px 0px 10px 0px',
+  padding: '8px 0px 8px 0px',
   overflow: 'hidden',
   backgroundColor: 'lightblue',
 }));
@@ -35,7 +35,7 @@ const Promotions = () => {
   useEffect(() => {
     setTimeout(() => {
       setShow(false);
-    }, 3000);
+    }, 4000);
 
     const intervalId = setInterval(() => {
       setMessageIndex((i) => (i + 1) % messages.length);
