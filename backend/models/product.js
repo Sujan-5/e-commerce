@@ -35,12 +35,9 @@ const productSchema = new Schema({
     },
   ],
   category: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Category',
     required: [true, 'Please enter product category'],
-    enum: {
-      values: ['Dairy', 'Fruits', 'Drinks'],
-      message: 'Please select correct category for product',
-    },
   },
   stock: {
     type: Number,

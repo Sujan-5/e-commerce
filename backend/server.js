@@ -28,9 +28,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //for routes************************************************************************************************
 const product = require('./routes/product');
 const user = require('./routes/users');
+const categoryRouter = require('./routes/categoryRoutes');
 
 app.use('/api/v1', product);
 app.use('/api/log', user);
+app.use('/api/v1', categoryRouter);
 
 //Errors Middleware******************************************************************************************
 app.use(errorMiddleware);
