@@ -19,6 +19,7 @@ import {
 } from '@mui/icons-material';
 import React from 'react';
 import { useState } from 'react';
+import SearchIcon from '@mui/icons-material/Search';
 import Switch from '@mui/material/Switch';
 
 const StyledToolbar = styled(Toolbar)({
@@ -29,7 +30,7 @@ const StyledToolbar = styled(Toolbar)({
 
 const Search = styled('div')(({ theme }) => ({
   backgroundColor: '#DADBDD',
-  padding: '0 10px',
+  padding: '0 12px',
   borderRadius: theme.shape.borderRadius,
   width: '40%',
 }));
@@ -80,8 +81,9 @@ const Navbar = () => {
         <LocationCity sx={{ display: { xs: 'block', sm: 'none' } }} />
 
         <Search>
+          <SearchIcon style={{ color: 'black' }} />
           <InputBase
-            placeholder="search..."
+            placeholder="   search..."
             sx={{ input: { color: 'black' } }}
           />
         </Search>

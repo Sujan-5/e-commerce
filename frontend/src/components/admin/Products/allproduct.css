@@ -1,0 +1,75 @@
+/******************************************************************************************************************************************/
+.productcontainer {
+  width: 100%;
+  box-sizing: border-box;
+  background-color: rgb(255, 255, 255);
+  border-left: 1px solid rgba(0, 0, 0, 0.158);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.heading {
+  font: 400 2rem;
+  padding: 0.5vmax;
+  box-sizing: border-box;
+  color: rgba(0, 0, 0, 0.637);
+  transition: all 0.5s;
+  margin: 2rem;
+  text-align: start;
+}
+
+.productcontainer > a {
+  text-decoration: none;
+}
+
+.productcontainer > a > button {
+  background-color: DodgerBlue;
+  border: none;
+  color: white;
+  padding: 12px 16px;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  margin-bottom: 2%;
+  margin-right: 5%;
+}
+.productcontainer > a > button:hover {
+  background-color: RoyalBlue;
+}
+
+.productTable {
+  background-color: rgb(255, 255, 255);
+  border: none !important;
+}
+
+.productTable div {
+  font: 300 1vmax 'Roboto';
+  color: rgba(0, 0, 0, 0.678);
+  border: none !important;
+}
+
+.productTable a,
+.productTable button {
+  color: rgba(0, 0, 0, 0.527);
+  transition: all 0.5s;
+}
+
+.productTable a:hover {
+  color: tomato;
+}
+
+.productTable button:hover {
+  color: rgb(236, 30, 30);
+}
+
+.MuiDataGrid-columnHeader div {
+  color: rgb(0, 0, 0);
+}
+
+@media screen and (max-width: 600px) {
+  .productTable div {
+    font: 300 4vw 'Roboto';
+  }
+}
