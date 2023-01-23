@@ -10,6 +10,7 @@ import PeopleIcon from '@material-ui/icons/People';
 import PostAddIcon from '@material-ui/icons/PostAdd';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import DashboardIcon from '@material-ui/icons/Dashboard';
+import Category from '@material-ui/icons/Category';
 import './sidebar.css';
 
 import AddIcon from '@material-ui/icons/Add';
@@ -55,6 +56,12 @@ export const LeftSidebar = () => {
         <p>
           <RateReviewIcon />
           Reviews
+        </p>
+      </Link>
+      <Link to="/admin/category">
+        <p>
+          <Category />
+          Category
         </p>
       </Link>
     </div>

@@ -14,13 +14,13 @@ import {
 import {
   LocationCity,
   ShoppingCart,
-  DarkMode,
-  WbSunny,
+  // DarkMode,
+  // WbSunny,
 } from '@mui/icons-material';
 import React from 'react';
 import { useState } from 'react';
 import SearchIcon from '@mui/icons-material/Search';
-import Switch from '@mui/material/Switch';
+// import Switch from '@mui/material/Switch';
 
 const StyledToolbar = styled(Toolbar)({
   display: 'flex',
@@ -54,14 +54,14 @@ const UserBox = styled(Box)(({ theme }) => ({
   },
 }));
 
-const Dark = styled(Box)(({ theme }) => ({
-  display: 'none',
-  alignItems: 'center',
-  color: 'black',
-  [theme.breakpoints.up('sm')]: {
-    display: 'flex',
-  },
-}));
+// const Dark = styled(Box)(({ theme }) => ({
+//   display: 'none',
+//   alignItems: 'center',
+//   color: 'black',
+//   [theme.breakpoints.up('sm')]: {
+//     display: 'flex',
+//   },
+// }));
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -87,11 +87,11 @@ const Navbar = () => {
             sx={{ input: { color: 'black' } }}
           />
         </Search>
-        <Dark>
+        {/* <Dark>
           <WbSunny style={{ color: '#FFAE42' }} />
           <Switch style={{ color: 'black' }} />
           <DarkMode />
-        </Dark>
+        </Dark> */}
         <Icons>
           <Badge>
             <ShoppingCart />

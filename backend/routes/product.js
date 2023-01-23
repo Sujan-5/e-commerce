@@ -6,6 +6,7 @@ const {
   deleteProduct,
   updateProduct,
   singleProduct,
+  getAdminProducts,
 } = require('../controllers/productController');
 
 const { isAuthenticatedUser, authorizeRoles } = require('../Middleware/authe');
@@ -18,6 +19,8 @@ router.route('/products').get(getProducts);
 //   authorizeRoles('admin'),
 //   newProduct
 // );
+
+router.route('/admin/products').get(getAdminProducts);
 
 router
   .route('/admin/product/new')

@@ -56,10 +56,10 @@
 .showpass {
   position: absolute;
   right: 47%;
-  top: 48%;
+  top: 47%;
   padding: 7px 10px;
   margin-right: 5px;
-  margin-top: 12px;
+  margin-top: -8px;
   font-size: 14px;
   font-weight: 600;
   color: #2a4365;

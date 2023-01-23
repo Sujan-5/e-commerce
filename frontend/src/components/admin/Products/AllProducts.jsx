@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { LeftSidebar } from '../LeftSidebar';
 import { DataGrid } from '@material-ui/data-grid';
@@ -6,9 +6,31 @@ import { Button } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Add from '@material-ui/icons/Add';
+import {
+  errorClear,
+  getAdminProduct,
+} from '../../../reduxFeature/actions/productAction';
+import { useSelector, useDispatch } from 'react-redux';
 import './allproduct.css';
+import { useEffect } from 'react';
+import { Fragment } from 'react';
+import { useAlert } from 'react-alert';
 
-export const AllProducts = () => {
+export const AllProducts = ({ history }) => {
+  const dispatch = useDispatch();
+
+  const alert = useAlert();
+
+  const { error, products } = useSelector((state) => state.products);
+
+  useEffect(() => {
+    if (error) {
+      alert.error(error);
+      dispatch(errorClear());
+    }
+    dispatch(getAdminProduct());
+  }, [dispatch, alert, error]);
+
   const columns = [
     {
       field: 'id',
@@ -48,7 +70,7 @@ export const AllProducts = () => {
       renderCell: (params) => {
         return (
           <Fragment>
-            <Link>
+            <Link to={`/admin/product/${params.getValue(params.id, 'id')}`}>
               <EditIcon />
             </Link>
 
@@ -61,7 +83,17 @@ export const AllProducts = () => {
     },
   ];
 
-  const rows = [{ id: 45652, name: 'Milk', stock: 444, price: 120 }];
+  const rows = [];
+
+  products &&
+    products.forEach((prod) => {
+      rows.push({
+        id: prod._id,
+        stock: prod.Stock,
+        price: prod.price,
+        name: prod.name,
+      });
+    });
 
   return (
     <Fragment>

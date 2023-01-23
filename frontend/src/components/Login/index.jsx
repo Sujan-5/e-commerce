@@ -5,7 +5,7 @@ import styles from './styles.module.css';
 
 const Login = () => {
   const [passShow, setPassShow] = useState(false);
-
+  const [msg, setMsg] = useState('');
   const [data, setData] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
 
@@ -18,7 +18,7 @@ const Login = () => {
     try {
       const url = 'http://localhost:8080/api/log/login';
       const { data: res } = await axios.post(url, data);
-
+      setMsg(res.message);
       window.location = '/home';
     } catch (error) {
       if (
@@ -72,6 +72,7 @@ const Login = () => {
           </form>
         </div>
 
+        {msg && <div className={styles.success_msg}>{msg}</div>}
         <div className={styles.right}>
           <h1>Register Here</h1>
           <Link to="/signup">
