@@ -1,0 +1,168 @@
+.ProductDetails {
+  background-color: rgb(255, 255, 255);
+  width: 100vw;
+  max-width: 100%;
+  padding: 6vmax;
+  box-sizing: border-box;
+  display: flex;
+}
+
+.ProductDetails > div {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 2vmax;
+  box-sizing: border-box;
+  /* border: 1px solid white; */
+}
+
+.ProductDetails > div:last-child {
+  align-items: flex-start;
+}
+
+.ImageCro {
+  width: 20vmax;
+}
+
+.block1 > h2 {
+  color: rgb(54, 54, 54);
+  font: 600 1.6vmax 'Roboto';
+}
+
+.block2 {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-top: 1px solid rgba(0, 0, 0, 0.205);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.205);
+  width: 70%;
+  padding: 1vmax 0;
+}
+
+.block2-span {
+  font: 200 0.8vmax cursive;
+  color: rgba(0, 0, 0, 0.699);
+}
+
+.block3 {
+  width: 70%;
+}
+
+.outstock {
+  color: red;
+}
+
+.lowstock {
+  color: rgb(251, 113, 113);
+}
+
+.instock {
+  color: rgb(57, 176, 57);
+}
+
+.block3 > h1 {
+  color: rgba(17, 17, 17, 0.795);
+  font: 400 1.8vmax 'Franklin Gothic Medium';
+  margin: 1vmax 0;
+}
+.block31 {
+  display: flex;
+  align-items: center;
+}
+
+.block31 > button:last-child {
+  border: none;
+  cursor: pointer;
+  color: white;
+  transition: all 0.5s;
+  background-color: rgb(3, 102, 251);
+  font: 500 0.7vmax 'Roboto';
+  border-radius: 20px;
+  padding: 0.5vmax 2vmax;
+  margin: 1vmax;
+  outline: none;
+}
+
+.block31 > button:last-child:hover {
+  background-color: rgb(214, 84, 61);
+}
+
+.block3 > p {
+  border-top: 1px solid rgba(0, 0, 0, 0.205);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.205);
+  padding: 1vmax 0;
+  color: rgba(0, 0, 0, 0.651);
+  font: 400 1vmax 'Roboto';
+  margin: 1vmax 0;
+}
+
+.block4 {
+  color: rgba(0, 0, 0, 0.897);
+  font: 500 1.2vmax sans-serif;
+}
+
+.block4 > p {
+  color: rgba(0, 0, 0, 0.534);
+  font: 300 0.8vmax sans-serif;
+}
+
+@media screen and (max-width: 600px) {
+  .ProductDetails {
+    flex-direction: column;
+    height: unset;
+  }
+
+  .ProductDetails > div:last-child {
+    align-items: center;
+  }
+
+  .block1 > h2 {
+    font-size: 2.8vmax;
+    text-align: center;
+  }
+
+  .block1 > p {
+    text-align: center;
+    font-size: 1vmax;
+  }
+
+  .block2 {
+    justify-content: center;
+  }
+  .block2 > span {
+    font-size: 1.5vmax;
+  }
+
+  .block3 > h1 {
+    font: 700 3vmax 'Franklin Gothic Medium';
+    text-align: center;
+  }
+
+  .block31 > button {
+    padding: 1.2vmax;
+    width: 4vmax;
+  }
+
+  .block31 > button:last-child {
+    font: 500 1.7vmax 'Roboto';
+    padding: 1.5vmax;
+    width: 20vmax;
+    margin: 3vmax 0;
+  }
+
+  .block3 > p {
+    padding: 2.5vmax 0;
+    text-align: center;
+    font: 400 2vmax 'Roboto';
+  }
+
+  .block4 {
+    font: 500 2.5vmax sans-serif;
+  }
+
+  .block4 > p {
+    font: 300 1.8vmax sans-serif;
+  }
+}

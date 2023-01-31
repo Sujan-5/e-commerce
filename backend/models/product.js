@@ -35,7 +35,8 @@ const productSchema = new Schema({
     },
   ],
   category: {
-    type: mongoose.Schema.Types.ObjectId,
+    // type: mongoose.Schema.Types.ObjectId,
+    type: String,
     ref: 'Category',
     required: [true, 'Please enter product category'],
   },

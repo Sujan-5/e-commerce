@@ -1,4 +1,4 @@
-.createProductContainer {
+.categoryContainer {
   width: 100%;
   box-sizing: border-box;
   background-color: rgb(255, 255, 255);
@@ -7,7 +7,7 @@
   flex-direction: column;
   height: 100vh;
 }
-.createProductContainer h1 {
+.categoryContainer h1 {
   font: 400 2rem;
   padding: 0.5vmax;
   box-sizing: border-box;
@@ -18,31 +18,31 @@
 }
 
 /* .headingProd {
-  font: 400 2rem;
-  color: rgba(158, 16, 16, 0.637);
-} */
+    font: 400 2rem;
+    color: rgba(158, 16, 16, 0.637);
+  } */
 
-.productForm {
+.categoryForm {
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* margin: auto; */
-  padding: 3vmax;
-  justify-content: space-evenly;
+  margin: auto;
+  padding: 10vmax;
+  justify-content: space-between;
   height: 80%;
   width: 40vh;
   background-color: rgb(255, 255, 255);
   /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.267); */
 }
 
-.productForm > div {
+.categoryForm > div {
   display: flex;
   width: 100%;
   align-items: center;
 }
-.productForm > div > input,
-.productForm > div > select,
-.productForm > div > textarea {
+.categoryForm > div > input,
+.categoryForm > div > select,
+.categoryForm > div > textarea {
   padding: 1vmax 4vmax;
   padding-right: 1vmax;
   width: 100%;
@@ -53,7 +53,7 @@
   outline: none;
 }
 
-.productForm > div > svg {
+.categoryForm > div > svg {
   position: absolute;
   transform: translateX(1vmax);
   font-size: 1.6vmax;
@@ -114,18 +114,18 @@
   .createProductContainer {
     background-color: rgb(255, 255, 255);
   }
-  .productForm {
+  .categoryForm {
     padding: 6vmax;
   }
 
-  .productForm > div > input,
-  .productForm > div > select,
-  .productForm > div > textarea {
+  .categoryForm > div > input,
+  .categoryForm > div > select,
+  .categoryForm > div > textarea {
     padding: 2.5vmax 5vmax;
     font: 300 1.7vmax cursive;
   }
 
-  .productForm > div > svg {
+  .categoryForm > div > svg {
     font-size: 2.8vmax;
   }
 

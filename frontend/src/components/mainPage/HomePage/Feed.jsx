@@ -119,7 +119,7 @@ const sliderItems = [
   {
     id: 2,
     title: 'Dahi',
-    img: 'https://nanakfoods.com/files/product-photo-gallery/dahi-368.png',
+    img: '/images/dahi1.jpg',
     desc: 'Fresh Everyday',
   },
   {

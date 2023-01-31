@@ -65,7 +65,7 @@ export const ProductReviews = () => {
           <form className="productReviewsForm">
             <div>
               <SearchIcon />
-              <input type="text" placeholder="Product Id" required />
+              <input type="text" placeholder="Product Name" required />
             </div>
 
             <Button id="searchProductBtn" type="submit">

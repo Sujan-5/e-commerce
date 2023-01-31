@@ -42,14 +42,17 @@ const HomePage = () => {
       ) : (
         <Box>
           <Navbar />
+
           <Feed />
           <Promotions />
           <Container>
             <Category />
           </Container>
-          <div className="container" style={styles.container}>
+          <div className="container" id="container" style={styles.container}>
             {products &&
-              products.map((product) => <Products product={product} />)}
+              products.map((product, index) => (
+                <Products product={product} key={index} />
+              ))}
           </div>
         </Box>
       )}

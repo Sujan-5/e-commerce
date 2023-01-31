@@ -9,32 +9,56 @@ import Add from '@material-ui/icons/Add';
 import {
   errorClear,
   getAdminProduct,
+  deleteProduct,
 } from '../../../reduxFeature/actions/productAction';
 import { useSelector, useDispatch } from 'react-redux';
 import './allproduct.css';
 import { useEffect } from 'react';
 import { Fragment } from 'react';
 import { useAlert } from 'react-alert';
+import { useNavigate } from 'react-router-dom';
+import { PRODUCT_DELETE_RESET } from '../../../reduxFeature/reducers/Products/productConstants';
 
 export const AllProducts = ({ history }) => {
   const dispatch = useDispatch();
 
   const alert = useAlert();
 
+  const navigate = useNavigate();
+
   const { error, products } = useSelector((state) => state.products);
+
+  const { error: deleteError, isDeleted } = useSelector(
+    (state) => state.product
+  );
+
+  const deleteProductHandler = (id) => {
+    dispatch(deleteProduct(id));
+  };
 
   useEffect(() => {
     if (error) {
       alert.error(error);
       dispatch(errorClear());
     }
+    if (deleteError) {
+      alert.error(deleteError);
+      dispatch(errorClear());
+    }
+
+    if (isDeleted) {
+      alert.success('Product Deleted Successfully');
+      navigate('/admin/products');
+      dispatch({ type: PRODUCT_DELETE_RESET });
+    }
+
     dispatch(getAdminProduct());
-  }, [dispatch, alert, error]);
+  }, [dispatch, alert, error, deleteError, navigate, isDeleted]);
 
   const columns = [
     {
       field: 'id',
-      headerName: 'Product ID',
+      headerName: 'S. N.',
       minWidth: 190,
       flex: 0.3,
     },
@@ -74,7 +98,11 @@ export const AllProducts = ({ history }) => {
               <EditIcon />
             </Link>
 
-            <Button>
+            <Button
+              onClick={() =>
+                deleteProductHandler(params.getValue(params.id, 'id'))
+              }
+            >
               <DeleteIcon />
             </Button>
           </Fragment>
@@ -82,13 +110,13 @@ export const AllProducts = ({ history }) => {
       },
     },
   ];
-
+  let counter = 1;
   const rows = [];
 
   products &&
     products.forEach((prod) => {
       rows.push({
-        id: prod._id,
+        id: counter++,
         stock: prod.Stock,
         price: prod.price,
         name: prod.name,

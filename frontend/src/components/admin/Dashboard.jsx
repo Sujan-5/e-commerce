@@ -6,7 +6,7 @@ import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
 import PeopleIcon from '@mui/icons-material/People';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 // import { Line } from 'react-chartjs-2';
 
 export const Dashboard = () => {
@@ -21,7 +21,7 @@ export const Dashboard = () => {
   //   ],
   // };
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const { products } = useSelector((state) => state.products);
 
@@ -93,7 +93,7 @@ export const Dashboard = () => {
             </Link>
           </div>
         </div>
-        <div className="line">{/* <Line data={lineState} /> */}</div>
+        {/* <div className="line"><Line data={lineState} /></div> */}
       </div>
     </div>
   );

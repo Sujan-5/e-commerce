@@ -2,7 +2,7 @@ import React from 'react';
 import { Fragment, useState, useEffect } from 'react';
 import './createproduct.css';
 import { Button } from '@material-ui/core';
-// import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { LeftSidebar } from '../LeftSidebar';
 import StorageIcon from '@material-ui/icons/Storage';
 import AccountTreeIcon from '@material-ui/icons/AccountTree';
@@ -11,22 +11,27 @@ import SpellcheckIcon from '@material-ui/icons/Spellcheck';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-
 import {
   errorClear,
-  createProduct,
+  updateProductDetails,
+  getProductDetails,
 } from '../../../reduxFeature/actions/productAction';
-import { PRODUCT_NEW_ADMIN_RESET } from '../../../reduxFeature/reducers/Products/productConstants';
+import { PRODUCT_UPDATE_RESET } from '../../../reduxFeature/reducers/Products/productConstants';
 import { useAlert } from 'react-alert';
 
-const CreateProduct = () => {
+const Updateproduct = () => {
   const dispatch = useDispatch();
   const alert = useAlert();
   const navigate = useNavigate();
+  const params = useParams();
 
-  const { loading, error, success } = useSelector(
-    (state) => state.createProduct
-  );
+  const { error, product } = useSelector((state) => state.productDetails);
+
+  const {
+    loading,
+    error: updateError,
+    isUpdated,
+  } = useSelector((state) => state.product);
 
   const [productname, setName] = useState('');
   const [price, setPrice] = useState(0);
@@ -34,24 +39,52 @@ const CreateProduct = () => {
   const [Stock, setStock] = useState(0);
   const [description, setDescription] = useState('');
   const [images, setImages] = useState([]);
+  const [pastimages, setPastImages] = useState([]);
   const [imagesPreview, setImagesPreview] = useState([]);
 
   const categories = ['Dairy', 'fruits', 'Snacks', 'Soft Drinks'];
 
+  const productId = params.id;
+
   useEffect(() => {
+    if (product && product._id !== productId) {
+      dispatch(getProductDetails(productId));
+    } else {
+      setName(product.productname);
+      setPrice(product.price);
+      setCategory(product.category);
+      setStock(product.Stock);
+      setDescription(product.description);
+      setPastImages(product.images);
+    }
+
+    if (updateError) {
+      alert.error(updateError);
+      dispatch(errorClear());
+    }
+
     if (error) {
       alert.error(error);
       dispatch(errorClear());
     }
 
-    if (success) {
-      alert.success('Product Created Successfully');
+    if (isUpdated) {
+      alert.success('Product Updated Successfully');
       navigate('/admin/products');
-      dispatch({ type: PRODUCT_NEW_ADMIN_RESET });
+      dispatch({ type: PRODUCT_UPDATE_RESET });
     }
-  }, [dispatch, alert, error, navigate, success]);
+  }, [
+    dispatch,
+    alert,
+    error,
+    navigate,
+    isUpdated,
+    productId,
+    product,
+    updateError,
+  ]);
 
-  const productSummitHandler = (e) => {
+  const productUpdateSummitHandler = (e) => {
     e.preventDefault();
     const formData = new FormData();
 
@@ -64,7 +97,7 @@ const CreateProduct = () => {
     formData.set('category', category);
     formData.set('Stock', Stock);
 
-    dispatch(createProduct(formData));
+    dispatch(updateProductDetails(productId, formData));
   };
 
   const productImageChange = (e) => {
@@ -72,6 +105,7 @@ const CreateProduct = () => {
 
     setImages([]);
     setImagesPreview([]);
+    setPastImages([]);
 
     files.forEach((file) => {
       const reader = new FileReader();
@@ -86,19 +120,6 @@ const CreateProduct = () => {
       reader.readAsDataURL(file);
     });
   };
-
-  // function handleRemoveImg(imgObj) {
-  //   setImgToRemove(imgObj.public_id);
-  //   axios
-  //     .delete(`/images/${imgObj.public_id}/`)
-  //     .then((res) => {
-  //       setImgToRemove(null);
-  //       setImages((prev) =>
-  //         prev.filter((img) => img.public_id !== imgObj.public_id)
-  //       );
-  //     })
-  //     .catch((e) => console.log(e));
-  // }
   return (
     <Fragment>
       <div className="dashboard">
@@ -108,7 +129,7 @@ const CreateProduct = () => {
           <form
             className="productForm"
             encType="multipart/form-data"
-            onSubmit={productSummitHandler}
+            onSubmit={productUpdateSummitHandler}
           >
             <div>
               <SpellcheckIcon />
@@ -126,6 +147,7 @@ const CreateProduct = () => {
                 type="number"
                 placeholder="price"
                 required
+                value={price}
                 onChange={(e) => setPrice(e.target.value)}
               />
             </div>
@@ -142,7 +164,10 @@ const CreateProduct = () => {
             </div>
             <div>
               <AccountTreeIcon />
-              <select onChange={(e) => setCategory(e.target.value)}>
+              <select
+                onChange={(e) => setCategory(e.target.value)}
+                value={category}
+              >
                 <option value="">Choose Category</option>
                 {categories.map((cate) => (
                   <option key={cate} value={cate}>
@@ -159,6 +184,7 @@ const CreateProduct = () => {
                 type="number"
                 placeholder="Stock"
                 required
+                value={Stock}
                 onChange={(e) => setStock(e.target.value)}
               />
             </div>
@@ -174,15 +200,16 @@ const CreateProduct = () => {
             </div>
 
             <div id="createProductFormImage">
+              {pastimages &&
+                pastimages.map((image, index) => (
+                  <img key={index} src={image.url} alt="Past Product Preview" />
+                ))}
+            </div>
+
+            <div id="createProductFormImage">
               {imagesPreview.map((image, index) => (
-                <img key={index} src={image} alt="Avatar Preview" />
+                <img key={index} src={image} alt="Product Preview" />
               ))}
-              {/* {imgToRemove != image.public_id && (
-                <i
-                  className="fa fa-times-circle"
-                  onClick={() => handleRemoveImg(image)}
-                ></i>
-              )} */}
             </div>
 
             <Button
@@ -200,4 +227,4 @@ const CreateProduct = () => {
   );
 };
 
-export default CreateProduct;
+export default Updateproduct;
