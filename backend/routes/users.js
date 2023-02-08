@@ -11,6 +11,7 @@ const {
   getAllUsers,
   getUser,
   getDeleteUser,
+  verifyUser,
 } = require('../controllers/userController');
 
 const { isAuthenticatedUser, authorizeRoles } = require('../Middleware/authe');
@@ -20,6 +21,9 @@ router.route('/register').post(registerUser);
 
 //to login
 router.route('/login').post(loginUser);
+
+//to verify
+router.route('/verify/:token').get(verifyUser);
 
 //to logout
 router.route('/logout').get(logout);

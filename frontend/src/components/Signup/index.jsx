@@ -1,34 +1,58 @@
 import { useState } from 'react';
 import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styles from './styles.module.css';
+import convertToBase64 from './convert';
+import avatar from '../../displayProductImages/profile.png';
+import EyeIcon from '@material-ui/icons/RemoveRedEye';
+import EyeOffIcon from '@material-ui/icons/VisibilityOff';
 
 const Signup = () => {
-  const [passShow, setPassShow] = useState(false);
-  const [avatar, setAvatar] = useState('/logo192.png');
-  const [avatarPreview, setAvatarPreview] = useState('/logo192.png');
+  const [showPassword, setShowPassword] = useState(false);
+  // const [avatar, setAvatar] = useState('/logo192.png');
+  // const [avatarPreview, setAvatarPreview] = useState('/logo192.png');
+  const [error, setError] = useState('');
+  const [msg, setMsg] = useState('');
+  const [file, setFile] = useState();
 
   const [data, setData] = useState({
     firstName: '',
     lastName: '',
     email: '',
     password: '',
+    confirmPassword: '',
   });
-  const [error, setError] = useState('');
-  const [msg, setMsg] = useState('');
-  const navigate = useNavigate();
 
-  const handleChange = ({ currentTarget: input }) => {
-    setData({ ...data, [input.name]: input.value });
+  const { firstName, lastName, email, password, confirmPassword } = data;
+
+  const handleChange = (e) => {
+    setData({ ...data, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = 'http://localhost:8080/api/log/register';
-      const { data: res } = await axios.post(url, data);
-      navigate('/login');
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+
+      const body = JSON.stringify({
+        firstName,
+        lastName,
+        email,
+        password,
+        confirmPassword,
+      });
+
+      if (password !== confirmPassword) {
+        setError('Password does not match');
+      }
+
+      const res = await axios.post('/api/log/register', body, config);
       setMsg(res.message);
+      console.log(res.data);
     } catch (error) {
       if (
         error.response &&
@@ -40,21 +64,27 @@ const Signup = () => {
     }
   };
 
-  const registerDataChange = (e) => {
-    if (e.target.name === 'avatar') {
-      const reader = new FileReader();
+  // const registerDataChange = (e) => {
+  //   if (e.target.name === 'avatar') {
+  //     const reader = new FileReader();
 
-      reader.onload = () => {
-        if (reader.readyState === 2) {
-          setAvatarPreview(reader.result);
-          setAvatar(reader.result);
-        }
-      };
-      reader.readAsDataURL(e.target.files[0]);
-    } else {
-      setData({ ...data, [e.target.name]: e.targe.value });
-    }
+  //     reader.onload = () => {
+  //       if (reader.readyState === 2) {
+  //         setAvatarPreview(reader.result);
+  //         setAvatar(reader.result);
+  //       }
+  //     };
+  //     reader.readAsDataURL(e.target.files[0]);
+  //   } else {
+  //     setData({ ...data, [e.target.name]: e.targe.value });
+  //   }
+  // };
+
+  const onUpload = async (e) => {
+    const base64 = await convertToBase64(e.target.files[0]);
+    setFile(base64);
   };
+
   return (
     <div className={styles.signup_container}>
       <div className={styles.signup_form_container}>
@@ -69,6 +99,21 @@ const Signup = () => {
         <div className={styles.right}>
           <form className={styles.form_container} onSubmit={handleSubmit}>
             <h2>Create Account</h2>
+            <div className="profile">
+              <label htmlFor="profile">
+                <img
+                  src={file || avatar}
+                  className={styles.profile_img}
+                  alt="avatar"
+                />
+              </label>
+              <input
+                onChange={onUpload}
+                type="file"
+                id="profile"
+                name="profile"
+              />
+            </div>
             <input
               type="text"
               placeholder="First Name"
@@ -96,16 +141,21 @@ const Signup = () => {
               required
               className={styles.input}
             />
-            <input
-              type={!passShow ? 'password' : 'text'}
-              placeholder="Password"
-              name="password"
-              onChange={handleChange}
-              value={data.password}
-              required
-              className={styles.input}
-            />
-            <div className={styles.avatarImg}>
+            <div>
+              <input
+                type={showPassword ? 'text' : 'password'}
+                placeholder="Password"
+                name="password"
+                onChange={handleChange}
+                value={data.password}
+                required
+                className={styles.input}
+              />
+              <button onClick={() => setShowPassword(!showPassword)}>
+                {showPassword ? <EyeOffIcon /> : <EyeIcon />}
+              </button>
+            </div>
+            {/* <div className={styles.avatarImg}>
               <img src={avatarPreview} alt="Avatar Preview" />
               <input
                 type="file"
@@ -113,17 +163,9 @@ const Signup = () => {
                 accept="image/*"
                 onChange={registerDataChange}
               ></input>
-            </div>
-            <div
-              className={styles.showpass}
-              onClick={() => setPassShow(!passShow)}
-            >
-              {!passShow ? 'Show' : 'Hide'}
-            </div>
-
+            </div> */}
             {error && <div className={styles.error_msg}>{error}</div>}
             {msg && <div className={styles.success_msg}>{msg}</div>}
-
             <button type="submit" className={styles.green_btn}>
               Sign Up
             </button>

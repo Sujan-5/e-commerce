@@ -4,6 +4,7 @@ const catchAsyncErrors = require('../Middleware/catchAsyncErrors');
 const tokenSend = require('../utils/tokenjwt');
 const sendEmail = require('../utils/sendEmail');
 const crypto = require('crypto');
+const jwt = require('jsonwebtoken');
 
 //Register
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
@@ -20,8 +21,61 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
     },
   });
 
-  tokenSend(user, 201, res);
+  const token = jwt.sign({ id: user._id }, process.env.JWTPRIVATEKEY, {
+    expiresIn: '1d',
+  });
+
+  const verifyLink = `${req.protocol}://${req.get(
+    'host'
+  )}/api/log/verify/${token}`;
+
+  const message = `Please click the following link to verify your email: \n\n ${verifyLink}`;
+  try {
+    await sendEmail({
+      email: user.email,
+      subject: `Email Verification`,
+      message,
+    });
+    res.status(200).json({
+      sucess: true,
+      message: `Email sent to ${user.email} sucessfully`,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: 'Error sending verification email. Please try again later',
+    });
+  }
 });
+
+exports.verifyUser = async (req, res) => {
+  const { token } = req.params;
+  try {
+    const decoded = jwt.verify(token, process.env.JWTPRIVATEKEY);
+    const user = await User.findByIdAndUpdate(
+      decoded.id,
+      { isVerified: true },
+      { new: true, runValidators: true }
+    );
+    if (!user) {
+      return res.status(404).json({
+        status: 'fail',
+        message: 'User not found',
+      });
+    }
+
+    res.status(200).json({
+      status: 'success',
+      message: 'Email verified successfully',
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: 'fail',
+      message: 'Invalid token',
+    });
+  }
+};
 
 //login
 exports.loginUser = catchAsyncErrors(async (req, res, next) => {
@@ -43,12 +97,13 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHandler('Invalid email or password', 401));
   }
 
-  // res.cookie('jwt', 'Hello World', {
-  //   httpOnly: true,
-  //   secure: true,
-  //   // sameSite: 'None',
-  //   maxAge: 246060 * 1000,
-  // });
+  if (!user.isVerified) {
+    return res.status(400).json({
+      status: 'fail',
+      message: 'Email not verified',
+    });
+  }
+
   tokenSend(user, 200, res);
 });
 

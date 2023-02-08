@@ -58,11 +58,25 @@ export const LeftSidebar = () => {
           Reviews
         </p>
       </Link>
-      <Link to="/admin/category">
-        <p>
-          <Category />
-          Category
-        </p>
+
+      <Link>
+        <TreeView
+          defaultCollapseIcon={<ExpandMoreIcon />}
+          defaultExpandIcon={<ImportExportIcon />}
+        >
+          <TreeItem nodeId="1" label="Category">
+            <Link to="/admin/category">
+              <TreeItem nodeId="3" label="Create Category" icon={<AddIcon />} />
+            </Link>
+            <Link to="/admin/categories">
+              <TreeItem
+                nodeId="2"
+                label="All Categories"
+                icon={<PostAddIcon />}
+              />
+            </Link>
+          </TreeItem>
+        </TreeView>
       </Link>
     </div>
   );

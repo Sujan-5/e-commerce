@@ -53,8 +53,12 @@
     display: block;
   }
 
+  .productCard > div > span {
+    width: 1vmax;
+  }
+
   .productCard > span {
-    font-size: 1.5vmax;
+    font-size: 2vmax;
   }
 
   .productCard > div > span {

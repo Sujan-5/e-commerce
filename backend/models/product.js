@@ -8,6 +8,12 @@ const productSchema = new Schema({
     trim: true,
     maxLength: [100, 'Product name cannot exceed 100 characters'],
   },
+  slug: {
+    type: String,
+    slug: 'title',
+    required: true,
+    unique: true,
+  },
   price: {
     type: Number,
     required: [true, 'Please enter product price'],
@@ -35,8 +41,8 @@ const productSchema = new Schema({
     },
   ],
   category: {
-    // type: mongoose.Schema.Types.ObjectId,
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    // type: String,
     ref: 'Category',
     required: [true, 'Please enter product category'],
   },

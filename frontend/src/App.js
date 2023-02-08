@@ -17,6 +17,8 @@ import AllUsers from './components/admin/Users/AllUsers';
 import ProductReviews from './components/admin/Reviews/ProductReviews';
 import Updateproduct from './components/admin/Products/Updateproduct';
 import Category from './components/admin/Category/Category';
+import Search from './components/mainPage/Filters/Search';
+import { CategoryList } from './components/admin/Category/CategoryList';
 
 function App() {
   return (
@@ -27,6 +29,7 @@ function App() {
         <Route path="/login" exact element={<Login />} />
         <Route path="/" exact element={<Navigate replace to="/home" />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/searchproducts" element={<Search />} />
         <Route path="/admin/dashboard" element={<Dashboard />} />
         <Route path="/admin/products" element={<AllProducts />} />
         <Route path="/admin/product" element={<CreateProduct />} />
@@ -34,6 +37,7 @@ function App() {
         <Route path="/admin/users" element={<AllUsers />} />
         <Route path="/admin/reviews" element={<ProductReviews />} />
         <Route path="/admin/category" element={<Category />} />
+        <Route path="/admin/categories" element={<CategoryList />} />
         <Route path="/admin/product/:id" element={<Updateproduct />} />
         <Route path="/product/:id" element={<ProductDetails />} />
       </Routes>

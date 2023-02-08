@@ -3,7 +3,7 @@ import Navbar from './HomePage/Navbar';
 import Feed from './HomePage/Feed';
 import { Box, Container } from '@mui/material';
 import Promotions from './HomePage/Promotions';
-import Products from './Products/Products';
+import Products from './Products/Productcard';
 import Category from './HomePage/Category';
 import { getProduct } from '../../reduxFeature/actions/productAction';
 import { useSelector, useDispatch } from 'react-redux';
@@ -33,6 +33,16 @@ const HomePage = () => {
       justifyContent: 'center',
       maxWidth: '100%',
     },
+    h2: {
+      textAlign: 'center',
+      fontFamily: 'Roboto',
+      fontSize: '1.4vmax',
+      borderBottom: '1px solid',
+      width: '20vmax',
+      padding: '1vmax',
+      margin: '5vmax auto',
+      color: 'rgb(0, 0, 0, 0.7)',
+    },
   };
 
   return (
@@ -46,8 +56,14 @@ const HomePage = () => {
           <Feed />
           <Promotions />
           <Container>
+            <h2 className="h2" style={styles.h2}>
+              Main Features
+            </h2>
             <Category />
           </Container>
+          <h2 className="h2" style={styles.h2}>
+            Products
+          </h2>
           <div className="container" id="container" style={styles.container}>
             {products &&
               products.map((product, index) => (

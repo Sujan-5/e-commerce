@@ -7,12 +7,18 @@ import {
   productReducer,
   productsReducer,
 } from './reduxFeature/reducers/Products/productReducer';
+import {
+  categoryReducer,
+  createCategoryReducer,
+} from './reduxFeature/reducers/category/categoryReducer';
 
 const reducer = combineReducers({
   products: productsReducer,
   createProduct: createProductReducer,
   product: productReducer,
   productDetails: getProductDetailsReducer,
+  categories: categoryReducer,
+  createCategory: createCategoryReducer,
 });
 
 let initialState = {};

@@ -19,7 +19,8 @@ import {
 } from '@mui/icons-material';
 import React from 'react';
 import { useState } from 'react';
-import SearchIcon from '@mui/icons-material/Search';
+
+// import { useNavigate } from 'react-router-dom';
 // import Switch from '@mui/material/Switch';
 
 const StyledToolbar = styled(Toolbar)({
@@ -65,6 +66,16 @@ const UserBox = styled(Box)(({ theme }) => ({
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
+  // const [keyword, setKeyword] = useState('');
+  // const navigate = useNavigate();
+
+  // const searchHandler = (e) => {
+  //   e.preventDefault();
+  //   if (keyword.trim()) {
+  //     navigate(``);
+  //   }
+  // };
+
   return (
     <AppBar position="sticky">
       <StyledToolbar>
@@ -80,13 +91,9 @@ const Navbar = () => {
         </Link>
         <LocationCity sx={{ display: { xs: 'block', sm: 'none' } }} />
 
-        <Search>
-          <SearchIcon style={{ color: 'black' }} />
-          <InputBase
-            placeholder="   search..."
-            sx={{ input: { color: 'black' } }}
-          />
-        </Search>
+        <Link></Link>
+
+        <Search></Search>
         {/* <Dark>
           <WbSunny style={{ color: '#FFAE42' }} />
           <Switch style={{ color: 'black' }} />
@@ -133,3 +140,33 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+/*
+import React from "react";
+
+const Navbar = () => {
+  return (
+    <nav className="relative container mx-auto p-6">
+      <div className="flex items-center justify-between">
+        <div className="pt-2">
+          <img src="img/logo.png" className="w-36 h-fit" alt="logo" />
+        </div>
+        <div className="hidden md: flex space-x-6">
+          <a href="#" className="hover:text-orange-700"> Service</a>
+          <a href="#" className="hover:text-orange-700"> About US</a>
+          <a href="#" className="hover:text-orange-700"> Contract</a>
+        </div>
+        <a
+          href="#"
+          className="hidden md:block px-6 py-3 text-white bg-orange-700 rounded-full hover:bg-black"
+        >
+          Get In Touch
+        </a>
+      </div>
+    </nav>
+  );
+};
+
+export default Navbar;
+
+*/

@@ -108,6 +108,43 @@
   font: 300 0.8vmax sans-serif;
 }
 
+.Review {
+  border: none;
+  background-color: rgb(3, 102, 251);
+  font: 500 0.7vmax 'Roboto';
+  border-radius: 20px;
+  padding: 0.6vmax 2vmax;
+  margin: 1vmax 0;
+  color: white;
+  cursor: pointer;
+  transition: all 0.5s;
+  outline: none;
+}
+
+.Review:hover {
+  background-color: rgb(197, 68, 45);
+  transform: scale(1.1);
+}
+
+.reviewHead {
+  color: #000000be;
+  font: 500 1.4vmax 'Roboto';
+  text-align: start;
+  padding: 1vmax;
+  width: 20vmax;
+  margin-bottom: 4vmax;
+}
+/* .reviews {
+  display: flex;
+  overflow: auto;
+} */
+
+.noReviews {
+  font: 400 1.3vmax;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.548);
+}
+
 @media screen and (max-width: 600px) {
   .ProductDetails {
     flex-direction: column;
