@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import ReactStars from 'react-rating-stars-component';
 import Pagination from '@mui/material/Pagination';
+
 import './product.css';
 
 const Products = ({ product }) => {
@@ -14,9 +15,16 @@ const Products = ({ product }) => {
     isHalf: true,
   };
 
+  const defaultImage = 'https://via.placeholder.com/250x250';
+
   return (
     <Link className="productCard" to={`/product/${product._id}`}>
-      <img src={product.images[0].url} alt={product.name} />
+      {/* <img src={product.images[0].url} alt={product.name} /> */}
+      {product.images && product.images.length > 0 ? (
+        <img src={product.images[0].url} alt={product.name} />
+      ) : (
+        <img src={defaultImage} alt={product.name} />
+      )}
       <p>{product.name}</p>
       <div>
         <ReactStars {...options} />{' '}

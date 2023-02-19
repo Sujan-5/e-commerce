@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-const categorySchema = new mongoose.Schema(
+const categorySchema = new Schema(
   {
     title: {
       type: String,
@@ -13,9 +14,9 @@ const categorySchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
-    parentId: {
-      type: String,
-    },
+    // parentId: {
+    //   type: String,
+    // },
   },
   {
     timestamps: true,

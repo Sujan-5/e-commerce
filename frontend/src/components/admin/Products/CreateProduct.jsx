@@ -11,12 +11,12 @@ import SpellcheckIcon from '@material-ui/icons/Spellcheck';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-
 import {
   errorClear,
   createProduct,
 } from '../../../reduxFeature/actions/productAction';
 import { PRODUCT_NEW_ADMIN_RESET } from '../../../reduxFeature/reducers/Products/productConstants';
+import { getAllCategory } from '../../../reduxFeature/actions/categoryAction';
 import { useAlert } from 'react-alert';
 
 const CreateProduct = () => {
@@ -28,7 +28,7 @@ const CreateProduct = () => {
     (state) => state.createProduct
   );
 
-  const [productname, setName] = useState('');
+  const [name, setName] = useState('');
   const [price, setPrice] = useState(0);
   const [category, setCategory] = useState('');
   const [Stock, setStock] = useState(0);
@@ -36,7 +36,11 @@ const CreateProduct = () => {
   const [images, setImages] = useState([]);
   const [imagesPreview, setImagesPreview] = useState([]);
 
-  const categories = ['Dairy', 'fruits', 'Snacks', 'Soft Drinks'];
+  // const categories = useSelector((state) => state.categories);
+
+  const {
+    categories: { categoryList },
+  } = useSelector((state) => state.categories);
 
   useEffect(() => {
     if (error) {
@@ -48,6 +52,7 @@ const CreateProduct = () => {
       alert.success('Product Created Successfully');
       navigate('/admin/products');
       dispatch({ type: PRODUCT_NEW_ADMIN_RESET });
+      dispatch(getAllCategory());
     }
   }, [dispatch, alert, error, navigate, success]);
 
@@ -55,7 +60,7 @@ const CreateProduct = () => {
     e.preventDefault();
     const formData = new FormData();
 
-    formData.set('productname', productname);
+    formData.set('name', name);
     formData.set('price', price);
     images.forEach((image) => {
       formData.append('images', image);
@@ -116,7 +121,7 @@ const CreateProduct = () => {
                 type="text"
                 placeholder="Product Name"
                 required
-                value={productname}
+                value={name}
                 onChange={(e) => setName(e.target.value)}
               />
             </div>
@@ -142,14 +147,17 @@ const CreateProduct = () => {
             </div>
             <div>
               <AccountTreeIcon />
-              <select onChange={(e) => setCategory(e.target.value)}>
-                <option value="">Choose Category</option>
-                {categories.map((cate) => (
-                  <option key={cate} value={cate}>
-                    {cate}
-                  </option>
-                ))}
-                ;
+              <select
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+              >
+                <option>Choose Category</option>
+                {categoryList &&
+                  categoryList.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.title}
+                    </option>
+                  ))}
               </select>
             </div>
 

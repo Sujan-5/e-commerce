@@ -2,7 +2,7 @@
   width: 100%;
   min-height: 100vh;
   /* background-color: #b5b0b0; */
-  background-image: url(../../../public/images/login&signup/farm.png);
+  background-image: url(../../../../public/images/login&signup/farm.png);
   background-repeat: no-repeat;
   background-size: cover;
   display: flex;
@@ -13,35 +13,17 @@
 
 .signup_form_container {
   width: 900px;
-  height: 500px;
+  height: 600px;
   display: flex;
   border-radius: 10px;
   box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%),
     0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
 }
 
-.left {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: #d8e2e0;
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
-}
-
-.left h2 {
-  margin-top: 0;
-  color: rgb(30, 29, 29);
-  font-size: 40px;
-  align-self: center;
-}
-
 .right {
   flex: 2;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   background-color: white;
@@ -99,6 +81,18 @@ input[type='file'] {
   font-size: 40px;
   margin-top: 0;
 }
+.signUpName {
+  position: relative;
+}
+.icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 10px;
+  width: 24px;
+  height: 24px;
+  color: #000000;
+}
 
 .input {
   outline: none;
@@ -111,34 +105,23 @@ input[type='file'] {
   font-size: 14px;
 }
 
-.showpass {
-  position: absolute;
-  right: 27%;
-  top: 58%;
-  padding: 7px 10px;
-  margin-right: 5px;
-  margin-top: -40px;
-  font-size: 14px;
-  font-weight: 600;
-  color: #2a4365;
-  background-color: #edf5f3;
-  border-radius: 5px;
-  cursor: pointer;
-}
-.avatarImg > img {
-  width: 3vmax;
-  border-radius: 80%;
-  margin-right: 9vmax;
-  margin-top: 1vmax;
-}
-.avatarImg > input {
+#registerImage {
   display: flex;
-  padding: 0%;
-  margin-left: 7vmax;
-  margin-bottom: 1vmax;
+  align-items: center;
 }
 
-.avatarImg > input::file-selector-button {
+#registerImage > img {
+  width: 3vmax;
+  border-radius: 100%;
+  margin-bottom: 16px;
+  margin-right: 16px;
+}
+#registerImage > input {
+  display: flex;
+  padding: 0%;
+}
+
+#registerImage > input::file-selector-button {
   cursor: pointer;
   width: 100%;
   z-index: 2;
@@ -184,13 +167,80 @@ input[type='file'] {
   margin: 10px;
 }
 
-@media screen and (max-width: 600px) {
+.aregister {
+  text-align: center;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.aregister_span {
+  color: #888;
+}
+
+.alogin {
+  color: #f00;
+}
+
+.aregister_span > a {
+  text-decoration: none !important;
+}
+
+@media only screen and (max-width: 600px) {
   .signup_container {
-    background-size: auto;
+    background-color: white;
   }
 
   .signup_form_container {
-    width: 100%;
-    height: auto;
+    width: 90%;
+    height: 500px;
+  }
+
+  .left {
+    background-color: white;
+  }
+
+  .left h1 {
+    font-size: 10px;
+    /* margin-top: 90vmax; */
+  }
+
+  .left > a {
+    margin-top: 90vmax;
+    margin-left: 20vmax;
+  }
+
+  .input {
+    width: 83%;
+  }
+  .icon {
+    padding: 0.25rem;
+    font-size: 0.75rem;
+    right: 10px;
+  }
+
+  .right {
+    display: block;
+  }
+
+  .error_msg.success_msg {
+    width: 80%;
+  }
+
+  #registerImage > img {
+    width: 6vmax;
+    border-radius: 100%;
+  }
+
+  #registerImage > input::file-selector-button {
+    height: 5vh;
+    font: 100 1.2vmax;
+  }
+  .white_btn,
+  .green_btn {
+    padding: 10px 0;
+    width: 120px;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
   }
 }

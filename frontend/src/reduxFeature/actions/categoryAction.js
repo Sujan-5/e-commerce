@@ -12,9 +12,9 @@ import {
   NEW_CATEGORY_FAIL,
 
   //update and delete
-  // CATEGORY_UPDATE_REQUEST,
-  // CATEGORY_UPDATE_SUCCESS,
-  // CATEGORY_UPDATE_FAIL,
+  CATEGORY_UPDATE_REQUEST,
+  CATEGORY_UPDATE_SUCCESS,
+  CATEGORY_UPDATE_FAIL,
   CATEGORY_DELETE_REQUEST,
   CATEGORY_DELETE_SUCCESS,
   CATEGORY_DELETE_FAIL,
@@ -115,38 +115,38 @@ export const addCategory = (form) => async (dispatch) => {
 };
 
 // Update admin CATEGORY
-// export const updateCategoryDetails = (id, categoryData) => async (dispatch) => {
-//   try {
-//     dispatch({ type: CATEGORY_UPDATE_REQUEST });
+export const updateCategoryDetails = (id, categoryData) => async (dispatch) => {
+  try {
+    dispatch({ type: CATEGORY_UPDATE_REQUEST });
 
-//     const config = {
-//       headers: { 'Content-Type': 'application/json' },
-//     };
+    const config = {
+      headers: { 'Content-Type': 'application/json' },
+    };
 
-//     const { data } = await axios.put(
-//       `/api/v1/admin/CATEGORY/${id}`,
-//       categoryData,
-//       config
-//     );
+    const { data } = await axios.put(
+      `/api/v1/category/${id}`,
+      categoryData,
+      config
+    );
 
-//     dispatch({
-//       type: CATEGORY_UPDATE_SUCCESS,
-//       payload: data.success,
-//     });
-//   } catch (error) {
-//     dispatch({
-//       type: CATEGORY_UPDATE_FAIL,
-//       payload: error.response.data.message,
-//     });
-//   }
-// };
+    dispatch({
+      type: CATEGORY_UPDATE_SUCCESS,
+      payload: data.success,
+    });
+  } catch (error) {
+    dispatch({
+      type: CATEGORY_UPDATE_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
 
 // Delete admin Category
 export const deleteCategory = (id) => async (dispatch) => {
   try {
     dispatch({ type: CATEGORY_DELETE_REQUEST });
 
-    const { data } = await axios.delete(`/api/v1/admin/CATEGORY/${id}`);
+    const { data } = await axios.delete(`/api/v1/category/${id}`);
 
     dispatch({
       type: CATEGORY_DELETE_SUCCESS,

@@ -92,17 +92,14 @@ export const AllProducts = ({ history }) => {
       type: 'number',
       sortable: false,
       renderCell: (params) => {
+        const productId = params.getValue(params.id, 'productId');
         return (
           <Fragment>
-            <Link to={`/admin/product/${params.getValue(params.id, 'id')}`}>
+            <Link to={`/admin/product/${productId}`}>
               <EditIcon />
             </Link>
 
-            <Button
-              onClick={() =>
-                deleteProductHandler(params.getValue(params.id, 'id'))
-              }
-            >
+            <Button onClick={() => deleteProductHandler(productId)}>
               <DeleteIcon />
             </Button>
           </Fragment>
@@ -110,7 +107,8 @@ export const AllProducts = ({ history }) => {
       },
     },
   ];
-  let counter = 1;
+
+  let counter = 0;
   const rows = [];
 
   products &&
@@ -120,6 +118,7 @@ export const AllProducts = ({ history }) => {
         stock: prod.Stock,
         price: prod.price,
         name: prod.name,
+        productId: prod._id,
       });
     });
 

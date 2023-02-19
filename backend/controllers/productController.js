@@ -1,16 +1,44 @@
 const Product = require('../models/product');
+const Category = require('../models/category');
 const ErrorHandler = require('../utils/errorhandler');
 const catchAsyncError = require('../Middleware/catchAsyncErrors');
 const features = require('../utils/features');
+const slugify = require('slugify');
 
 //create new product = /api/v1/product/new for ADMIN **************************************************************************************************************
 exports.newProduct = catchAsyncError(async (req, res, next) => {
-  const product = await Product.create(req.body);
+  const { name, price, description, category, stock, images } = req.body;
 
-  res.status(201).json({
-    success: true,
-    product,
+  const categoryDoc = await Category.findOne({ title: category });
+  if (!categoryDoc) {
+    return res.status(404).json({
+      message: `Category "${category}" not found`,
+    });
+  }
+
+  const product = new Product({
+    name,
+    slug: slugify(name),
+    price,
+    description,
+    category: categoryDoc._id,
+    stock,
+    images,
   });
+
+  try {
+    const result = await product.save();
+    res.status(201).json({
+      message: 'Product created successfully',
+      product: result,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(400).json({
+      message: 'Product creation failed',
+      error: error,
+    });
+  }
 });
 
 //Get all products => /api/v1/products **************************************************************************************************************

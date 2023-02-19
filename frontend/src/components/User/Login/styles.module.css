@@ -2,7 +2,7 @@
   width: 100%;
   min-height: 100vh;
   /* background-color: #f5f5f5; */
-  background-image: url(../../../public/images/login&signup/farm.png);
+  background-image: url(../../../../public/images/login&signup/farm.png);
   background-repeat: no-repeat;
   background-size: cover;
   display: flex;
@@ -29,6 +29,12 @@
   background-color: white;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
+}
+
+.verified_message {
+  color: green;
+  font-size: 18px;
+  margin: 10px 0;
 }
 
 .form_container {

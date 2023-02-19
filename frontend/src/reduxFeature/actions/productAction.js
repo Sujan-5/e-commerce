@@ -52,14 +52,14 @@ export const createProduct = (productData) => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_NEW_ADMIN_REQUEST });
 
-    const env = {
-      headers: { 'Content-Type': 'application/json' },
-    };
+    // const env = {
+    //   headers: { 'Content-Type': 'application/json' },
+    // };
 
     const { data } = await axios.post(
       `/api/v1/admin/product/new`,
-      productData,
-      env
+      productData
+      // env
     );
 
     dispatch({
@@ -141,6 +141,24 @@ export const getAdminProduct = () => async (dispatch) => {
 
 // Get Products Details
 export const getProductDetails = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: PRODUCT_DETAILS_REQUEST });
+
+    const { data } = await axios.get(`/api/v1/product/${id}`);
+
+    dispatch({
+      type: PRODUCT_DETAILS_SUCCESS,
+      payload: data.product,
+    });
+  } catch (error) {
+    dispatch({
+      type: PRODUCT_DETAILS_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const getadminProductDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_DETAILS_REQUEST });
 

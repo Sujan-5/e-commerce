@@ -42,6 +42,8 @@ const HomePage = () => {
       padding: '1vmax',
       margin: '5vmax auto',
       color: 'rgb(0, 0, 0, 0.7)',
+      marginTop: '10px',
+      marginBottom: '20px',
     },
   };
 

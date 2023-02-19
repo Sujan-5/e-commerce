@@ -41,7 +41,7 @@ export const CategoryList = () => {
       dispatch(errorClear());
     }
 
-    dispatch(getAllCategory());
+    // dispatch(getAllCategory());
   }, [dispatch, alert, error]);
 
   const columns = [
@@ -66,17 +66,14 @@ export const CategoryList = () => {
       type: 'number',
       sortable: false,
       renderCell: (params) => {
+        const categoryId = params.getValue(params.id, 'categoryId');
         return (
           <Fragment>
-            <Link to={`/admin/product/${params.getValue(params.id, 'id')}`}>
+            <Link to={`/admin/product/${categoryId}`}>
               <EditIcon />
             </Link>
 
-            <Button
-              onClick={() =>
-                deleteProductHandler(params.getValue(params.id, 'id'))
-              }
-            >
+            <Button onClick={() => deleteProductHandler(categoryId)}>
               <DeleteIcon />
             </Button>
           </Fragment>
@@ -93,19 +90,9 @@ export const CategoryList = () => {
         id: counter++,
         title: cate.title,
         slug: cate.slug,
+        categoryId: cate._id,
       });
     });
-
-  // if (typeof categoryList === 'object') {
-  //   for (const cate of Object.values(categoryList)) {
-  //     rows.push({
-  //       id: counter++,
-  //       title: cate.title,
-  //     });
-  //   }
-  // } else if (error) {
-  //   console.error(error);
-  // }
 
   return (
     <Fragment>

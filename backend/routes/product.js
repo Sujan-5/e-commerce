@@ -24,9 +24,7 @@ router.route('/admin/products').get(getAdminProducts);
 
 router.route('/admin/product/new').post(newProduct);
 
-router
-  .route('/admin/product/:id')
-  .put(isAuthenticatedUser, authorizeRoles('admin'), updateProduct);
+router.route('/admin/product/:id').put(isAuthenticatedUser, updateProduct);
 
 router.route('/admin/product/:id').delete(deleteProduct);
 // .delete(isAuthenticatedUser, authorizeRoles('admin'), deleteProduct);

@@ -1,4 +1,4 @@
-import { Box, styled, Typography, Slide } from '@mui/material';
+import { Box, styled, Slide } from '@mui/material';
 import { useState, useEffect } from 'react';
 
 const Promotion = styled(Box)(({ theme }) => ({
@@ -13,13 +13,14 @@ const Promotion = styled(Box)(({ theme }) => ({
   backgroundColor: 'lightblue',
 }));
 
-const MessagePromo = styled(Typography)(({ theme }) => ({
+const MessagePromo = styled('div')(({ theme }) => ({
+  fontSize: '16px',
+  fontWeight: 400,
+  color: '#333',
   fontFamily: 'Verdana',
   [theme.breakpoints.up('md')]: {
     fontSize: '1.5rem',
   },
-  fontSize: '1rem',
-  color: 'black',
 }));
 
 const messages = [

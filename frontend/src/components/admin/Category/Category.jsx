@@ -35,17 +35,7 @@ const Category = () => {
       navigate('/admin/products');
       dispatch({ type: NEW_CATEGORY_RESET });
     }
-  }, [dispatch]);
-
-  const createCategoryList = (categories, options = []) => {
-    for (let category of categories) {
-      options.push({ value: category._id, title: category.title });
-      if (category.children.length > 0) {
-        createCategoryList(category.children, options);
-      }
-    }
-    return options;
-  };
+  }, [dispatch, alert, navigate, error, success]);
 
   const productSummitHandler = () => {
     const form = new FormData();

@@ -14,7 +14,7 @@ import { useNavigate } from 'react-router-dom';
 import {
   errorClear,
   updateProductDetails,
-  getProductDetails,
+  getadminProductDetails,
 } from '../../../reduxFeature/actions/productAction';
 import { PRODUCT_UPDATE_RESET } from '../../../reduxFeature/reducers/Products/productConstants';
 import { useAlert } from 'react-alert';
@@ -33,7 +33,7 @@ const Updateproduct = () => {
     isUpdated,
   } = useSelector((state) => state.product);
 
-  const [productname, setName] = useState('');
+  const [name, setName] = useState('');
   const [price, setPrice] = useState(0);
   const [category, setCategory] = useState('');
   const [Stock, setStock] = useState(0);
@@ -42,15 +42,17 @@ const Updateproduct = () => {
   const [pastimages, setPastImages] = useState([]);
   const [imagesPreview, setImagesPreview] = useState([]);
 
-  const categories = ['Dairy', 'fruits', 'Snacks', 'Soft Drinks'];
+  const {
+    categories: { categoryList },
+  } = useSelector((state) => state.categories);
 
   const productId = params.id;
 
   useEffect(() => {
     if (product && product._id !== productId) {
-      dispatch(getProductDetails(productId));
+      dispatch(getadminProductDetails(productId));
     } else {
-      setName(product.productname);
+      setName(product.name);
       setPrice(product.price);
       setCategory(product.category);
       setStock(product.Stock);
@@ -88,7 +90,7 @@ const Updateproduct = () => {
     e.preventDefault();
     const formData = new FormData();
 
-    formData.set('productname', productname);
+    formData.set('name', name);
     formData.set('price', price);
     images.forEach((image) => {
       formData.append('images', image);
@@ -137,7 +139,7 @@ const Updateproduct = () => {
                 type="text"
                 placeholder="Product Name"
                 required
-                value={productname}
+                value={name}
                 onChange={(e) => setName(e.target.value)}
               />
             </div>
@@ -165,16 +167,16 @@ const Updateproduct = () => {
             <div>
               <AccountTreeIcon />
               <select
-                onChange={(e) => setCategory(e.target.value)}
                 value={category}
+                onChange={(e) => setCategory(e.target.value)}
               >
-                <option value="">Choose Category</option>
-                {categories.map((cate) => (
-                  <option key={cate} value={cate}>
-                    {cate}
-                  </option>
-                ))}
-                ;
+                <option>Choose Category</option>
+                {categoryList &&
+                  categoryList.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.title}
+                    </option>
+                  ))}
               </select>
             </div>
 

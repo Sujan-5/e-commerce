@@ -5,9 +5,16 @@ const tokenSend = require('../utils/tokenjwt');
 const sendEmail = require('../utils/sendEmail');
 const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
+const cloudinary = require('cloudinary');
 
 //Register
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
+  const cloudInary = await cloudinary.v2.uploader.upload(req.body.avatar, {
+    folder: 'avatars',
+    width: 150,
+    crop: 'scale',
+  });
+
   const { firstName, lastName, email, password } = req.body;
 
   const user = await User.create({
@@ -16,8 +23,10 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
     email,
     password,
     avatar: {
-      public_id: 'sample Id',
-      url: 'dpUrl',
+      public_id: cloudInary.public_id,
+      url: cloudInary.secure_url,
+      // public_id: 'sample',
+      // url: 'sampleURL',
     },
   });
 
@@ -65,10 +74,7 @@ exports.verifyUser = async (req, res) => {
       });
     }
 
-    res.status(200).json({
-      status: 'success',
-      message: 'Email verified successfully',
-    });
+    res.redirect('http://localhost:3000/login?verified=true');
   } catch (error) {
     res.status(400).json({
       status: 'fail',

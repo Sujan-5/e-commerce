@@ -1,172 +1,326 @@
+import { useState } from 'react';
 import {
-  AppBar,
-  styled,
-  Toolbar,
-  Typography,
-  Avatar,
-  Badge,
   Box,
+  IconButton,
   InputBase,
-  Menu,
+  Select,
   MenuItem,
-  Link,
+  FormControl,
+  // Avatar,
+  useMediaQuery,
+  Button,
 } from '@mui/material';
 import {
-  LocationCity,
+  Search,
+  DarkMode,
+  LightMode,
+  Menu,
+  Close,
   ShoppingCart,
-  // DarkMode,
-  // WbSunny,
 } from '@mui/icons-material';
-import React from 'react';
-import { useState } from 'react';
+import { styled } from '@mui/system';
+import { Link, useNavigate } from 'react-router-dom';
+import { createTheme } from '@material-ui/core/styles';
+import Login from '@mui/icons-material/Login';
+import { useDispatch, useSelector } from 'react-redux';
+import { useAlert } from 'react-alert';
+import { logout } from '../../../reduxFeature/actions/userAction';
 
-// import { useNavigate } from 'react-router-dom';
-// import Switch from '@mui/material/Switch';
-
-const StyledToolbar = styled(Toolbar)({
+const FlexBetween = styled(Box)({
   display: 'flex',
   justifyContent: 'space-between',
-  backgroundColor: '#98AFC7',
+  alignItems: 'center',
 });
 
-const Search = styled('div')(({ theme }) => ({
-  backgroundColor: '#DADBDD',
-  padding: '0 12px',
-  borderRadius: theme.shape.borderRadius,
-  width: '40%',
-}));
+const Text = styled('div')`
+  font-size: 16px;
+  font-weight: 400;
+  color: #333;
+`;
 
-const Icons = styled(Box)(({ theme }) => ({
-  display: 'none',
-  alignItems: 'center',
-  color: 'black',
-  gap: '20px',
-  [theme.breakpoints.up('sm')]: {
-    display: 'flex',
+const Logo = styled('div')`
+  font-size: 16px;
+  font-weight: 400;
+  color: #333;
+  background-color: transparent;
+  font-weight: bold;
+  font-size: clamp(0.8rem, 1.5rem, 1.9rem);
+  color: primary;
+`;
+
+const theme = createTheme({
+  palette: {
+    neutral: {
+      light: '#ECEFF1',
+      main: '#CFD8DC',
+      dark: '#455A64',
+    },
+    primary: {
+      light: '#81C784',
+      main: '#4CAF50',
+      dark: '#388E3C',
+      500: '#4CAF50',
+    },
+    background: {
+      default: '#FFFFFF',
+      alt: 'lightblue',
+    },
   },
-}));
-
-const UserBox = styled(Box)(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  gap: '10px',
-  [theme.breakpoints.up('sm')]: {
-    display: 'none',
-  },
-}));
-
-// const Dark = styled(Box)(({ theme }) => ({
-//   display: 'none',
-//   alignItems: 'center',
-//   color: 'black',
-//   [theme.breakpoints.up('sm')]: {
-//     display: 'flex',
-//   },
-// }));
+});
 
 const Navbar = () => {
-  const [open, setOpen] = useState(false);
-  // const [keyword, setKeyword] = useState('');
-  // const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const alert = useAlert();
 
-  // const searchHandler = (e) => {
-  //   e.preventDefault();
-  //   if (keyword.trim()) {
-  //     navigate(``);
-  //   }
-  // };
+  const { user, loading } = useSelector((state) => state.user);
+
+  const logoutHandler = () => {
+    dispatch(logout());
+    alert.success('Logged out SuccessFully');
+  };
+
+  const [isMobileMenuToggled, setIsMobileMenuToggled] = useState(false);
+  const navigate = useNavigate();
+  const isNonMobileScreens = useMediaQuery('(min-width: 1000px)');
+
+  // const theme = useTheme();
+
+  const neutralLight = theme.palette.neutral.light;
+  const dark = theme.palette.neutral.dark;
+  const background = theme.palette.background.default;
+  const primaryLight = theme.palette.primary.light;
+  const alt = theme.palette.background.alt;
+
+  const fullName = `${user && user.firstName}`;
 
   return (
-    <AppBar position="sticky">
-      <StyledToolbar>
-        <Link to="/home" sx={{ textDecoration: 'none' }}>
-          <Typography
-            variant="h6"
-            sx={{ display: { xs: 'none', sm: 'block' } }}
-            color={'black'}
-          >
-            City<b style={{ color: 'red' }}>Wide</b>
-            {/* <img src="/images/banner/logo.png" alt='logo' /> */}
-          </Typography>
-        </Link>
-        <LocationCity sx={{ display: { xs: 'block', sm: 'none' } }} />
-
-        <Link></Link>
-
-        <Search></Search>
-        {/* <Dark>
-          <WbSunny style={{ color: '#FFAE42' }} />
-          <Switch style={{ color: 'black' }} />
-          <DarkMode />
-        </Dark> */}
-        <Icons>
-          <Badge>
-            <ShoppingCart />
-          </Badge>
-          <Avatar
-            sx={{ width: 30, height: 30 }}
-            src="https://images.pexels.com/photos/846741/pexels-photo-846741.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-            onClick={(e) => setOpen(true)}
-          />
-        </Icons>
-
-        <UserBox onClick={(e) => setOpen(true)}>
-          <Avatar
-            sx={{ width: 30, height: 30 }}
-            src="https://images.pexels.com/photos/846741/pexels-photo-846741.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-          />
-        </UserBox>
-      </StyledToolbar>
-      <Menu
-        id="demo-positioned-menu"
-        aria-labelledby="demo-positioned-button"
-        open={open}
-        onClose={(e) => setOpen(false)}
-        anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
-        }}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
-        }}
-      >
-        <MenuItem>Profile</MenuItem>
-        <MenuItem>My account</MenuItem>
-        <MenuItem>Logout</MenuItem>
-      </Menu>
-    </AppBar>
-  );
-};
-
-export default Navbar;
-
-/*
-import React from "react";
-
-const Navbar = () => {
-  return (
-    <nav className="relative container mx-auto p-6">
-      <div className="flex items-center justify-between">
-        <div className="pt-2">
-          <img src="img/logo.png" className="w-36 h-fit" alt="logo" />
-        </div>
-        <div className="hidden md: flex space-x-6">
-          <a href="#" className="hover:text-orange-700"> Service</a>
-          <a href="#" className="hover:text-orange-700"> About US</a>
-          <a href="#" className="hover:text-orange-700"> Contract</a>
-        </div>
-        <a
-          href="#"
-          className="hidden md:block px-6 py-3 text-white bg-orange-700 rounded-full hover:bg-black"
+    <FlexBetween padding="1rem 6%" backgroundColor={alt}>
+      <FlexBetween gap="1.75rem">
+        <Logo
+          sx={{
+            '&:hover': {
+              color: primaryLight,
+              cursor: 'pointer',
+            },
+          }}
+          onClick={() => navigate('/')}
         >
-          Get In Touch
-        </a>
-      </div>
-    </nav>
+          CityWide
+        </Logo>
+        {isNonMobileScreens && (
+          <FlexBetween
+            backgroundColor={neutralLight}
+            borderRadius="9px"
+            gap="3rem"
+            padding="0.1rem 1.5rem"
+          >
+            <InputBase placeholder="Search..." />
+            <IconButton>
+              <Search />
+            </IconButton>
+          </FlexBetween>
+        )}
+      </FlexBetween>
+      {isNonMobileScreens ? (
+        <FlexBetween gap="2rem">
+          <IconButton>
+            {theme.palette.mode === 'dark' ? (
+              <DarkMode sx={{ fontSize: '25px' }} />
+            ) : (
+              <LightMode sx={{ color: dark, fontSize: '25px' }} />
+            )}
+          </IconButton>
+          <Link to="/cart" style={{ textDecoration: 'none' }}>
+            <ShoppingCart sx={{ fontSize: '25px' }} />
+          </Link>
+
+          {/* Login and Logout */}
+          <FormControl variant="standard">
+            {user ? (
+              <Select
+                value={fullName}
+                sx={{
+                  backgroundColor: neutralLight,
+                  width: '150px',
+                  borderRadius: '0.25rem',
+                  p: '0.25rem 1rem',
+                  '& .MuiSvgIcon-root': {
+                    pr: '0.25rem',
+                    width: '3rem',
+                  },
+                  '& .MuiSelect-select:focus': {
+                    backgroundColor: neutralLight,
+                  },
+                }}
+                input={<InputBase />}
+                // icon={<Avatar sx={{ width: 30, height: 30 }} />}
+              >
+                <MenuItem value={fullName}>
+                  <Text>{fullName}</Text>
+                </MenuItem>
+                {user && user.role !== 'admin' ? (
+                  <Link
+                    to="/order"
+                    style={{ textDecoration: 'none', color: 'black' }}
+                  >
+                    {' '}
+                    <MenuItem> My Orders</MenuItem>
+                  </Link>
+                ) : (
+                  <Link
+                    to="/dashboard"
+                    style={{ textDecoration: 'none', color: 'black' }}
+                  >
+                    {' '}
+                    <MenuItem> DashBoard</MenuItem>
+                  </Link>
+                )}
+                <Link
+                  to="/account"
+                  style={{ textDecoration: 'none', color: 'black' }}
+                >
+                  {' '}
+                  <MenuItem> My Account</MenuItem>
+                </Link>
+                <Link
+                  to="/"
+                  style={{ textDecoration: 'none', color: 'red' }}
+                  onClick={logoutHandler}
+                >
+                  <MenuItem> Logout</MenuItem>
+                </Link>
+              </Select>
+            ) : (
+              !loading && (
+                <Button
+                  variant="contained"
+                  endIcon={<Login />}
+                  component={Link}
+                  to="/login"
+                >
+                  Login
+                </Button>
+              )
+            )}
+          </FormControl>
+        </FlexBetween>
+      ) : (
+        <IconButton
+          onClick={() => setIsMobileMenuToggled(!isMobileMenuToggled)}
+        >
+          <Menu />
+        </IconButton>
+      )}
+
+      {/* Mobile  */}
+      {!isNonMobileScreens && isMobileMenuToggled && (
+        <Box
+          position="fixed"
+          right="0"
+          bottom="0"
+          height="100%"
+          zIndex="10"
+          maxWidth="500px"
+          minWidth="300px"
+          backgroundColor={background}
+        >
+          {/* CLOSE ICON */}
+          <Box display="flex" justifyContent="flex-end" p="1rem">
+            <IconButton
+              onClick={() => setIsMobileMenuToggled(!isMobileMenuToggled)}
+            >
+              <Close />
+            </IconButton>
+          </Box>
+
+          {/* MENU ITEMS */}
+          <FlexBetween
+            display="flex"
+            flexDirection="column"
+            justifyContent="center"
+            alignItems="center"
+            gap="3rem"
+          >
+            <IconButton sx={{ fontSize: '25px' }}>
+              {theme.palette.mode === 'dark' ? (
+                <DarkMode sx={{ fontSize: '25px' }} />
+              ) : (
+                <LightMode sx={{ color: dark, fontSize: '25px' }} />
+              )}
+            </IconButton>
+
+            <ShoppingCart sx={{ fontSize: '25px' }} />
+            <FormControl variant="standard">
+              {user ? (
+                <Select
+                  value={fullName}
+                  sx={{
+                    backgroundColor: neutralLight,
+                    width: '150px',
+                    borderRadius: '0.25rem',
+                    p: '0.25rem 1rem',
+                    '& .MuiSvgIcon-root': {
+                      pr: '0.25rem',
+                      width: '3rem',
+                    },
+                    '& .MuiSelect-select:focus': {
+                      backgroundColor: neutralLight,
+                    },
+                  }}
+                  input={<InputBase />}
+                >
+                  <MenuItem value={fullName}>
+                    <Text>{fullName}</Text>
+                  </MenuItem>
+                  {user && user.role !== 'admin' ? (
+                    <Link
+                      to="/order"
+                      style={{ textDecoration: 'none', color: 'black' }}
+                    >
+                      {' '}
+                      <MenuItem> My Orders</MenuItem>
+                    </Link>
+                  ) : (
+                    <Link
+                      to="/dashboard"
+                      style={{ textDecoration: 'none', color: 'black' }}
+                    >
+                      {' '}
+                      <MenuItem> DashBoard</MenuItem>
+                    </Link>
+                  )}
+                  <Link
+                    to="/account"
+                    style={{ textDecoration: 'none', color: 'black' }}
+                  >
+                    {' '}
+                    <MenuItem> My Account</MenuItem>
+                  </Link>
+                  <Link
+                    to="/"
+                    style={{ textDecoration: 'none', color: 'red' }}
+                    onClick={logoutHandler}
+                  >
+                    <MenuItem> Logout</MenuItem>
+                  </Link>
+                </Select>
+              ) : (
+                !loading && (
+                  <Button
+                    variant="contained"
+                    endIcon={<Login />}
+                    component={Link}
+                    to="/login"
+                  >
+                    Login
+                  </Button>
+                )
+              )}
+            </FormControl>
+          </FlexBetween>
+        </Box>
+      )}
+    </FlexBetween>
   );
 };
-
 export default Navbar;
-
-*/

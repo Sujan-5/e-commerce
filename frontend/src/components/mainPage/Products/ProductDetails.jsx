@@ -112,7 +112,7 @@ const ProductDetails = () => {
                 Description : <p>{product.description}</p>
               </div>
 
-              <button className="Review">Review</button>
+              <button className="Review">Review this product</button>
             </div>
           </div>
 

@@ -10,7 +10,7 @@ const productSchema = new Schema({
   },
   slug: {
     type: String,
-    slug: 'title',
+    slug: 'name',
     required: true,
     unique: true,
   },

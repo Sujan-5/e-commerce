@@ -1,4 +1,4 @@
-import { Box, styled, Typography } from '@mui/material';
+import { Box, styled } from '@mui/material';
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Navigation, Pagination, Scrollbar, Thumbs } from 'swiper';
@@ -27,9 +27,12 @@ const BannerContent = styled(Box)(() => ({
   flexDirection: 'column',
   padding: '30px',
   maxWidth: '420',
+  backgroundColor: '#D3D3D3',
 }));
 
-const Title = styled(Typography)(({ theme }) => ({
+const Title = styled('div')(({ theme }) => ({
+  fontWeight: 400,
+  color: '#333',
   lineHeight: 1.5,
   fontSize: '70px',
   marginBottom: '20px',
@@ -39,7 +42,10 @@ const Title = styled(Typography)(({ theme }) => ({
   },
 }));
 
-const Description = styled(Typography)(({ theme }) => ({
+const Description = styled('div')(({ theme }) => ({
+  fontSize: '16px',
+  fontWeight: 400,
+  color: '#333',
   lineHeight: 1.25,
   letterSpacing: 1.25,
   marginBottom: '20px',
@@ -47,6 +53,18 @@ const Description = styled(Typography)(({ theme }) => ({
     lineHeight: 1.15,
     letterSpacing: 1.15,
     marginBottom: '1.5em',
+  },
+}));
+
+const Slogan = styled('div')(({ theme }) => ({
+  fontSize: '16px',
+  fontWeight: 400,
+  color: '#333',
+  [theme.breakpoints.down('xs')]: {
+    fontSize: '9px',
+  },
+  [theme.breakpoints.down('sm')]: {
+    fontSize: '18px',
   },
 }));
 
@@ -60,8 +78,8 @@ const Image = styled('img')(({ src, theme }) => ({
     width: '200px',
   },
   [theme.breakpoints.down('sm')]: {
-    width: '200px',
-    height: '180px',
+    width: '190px',
+    height: '160px',
   },
 }));
 
@@ -93,9 +111,7 @@ const Feed = () => {
             <Wrapper>
               <Image src={product.img} />
               <BannerContent>
-                <Typography fontSize={{ xs: '9px', sm: '18px' }}>
-                  Fresh, Local, Delivered
-                </Typography>
+                <Slogan>Fresh, Local, Delivered</Slogan>
                 <Title variant="h2">{product.title}</Title>
                 <Description fontSize={{ xs: '9px', sm: '18px' }}>
                   {product.desc}

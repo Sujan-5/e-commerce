@@ -7,6 +7,8 @@ const connection = require('./database');
 const errorMiddleware = require('./Middleware/error');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const cloudinary = require('cloudinary');
+const fileUpload = require('express-fileupload');
 
 // Handling Uncaught Exception********************************************************************************
 process.on('uncaughtException', (err) => {
@@ -18,21 +20,33 @@ process.on('uncaughtException', (err) => {
 //connection**************************************************************************************************
 connection();
 
+//config
+dotenv.config({ path: 'backend/.env' });
+
+//cloudinary******************************************************************************************************
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.APIKEY,
+  api_secret: process.env.APISECRETKEY,
+});
+
 //middlewares************************************************************************************************
 app.use(express.json());
-
 app.use(cors());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(fileUpload());
 
 //for routes************************************************************************************************
 const product = require('./routes/product');
 const user = require('./routes/users');
-const categoryRouter = require('./routes/categoryRoutes');
+const category = require('./routes/categoryRoutes');
+const order = require('./routes/orderRoute');
 
 app.use('/api/v1', product);
 app.use('/api/log', user);
-app.use('/api/v1', categoryRouter);
+app.use('/api/v1', category);
+app.use('/api/ord', order);
 
 //Errors Middleware******************************************************************************************
 app.use(errorMiddleware);
