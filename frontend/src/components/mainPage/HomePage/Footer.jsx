@@ -18,7 +18,6 @@ const Terms = styled('div')`
   font-size: 16px;
   font-weight: 400;
   color: white;
-  align: center;
 `;
 
 const Footer = () => {
@@ -51,7 +50,7 @@ const Footer = () => {
         </Box>
       </Stack>
       <hr />
-      <Terms variant={'body2'}>
+      <Terms>
         &copy;{new Date().getFullYear()} Citywide | All right reserved | Terms
         of Service | Privacy
       </Terms>

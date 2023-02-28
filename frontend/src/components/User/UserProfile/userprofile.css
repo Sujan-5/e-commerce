@@ -1,0 +1,206 @@
+.accountCont {
+  display: flex;
+  height: 80vh;
+  width: 100vw;
+  /* /* position: fixed; */
+  top: 0%;
+  left: 0%;
+  max-width: 100%;
+}
+
+.accountCont > div {
+  display: flex;
+  height: 70vh;
+  width: 50vw;
+  /* max-width: 100%; */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.first > h1 {
+  color: rgba(0, 0, 0, 0.555);
+  font: 500 2.2vmax;
+  transform: translateX(-10vmax) translateY(-2vmax);
+  margin-top: -20%;
+}
+
+.second {
+  align-items: flex-start;
+  margin-top: 3%;
+  margin-left: -25%;
+  padding: 5vmax;
+  box-sizing: border-box;
+}
+
+.second > h3 {
+  margin-left: -22%;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 300;
+}
+
+.personalProfile {
+  width: 270px;
+  height: 150px;
+  background-color: #ffffff;
+  padding: 16px;
+  margin-right: 12px;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 5px 0px;
+  float: left;
+}
+
+.personalProfile > h4 {
+  text-align: start;
+  margin: 0;
+  font-weight: 400;
+}
+.personalProfile > h5 {
+  font-weight: 300;
+}
+
+.personalProfile > a > button {
+  color: #0116ff;
+  background-color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  margin-top: -5%;
+  cursor: pointer;
+  padding: 10px;
+  font-size: 1em;
+}
+.personalProfile > a > button:hover {
+  text-decoration: underline;
+}
+
+/*************************for details********************/
+.container {
+  /* flex: 1; */
+  width: 50%;
+  margin-right: 30%;
+  margin-bottom: -35%;
+}
+
+.profile {
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+}
+
+.profile > .avatar {
+  width: 150px;
+  height: 150px;
+}
+
+.userWappper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 5px;
+  font-weight: 500;
+}
+
+.username {
+  font-weight: 500;
+}
+
+.verified-icon {
+  margin-left: 0px;
+}
+
+.user-info {
+  width: 100%;
+  padding: 20px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.item-title {
+  font-weight: 200;
+  color: gray;
+  margin-left: 5%;
+}
+
+.item {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin: 15px 0;
+}
+
+.icon {
+  font-size: 1.2rem;
+}
+
+.data {
+  font-weight: 300;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  margin-right: 12%;
+  margin-top: 15%;
+}
+
+.buttons > a {
+  border: none;
+  background-color: rgb(68, 68, 68);
+  font: 200 1vmax;
+  color: white;
+  text-decoration: none;
+  padding: 0.5vmax;
+  text-align: center;
+  transition: all 0.5s;
+  margin: 1vmax 0;
+}
+
+@media screen and (max-width: 600px) {
+  .accountCont {
+    flex-direction: column;
+    align-items: center;
+    margin-top: -2%;
+    height: 130vh;
+    width: 100vw;
+  }
+
+  .second {
+    margin-left: 4%;
+    margin-top: -55%;
+    margin-top: 10%;
+  }
+
+  .second > h3 {
+    margin-left: -100%;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .container {
+    /* flex: 1; */
+    width: 40vmax;
+    margin-right: 10%;
+  }
+
+  .first > h1 {
+    margin-top: 10%;
+  }
+
+  .profile {
+    box-shadow: rgb(255, 254, 254) 0px 5px 5px 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+  }
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    width: 30vmax;
+    margin-right: 12%;
+    margin-top: 30%;
+  }
+}

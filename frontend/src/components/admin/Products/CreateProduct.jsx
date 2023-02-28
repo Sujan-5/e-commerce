@@ -16,7 +16,6 @@ import {
   createProduct,
 } from '../../../reduxFeature/actions/productAction';
 import { PRODUCT_NEW_ADMIN_RESET } from '../../../reduxFeature/reducers/Products/productConstants';
-import { getAllCategory } from '../../../reduxFeature/actions/categoryAction';
 import { useAlert } from 'react-alert';
 
 const CreateProduct = () => {
@@ -52,7 +51,6 @@ const CreateProduct = () => {
       alert.success('Product Created Successfully');
       navigate('/admin/products');
       dispatch({ type: PRODUCT_NEW_ADMIN_RESET });
-      dispatch(getAllCategory());
     }
   }, [dispatch, alert, error, navigate, success]);
 
@@ -129,7 +127,7 @@ const CreateProduct = () => {
               <AttachMoneyIcon />
               <input
                 type="number"
-                placeholder="price"
+                placeholder="Price"
                 required
                 onChange={(e) => setPrice(e.target.value)}
               />

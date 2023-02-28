@@ -43,9 +43,7 @@ router
   .put(isAuthenticatedUser, getUpdatePassword);
 
 //to update profile
-router
-  .route('/profile/update-profile')
-  .put(isAuthenticatedUser, getUpdateProfile);
+router.route('/profile/update').put(isAuthenticatedUser, getUpdateProfile);
 
 //getting all users
 router

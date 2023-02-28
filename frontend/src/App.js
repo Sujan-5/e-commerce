@@ -26,6 +26,11 @@ import { useDispatch } from 'react-redux';
 import store from './store';
 import { userLoad } from './reduxFeature/actions/userAction';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import UserProfile from './components/User/UserProfile/UserProfile';
+import UpdateProfile from './components/User/UserProfile/UpdateProfile';
+import { UpdatePassword } from './components/User/Updatepassword/UpdatePassword';
+import { CartS } from './components/ShoppingCart/CartS';
+import Navbar from './components/mainPage/HomePage/Navbar';
 
 function App() {
   const dispatch = useDispatch();
@@ -37,6 +42,7 @@ function App() {
 
   return (
     <Router>
+      <Navbar />
       <Routes>
         <Route path="/home" element={<Home />} />
         <Route path="/signup" exact element={<Signup />} />
@@ -44,49 +50,24 @@ function App() {
         <Route path="/" exact element={<Navigate replace to="/home" />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/searchproducts" element={<Search />} />
-        //admin
-        <Route
-          path="/admin/dashboard"
-          element={<PrivateRoute element={<Dashboard />} />}
-        />
-        <Route
-          path="/admin/products"
-          element={<PrivateRoute element={<AllProducts />} />}
-        />
-        <Route
-          path="/admin/product"
-          element={<PrivateRoute element={<CreateProduct />} />}
-        />
-        <Route
-          path="/admin/orders"
-          element={<PrivateRoute element={<Orders />} />}
-        />
-        <Route
-          path="/admin/users"
-          element={<PrivateRoute element={<AllUsers />} />}
-        />
-        <Route
-          path="/admin/reviews"
-          element={<PrivateRoute element={<ProductReviews />} />}
-        />
-        <Route
-          path="/admin/category"
-          element={<PrivateRoute element={<Category />} />}
-        />
-        <Route
-          path="/admin/categories"
-          element={<PrivateRoute element={<CategoryList />} />}
-        />
-        {/* <Route path="/admin/category/:id" element={<PrivateRoute element={<UpdateCategory />} />} /> */}
-        *{' '}
-        <Route
-          path="/admin/product/:id"
-          element={<PrivateRoute element={<Updateproduct />} />}
-        />
-        <Route
-          path="/product/:id"
-          element={<PrivateRoute element={<ProductDetails />} />}
-        />
+        <Route path="/cart" element={<CartS />} />
+        <Route element={<PrivateRoute />}>
+          <Route path="/account" element={<UserProfile />} exact />
+          <Route path="/update/profile" element={<UpdateProfile />} exact />
+          <Route path="/update/password" element={<UpdatePassword />} exact />
+          <Route path="/admin/dashboard" element={<Dashboard />} />
+          <Route path="/admin/products" element={<AllProducts />} />
+          <Route path="/admin/product" element={<CreateProduct />} />
+          <Route path="/admin/orders" element={<Orders />} />
+          <Route path="/admin/users" element={<AllUsers />} />
+          <Route path="/admin/reviews" element={<ProductReviews />} />
+          <Route path="/admin/category" element={<Category />} />
+          <Route path="/admin/categories" element={<CategoryList />} />
+          {/* <Route path="/admin/category/:id" element={<PrivateRoute element={<UpdateCategory />} />} /> */}
+          *
+          <Route path="/admin/product/:id" element={<Updateproduct />} />
+          <Route path="/product/:id" element={<ProductDetails />} />
+        </Route>
       </Routes>
       <Footer />
     </Router>

@@ -12,8 +12,8 @@
 }
 
 .signup_form_container {
-  width: 900px;
-  height: 600px;
+  width: 600px;
+  height: 620px;
   display: flex;
   border-radius: 10px;
   box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%),
@@ -55,22 +55,6 @@ input[type='file'] {
   display: none;
 }
 
-.showPass {
-  position: relative;
-}
-
-.showPass button {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  cursor: pointer;
-}
-
-.showPass input {
-  padding-right: 30px;
-}
-
 .form_container {
   display: flex;
   flex-direction: column;
@@ -81,8 +65,20 @@ input[type='file'] {
   font-size: 40px;
   margin-top: 0;
 }
+
+.nameInRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
 .signUpName {
   position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-right: 20px;
 }
 .icon {
   position: absolute;
@@ -92,6 +88,18 @@ input[type='file'] {
   width: 24px;
   height: 24px;
   color: #000000;
+}
+
+.nameinput {
+  outline: none;
+  padding: 15px;
+  border: none;
+  margin: 5px 0;
+  font-size: 14px;
+  width: 100%;
+  border-radius: 10px;
+  background-color: #edf5f3;
+  margin-left: 0px;
 }
 
 .input {

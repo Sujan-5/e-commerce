@@ -41,6 +41,15 @@ const userSchema = new mongoose.Schema({
     default: 'user',
   },
 
+  address: {
+    type: String,
+    required: [true, 'Please enter your Address'],
+  },
+  contact: {
+    type: Number,
+    required: [true, 'Please enter your Contact'],
+  },
+
   createdAt: {
     type: Date,
     default: Date.now,

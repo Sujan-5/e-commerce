@@ -20,6 +20,16 @@ import {
   LOGOUT_SUCCESS,
   LOGOUT_FAIL,
 
+  //profile details update
+  UPDATE_DETAILS_REQUEST,
+  UPDATE_DETAILS_SUCCESS,
+  UPDATE_DETAILS_FAIL,
+
+  //password update
+  PASSWORD_UPDATE_REQUEST,
+  PASSWORD_UPDATE_SUCCESS,
+  PASSWORD_UPDATE_FAIL,
+
   //error
   ERROR_CLEAR,
 } from '../reducers/Users/userConstants';
@@ -79,6 +89,51 @@ export const logout = () => async (dispatch) => {
     dispatch({ type: LOGOUT_SUCCESS });
   } catch (error) {
     dispatch({ type: LOGOUT_FAIL, payload: error.response.data.message });
+  }
+};
+
+//update acount details
+export const editProfileDetails = (dataOfUser) => async (dispatch) => {
+  try {
+    dispatch({ type: UPDATE_DETAILS_REQUEST });
+
+    const config = { headers: { 'Content-Type': 'multipart/form-data' } };
+
+    const data = await axios.put(`/api/log/profile/update`, dataOfUser, {
+      config,
+    });
+    console.log(data);
+
+    dispatch({ type: UPDATE_DETAILS_SUCCESS, payload: data.success });
+  } catch (error) {
+    dispatch({
+      type: UPDATE_DETAILS_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+//update password
+export const editPassword = (dataOfUser) => async (dispatch) => {
+  try {
+    dispatch({ type: PASSWORD_UPDATE_REQUEST });
+
+    const config = { headers: { 'Content-Type': 'application/json' } };
+
+    const { data } = await axios.put(
+      `/api/log/password/update-password`,
+      dataOfUser,
+      {
+        config,
+      }
+    );
+
+    dispatch({ type: PASSWORD_UPDATE_SUCCESS, payload: data.success });
+  } catch (error) {
+    dispatch({
+      type: PASSWORD_UPDATE_FAIL,
+      payload: error.response.data.message,
+    });
   }
 };
 

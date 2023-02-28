@@ -86,7 +86,7 @@ exports.updateProduct = catchAsyncError(async (req, res, next) => {
     useFindAndModify: false,
   });
   res.status(200).json({
-    sucess: true,
+    success: true,
     product,
   });
 });

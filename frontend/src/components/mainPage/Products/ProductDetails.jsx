@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Fragment, useEffect } from 'react';
 import Carousel from 'react-material-ui-carousel';
 import {
@@ -13,6 +13,8 @@ import Rating from '@mui/material/Rating';
 import Navbar from '../HomePage/Navbar';
 import Loader from '../FrontFeatures/Loading/Loader';
 import { useAlert } from 'react-alert';
+import PageNavigation from '../FrontFeatures/PageNavigation/PageNavigation';
+import { addToCart } from '../../../reduxFeature/actions/cartAction';
 
 const ProductDetails = () => {
   const dispatch = useDispatch();
@@ -23,6 +25,15 @@ const ProductDetails = () => {
     (state) => state.productDetails
   );
 
+  const options = {
+    size: 'large',
+    value: product.ratings,
+    readOnly: true,
+    precision: 0.5,
+  };
+
+  const [quantity] = useState(1);
+
   useEffect(() => {
     if (error) {
       alert.error(error);
@@ -31,15 +42,8 @@ const ProductDetails = () => {
     dispatch(getProductDetails(params.id));
   }, [dispatch, params.id, alert, error]);
 
-  const options = {
-    size: 'large',
-    value: product.ratings,
-    readOnly: true,
-    precision: 0.5,
-  };
-
   const addToCartHandler = () => {
-    // dispatch(addItemsToCart(params.id, quantity));
+    dispatch(addToCart(params.id, quantity));
     alert.success('Item Added To Cart');
   };
 
@@ -49,21 +53,22 @@ const ProductDetails = () => {
         <Loader />
       ) : (
         <Fragment>
-          <Navbar />
+          <div className="wrapper">
+            <PageNavigation title={product.name} />
+          </div>
           <div className="ProductDetails">
-            <div>
-              <Carousel>
-                {product.images &&
-                  product.images.map((item, i) => (
-                    <img
-                      className="ImageCro"
-                      key={i}
-                      src={item.url}
-                      alt={`${i} Slide`}
-                    />
-                  ))}
-              </Carousel>
-            </div>
+            <Carousel className="Carousel">
+              {product.images &&
+                product.images.map((item, i) => (
+                  <img
+                    className="ImageCro"
+                    key={i}
+                    src={item?.url}
+                    alt={`${i} Slide`}
+                  />
+                ))}
+            </Carousel>
+
             <div>
               <div className="block1">
                 <h2>{product.name}</h2>
@@ -79,7 +84,7 @@ const ProductDetails = () => {
                 <h1>{`Rs ${product.price}`}</h1>
                 <div className="block31">
                   <button
-                    disabled={product.Stock < 1 ? true : false}
+                    disabled={product.stock === 0}
                     onClick={addToCartHandler}
                   >
                     Add to Cart
@@ -93,16 +98,16 @@ const ProductDetails = () => {
                   Status:
                   <b
                     className={
-                      product.Stock <= 0
+                      product.stock <= 0
                         ? 'outstock'
-                        : product.Stock <= 10
+                        : product.stock <= 10
                         ? 'lowstock'
                         : 'instock'
                     }
                   >
-                    {product.Stock <= 0
+                    {product.stock <= 0
                       ? 'OutOfStock'
-                      : product.Stock <= 10
+                      : product.stock <= 10
                       ? 'Low on Stock'
                       : ' In Stock'}
                   </b>

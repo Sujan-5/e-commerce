@@ -18,6 +18,8 @@ import {
 
 //user
 import { userReducer } from './reduxFeature/reducers/Users/userReducer';
+import { accountReducer } from './reduxFeature/reducers/Users/profileReducer';
+import { cartReducer } from './reduxFeature/reducers/ShoppingCart/cartReducer';
 
 const reducer = combineReducers({
   //products
@@ -32,21 +34,18 @@ const reducer = combineReducers({
 
   //user
   user: userReducer,
+  account: accountReducer,
+
+  //cart
+  cart: cartReducer,
 });
 
 let initialState = {
-  //products
-  products: [],
-  createProduct: { success: false },
-  product: {},
-  productDetails: { product: {} },
-
-  //categories
-  categories: [],
-  createCategory: { success: false },
-
-  //user
-  user: { user: {} },
+  cart: {
+    cartItems: localStorage.getItem('cartItems')
+      ? JSON.parse(localStorage.getItem('cartItems'))
+      : [],
+  },
 };
 
 const middleware = [thunk];

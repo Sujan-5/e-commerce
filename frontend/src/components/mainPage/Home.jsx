@@ -1,5 +1,4 @@
 import React from 'react';
-import Navbar from './HomePage/Navbar';
 import Feed from './HomePage/Feed';
 import { Box, Container } from '@mui/material';
 import Promotions from './HomePage/Promotions';
@@ -53,11 +52,15 @@ const HomePage = () => {
         <Loader />
       ) : (
         <Box>
-          <Navbar />
-
           <Feed />
           <Promotions />
-          <Container>
+          <Container
+            style={{
+              backgroundColor: 'lightgray',
+              width: '100%',
+              height: '5%',
+            }}
+          >
             <h2 className="h2" style={styles.h2}>
               Main Features
             </h2>
@@ -68,8 +71,8 @@ const HomePage = () => {
           </h2>
           <div className="container" id="container" style={styles.container}>
             {products &&
-              products.map((product, index) => (
-                <Products product={product} key={index} />
+              products.map((product) => (
+                <Products product={product} key={product._id} />
               ))}
           </div>
         </Box>

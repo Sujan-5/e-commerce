@@ -15,13 +15,15 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
     crop: 'scale',
   });
 
-  const { firstName, lastName, email, password } = req.body;
+  const { firstName, lastName, email, password, address, contact } = req.body;
 
   const user = await User.create({
     firstName,
     lastName,
     email,
     password,
+    address,
+    contact,
     avatar: {
       public_id: cloudInary.public_id,
       url: cloudInary.secure_url,
@@ -231,12 +233,34 @@ exports.getUpdatePassword = catchAsyncErrors(async (req, res, next) => {
 
 //user profile (update)
 exports.getUpdateProfile = catchAsyncErrors(async (req, res, next) => {
+  console.log('check1');
   const newUser = {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     email: req.body.email,
+    address: req.body.address,
+    contact: req.body.contact,
   };
+  const avatar = req.body?.avatar;
+  console.log(avatar);
+  if (avatar !== undefined) {
+    console.log('check2');
+    const user = await User.findById(req.user.id);
+    const avatarID = user.avatar.public_id;
+    await cloudinary.v2.uploader.destroy(avatarID);
 
+    const cloudInary = await cloudinary.v2.uploader.upload(avatar, {
+      folder: 'avatars',
+      width: 150,
+      crop: 'scale',
+    });
+
+    newUser.avatar = {
+      public_id: cloudInary.public_id,
+      url: cloudInary.secure_url,
+    };
+  }
+  console.log('check3');
   const user = await User.findByIdAndUpdate(req.user.id, newUser, {
     new: true,
     runValidators: true,

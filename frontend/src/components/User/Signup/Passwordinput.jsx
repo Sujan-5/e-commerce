@@ -21,7 +21,12 @@ const PasswordInput = ({ name, placeholder, value, onChange }) => {
         className={styles.input}
         required
       />
-      <button onClick={handleShowPassword}>
+      <button
+        onClick={(event) => {
+          event.preventDefault();
+          handleShowPassword();
+        }}
+      >
         {showPassword ? <EyeOffIcon /> : <EyeIcon />}
       </button>
     </div>

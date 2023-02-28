@@ -5,6 +5,7 @@ import { useAlert } from 'react-alert';
 import { errorClear, login } from '../../../reduxFeature/actions/userAction';
 import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../../mainPage/FrontFeatures/Loading/Loader';
+import PasswordInput from '../Signup/Passwordinput';
 
 const Login = () => {
   const alert = useAlert();
@@ -65,7 +66,7 @@ const Login = () => {
                   />
                 </div>
                 <div>
-                  <input
+                  <PasswordInput
                     type="password"
                     placeholder="Password"
                     onChange={(e) => setLoginPass(e.target.value)}
@@ -81,17 +82,26 @@ const Login = () => {
                 <button type="submit" className={styles.green_btn}>
                   Login
                 </button>
+
+                <div className="aregister">
+                  <span className="aregister_span">
+                    New Here?{' '}
+                    <Link className="alogin" to="/signup">
+                      SignUp
+                    </Link>
+                  </span>
+                </div>
               </form>
             </div>
 
-            <div className={styles.right}>
+            {/* <div className={styles.right}>
               <h1>Register Here</h1>
               <Link to="/signup">
                 <button type="button" className={styles.white_btn}>
                   Sign Up
                 </button>
-              </Link>
-            </div>
+              </Link> */}
+            {/* </div> */}
           </div>
         </div>
       )}

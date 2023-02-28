@@ -9,6 +9,7 @@ import {
   // Avatar,
   useMediaQuery,
   Button,
+  Badge,
 } from '@mui/material';
 import {
   Search,
@@ -51,9 +52,9 @@ const Logo = styled('div')`
 const theme = createTheme({
   palette: {
     neutral: {
-      light: '#ECEFF1',
-      main: '#CFD8DC',
-      dark: '#455A64',
+      light: '#CFD2D4',
+      main: '#CFD8DB',
+      dark: '#455A61',
     },
     primary: {
       light: '#81C784',
@@ -63,7 +64,7 @@ const theme = createTheme({
     },
     background: {
       default: '#FFFFFF',
-      alt: 'lightblue',
+      alt: '#9f9ea7',
     },
   },
 });
@@ -73,6 +74,8 @@ const Navbar = () => {
   const alert = useAlert();
 
   const { user, loading } = useSelector((state) => state.user);
+
+  const { cartItems } = useSelector((state) => state.cart);
 
   const logoutHandler = () => {
     dispatch(logout());
@@ -131,7 +134,9 @@ const Navbar = () => {
             )}
           </IconButton>
           <Link to="/cart" style={{ textDecoration: 'none' }}>
-            <ShoppingCart sx={{ fontSize: '25px' }} />
+            <Badge badgeContent={`${cartItems.length}`} color="primary">
+              <ShoppingCart sx={{ fontSize: '25px' }} />
+            </Badge>
           </Link>
 
           {/* Login and Logout */}
@@ -168,7 +173,7 @@ const Navbar = () => {
                   </Link>
                 ) : (
                   <Link
-                    to="/dashboard"
+                    to="/admin/dashboard"
                     style={{ textDecoration: 'none', color: 'black' }}
                   >
                     {' '}
@@ -249,7 +254,9 @@ const Navbar = () => {
               )}
             </IconButton>
 
-            <ShoppingCart sx={{ fontSize: '25px' }} />
+            <Link to="/cart" style={{ textDecoration: 'none' }}>
+              <ShoppingCart sx={{ fontSize: '25px' }} />
+            </Link>
             <FormControl variant="standard">
               {user ? (
                 <Select

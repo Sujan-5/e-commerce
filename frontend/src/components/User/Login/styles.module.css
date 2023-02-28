@@ -12,7 +12,7 @@
 }
 
 .login_form_container {
-  width: 900px;
+  width: 600px;
   height: 500px;
   display: flex;
   border-radius: 10px;
@@ -124,4 +124,22 @@
   background-color: rgb(244, 135, 40);
   color: rgb(47, 44, 44);
   margin: 10px;
+}
+
+.aregister {
+  text-align: center;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.aregister_span {
+  color: #888;
+}
+
+.alogin {
+  color: #f00;
+}
+
+.aregister_span > a {
+  text-decoration: none !important;
 }
