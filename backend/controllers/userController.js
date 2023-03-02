@@ -233,35 +233,44 @@ exports.getUpdatePassword = catchAsyncErrors(async (req, res, next) => {
 
 //user profile (update)
 exports.getUpdateProfile = catchAsyncErrors(async (req, res, next) => {
-  console.log('check1');
-  const newUser = {
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    email: req.body.email,
-    address: req.body.address,
-    contact: req.body.contact,
-  };
-  const avatar = req.body?.avatar;
-  console.log(avatar);
-  if (avatar !== undefined) {
-    console.log('check2');
+  const updateUserData = {};
+  if (req.body.firstName) {
+    updateUserData.firstName = req.body.firstName;
+  }
+  if (req.body.lastName) {
+    updateUserData.lastName = req.body.lastName;
+  }
+  if (req.body.email) {
+    updateUserData.email = req.body.email;
+  }
+  if (req.body.address) {
+    updateUserData.address = req.body.address;
+  }
+  if (req.body.contact) {
+    updateUserData.contact = req.body.contact;
+  }
+
+  if (req.body.avatar !== undefined && req.body.avatar !== '') {
     const user = await User.findById(req.user.id);
     const avatarID = user.avatar.public_id;
     await cloudinary.v2.uploader.destroy(avatarID);
 
-    const cloudInary = await cloudinary.v2.uploader.upload(avatar, {
-      folder: 'avatars',
-      width: 150,
-      crop: 'scale',
-    });
+    const cloudinaryResponse = await cloudinary.v2.uploader.upload(
+      req.body.avatar,
+      {
+        folder: 'avatars',
+        width: 150,
+        crop: 'scale',
+      }
+    );
 
-    newUser.avatar = {
-      public_id: cloudInary.public_id,
-      url: cloudInary.secure_url,
+    updateUserData.avatar = {
+      public_id: cloudinaryResponse.public_id,
+      url: cloudinaryResponse.secure_url,
     };
   }
-  console.log('check3');
-  const user = await User.findByIdAndUpdate(req.user.id, newUser, {
+
+  const user = await User.findByIdAndUpdate(req.user.id, updateUserData, {
     new: true,
     runValidators: true,
     useFindAndModify: false,

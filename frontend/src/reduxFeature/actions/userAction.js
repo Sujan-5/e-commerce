@@ -93,16 +93,17 @@ export const logout = () => async (dispatch) => {
 };
 
 //update acount details
-export const editProfileDetails = (dataOfUser) => async (dispatch) => {
+export const editProfileDetails = (dataaOfUser) => async (dispatch) => {
   try {
     dispatch({ type: UPDATE_DETAILS_REQUEST });
 
     const config = { headers: { 'Content-Type': 'multipart/form-data' } };
 
-    const data = await axios.put(`/api/log/profile/update`, dataOfUser, {
-      config,
-    });
-    console.log(data);
+    const { data } = await axios.put(
+      `/api/log/profile/update`,
+      dataaOfUser,
+      config
+    );
 
     dispatch({ type: UPDATE_DETAILS_SUCCESS, payload: data.success });
   } catch (error) {

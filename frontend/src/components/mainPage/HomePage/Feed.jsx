@@ -14,7 +14,7 @@ const Banner = styled(Box)(({ theme }) => ({
   height: '100%',
   padding: '2px 8px',
 
-  backgroundColor: '#D3D3D3',
+  backgroundColor: '#F2F2F2',
   [theme.breakpoints.down('sm')]: {
     display: 'flex',
   },
@@ -27,7 +27,7 @@ const BannerContent = styled(Box)(() => ({
   flexDirection: 'column',
   padding: '30px',
   maxWidth: '420',
-  backgroundColor: '#D3D3D3',
+  backgroundColor: '#F2F2F2',
 }));
 
 const Title = styled('div')(({ theme }) => ({

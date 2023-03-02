@@ -111,7 +111,8 @@
 
 .updateProfileBtn {
   display: block;
-  margin: 20px auto;
+  margin-bottom: 20px;
+  /* margin: 30px auto; */
   background-color: #1976d2;
   color: #fff;
   border: none;
@@ -138,7 +139,7 @@
     width: 60%;
     height: 120vmax;
     display: flex;
-    margin-bottom: -50%;
+    margin-bottom: -60%;
     margin-left: -20%;
     border: none;
     box-shadow: #fff;
@@ -146,6 +147,7 @@
 
   .updateBox {
     margin-left: 10%;
+    margin-bottom: -10%;
   }
 
   .updateH2 {
@@ -153,7 +155,7 @@
     font-weight: 400;
     color: #000000;
     text-align: center;
-    margin: 1rem 0 15rem;
+    margin: 1rem 0 40rem;
     text-shadow: 1px 1px 1px #ccc;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -161,7 +163,7 @@
 
   .updateProfileForm {
     padding: 10px;
-    margin-bottom: -90%;
+    margin-bottom: -10%;
     margin-left: -70%;
   }
 

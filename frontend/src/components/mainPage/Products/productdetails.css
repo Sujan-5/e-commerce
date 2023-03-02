@@ -11,51 +11,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f7f7f8;
+  background-color: #ffffff;
 }
-
-/* .Carousel {
-  display: flex;
-  flex-wrap: nowrap;
-  overflow-x: scroll;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  margin-bottom: 20px;
-} */
-
-/* .Carousel img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-
-  object-fit: cover;
-  opacity: 0;
-  transition: opacity 0.5s ease-in-out;
-} */
-
-/* .Carousel img.active {
-  opacity: 1;
-}
-
-.Carousel button {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  padding: 10px;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-}
-
-.Carousel button.prev {
-  left: 0;
-}
-
-.Carousel button.next {
-  right: 0;
-} */
 
 .ProductDetails > div {
   width: 100%;
@@ -79,7 +36,7 @@
   object-fit: cover;
 }
 
-.block1 > h2 {
+/* .block1 > h2 {
   color: rgb(54, 54, 54);
   font: 600 1.6vmax 'Roboto';
 }
@@ -101,7 +58,7 @@
 
 .block3 {
   width: 70%;
-}
+} */
 
 .outstock {
   color: red;
@@ -115,7 +72,7 @@
   color: rgb(57, 176, 57);
 }
 
-.block3 > h1 {
+/* .block3 > h1 {
   color: rgba(17, 17, 17, 0.795);
   font: 400 1.8vmax 'Franklin Gothic Medium';
   margin: 1vmax 0;
@@ -177,25 +134,118 @@
 .Review:hover {
   background-color: rgb(197, 68, 45);
   transform: scale(1.1);
+} */
+
+.block1 {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.block1 h2 {
+  display: flex;
+  /* align-items: center; */
+  /* justify-content: space-between; */
+  margin-right: 34vmax;
+  margin-bottom: 20px;
+}
+
+.block2 {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.block2-span {
+  margin-left: 10px;
+  font-size: 1.2rem;
+  color: #555;
+}
+
+.block3 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.block31 {
+  display: flex;
+  margin-top: 10px;
+}
+
+.block31 button {
+  border: none;
+  padding: 8px 70px;
+  margin-right: 10px;
+  color: #fff;
+  background-color: #007bff;
+  border-radius: 7px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  flex: 2;
+}
+
+.block31 button:last-child {
+  margin-left: 2%;
+}
+
+.block31 button:hover {
+  background-color: #0056b3;
+}
+
+.block4 {
+  margin-bottom: 20px;
+}
+
+.block4 h3 {
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+  color: #007bff;
+}
+
+.block4 p {
+  font-size: 1.2rem;
+  line-height: 1.5;
+}
+
+.Review {
+  border: none;
+  padding: 10px 20px;
+  color: #fff;
+  background-color: #007bff;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.Review:hover {
+  background-color: #0056b3;
 }
 
 .reviewHead {
   color: #000000be;
-  font: 500 1.4vmax 'Roboto';
+  font: 500 1.4vmax;
   text-align: start;
   padding: 1vmax;
   width: 20vmax;
   margin-bottom: 4vmax;
 }
-/* .reviews {
+
+.reviews {
   display: flex;
-  overflow: auto;
-} */
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 30px;
+}
 
 .noReviews {
-  font: 400 1.3vmax;
+  font-size: 1.2rem;
   text-align: center;
-  color: rgba(0, 0, 0, 0.548);
+  margin-top: 30px;
+  color: gray;
 }
 
 @media screen and (max-width: 600px) {
@@ -212,55 +262,59 @@
   }
 
   .block1 > h2 {
-    font-size: 2.8vmax;
+    font-size: 3vmax;
     text-align: center;
-  }
-
-  .block1 > p {
-    text-align: center;
-    font-size: 1vmax;
+    margin-left: 17vmax;
   }
 
   .block2 {
     justify-content: center;
   }
   .block2 > span {
-    font-size: 1.5vmax;
+    font-size: 2.5vmax;
   }
 
   .block3 > h1 {
     font: 700 3vmax 'Franklin Gothic Medium';
     text-align: center;
+    margin-left: 8vmax;
+  }
+
+  .block31 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .block31 > button {
-    padding: 1.2vmax;
-    width: 4vmax;
-  }
-
-  .block31 > button:last-child {
-    font: 500 1.7vmax 'Roboto';
-    padding: 1.5vmax;
-    width: 20vmax;
-    margin: 3vmax 0;
+    margin-right: 0;
+    margin-bottom: 10px;
+    width: 100%;
   }
 
   .block3 > p {
     padding: 2.5vmax 0;
-    text-align: center;
-    font: 400 2vmax 'Roboto';
+    margin-left: 0.5vmax;
+    font: 400 2vmax;
   }
 
   .block4 {
-    font: 500 2.5vmax sans-serif;
+    padding: 0 2vmax;
+    font: 500 2.5vmax;
+    margin-right: 11vmax;
+    margin-bottom: 5%;
   }
 
   .block4 > p {
-    font: 300 1.8vmax sans-serif;
+    font: 300 1.2vmax;
   }
 
   .Review {
-    font-size: 10px;
-    height: 4vmax;
+    font-size: 20px;
+    height: 6vmax;
+  }
+
+  .reviewHead {
+    font-size: 15px;
   }
 }

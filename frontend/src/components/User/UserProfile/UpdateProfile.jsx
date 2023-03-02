@@ -7,7 +7,6 @@ import { UPDATE_DETAILS_RESET } from '../../../reduxFeature/reducers/Users/userC
 import { userLoad, errorClear } from '../../../reduxFeature/actions/userAction';
 import { editProfileDetails } from '../../../reduxFeature/actions/userAction';
 import { useNavigate } from 'react-router-dom';
-import Navbar from '../../mainPage/HomePage/Navbar';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import FaceIcon from '@material-ui/icons/Face';
 import LocationCityIcon from '@mui/icons-material/LocationCity';
@@ -27,21 +26,23 @@ const UpdateProfile = () => {
   const [email, setEmail] = useState('');
   const [address, setAddress] = useState('');
   const [contact, setContact] = useState('');
-  const [avatar, setAvatar] = useState();
+  const [avatar, setAvatar] = useState(null);
   const [avatarPreview, setAvatarPreview] = useState('/Profile.png');
 
   const updateDetailsSubmit = (e) => {
     e.preventDefault();
     const form = new FormData();
-    form.set('firstname', firstName);
-    form.set('lastname', lastName);
+    form.set('firstName', firstName);
+    form.set('lastName', lastName);
     form.set('email', email);
     form.set('address', address);
     form.set('contact', contact);
-    form.set('avatar', avatar);
-    for (let key of form.keys()) {
-      console.log(key + ': ' + form.get(key));
+    if (avatar) {
+      form.set('avatar', avatar);
     }
+    // for (let key of form.keys()) {
+    //   console.log(key + ': ' + form.get(key));
+    // }
     dispatch(editProfileDetails(form));
   };
 
@@ -112,7 +113,7 @@ const UpdateProfile = () => {
                       type="text"
                       placeholder="firstName"
                       required
-                      name="firsNname"
+                      name="firstName"
                       value={firstName}
                       onChange={(e) => setFirstName(e.target.value)}
                     />
@@ -123,7 +124,7 @@ const UpdateProfile = () => {
                       type="text"
                       placeholder="lastName"
                       required
-                      name="lastname"
+                      name="lastName"
                       value={lastName}
                       onChange={(e) => setLastName(e.target.value)}
                     />
@@ -133,7 +134,7 @@ const UpdateProfile = () => {
                     <input
                       type="email"
                       placeholder="Email"
-                      required
+                      readOnly
                       name="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}

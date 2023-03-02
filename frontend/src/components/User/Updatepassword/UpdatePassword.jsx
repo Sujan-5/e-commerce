@@ -12,7 +12,6 @@ import {
   errorClear,
 } from '../../../reduxFeature/actions/userAction';
 import { useNavigate } from 'react-router-dom';
-import Navbar from '../../mainPage/HomePage/Navbar';
 import './passwordup.css';
 import PasswordInput from '../Signup/Passwordinput';
 

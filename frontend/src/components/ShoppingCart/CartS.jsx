@@ -4,7 +4,6 @@ import { useNavigate, Link } from 'react-router-dom';
 import ProductCart from './ProductCart';
 import { useDispatch, useSelector } from 'react-redux';
 import RemoveShoppingCartIcon from '@material-ui/icons/RemoveShoppingCart';
-import { Typography } from '@material-ui/core';
 import {
   addToCart,
   deleteFromCart,
@@ -45,13 +44,15 @@ export const CartS = () => {
         <div className="noItemInCart">
           <RemoveShoppingCartIcon />
 
-          <Typography>No Product in Your Cart</Typography>
+          <p>No Product in Your Cart</p>
           <Link to="/home">View Products</Link>
         </div>
       ) : (
         <Fragment>
           <div className="top">
-            <button className="shopbutton">More Shopping</button>
+            <Link to="/">
+              <button className="shopbutton">More Shopping</button>
+            </Link>
             <button className="checkOut">CheckOut</button>
           </div>
           <div className="cartContainer">
@@ -107,25 +108,23 @@ export const CartS = () => {
   );
 };
 
-{
-  /* <div className="summary">
-          <h2 className="summary-title">Order Summary</h2>
-          <div className="summary-item">
-            <span className="summary-item-text">Sub Total</span>
-            <span className="summary-item-price">{item.price}</span>
-          </div>
-          <div className="Shipping">
-            <span className="summary-shipping-text">Shipping: </span>
-            <span className="summary-shipping-price">100</span>
-          </div>
-          <div className="totalAll">
-            <span className="summary-shipping-text">Total </span>
-            <span className="summary-shipping-price">{`Rs${cartItems.reduce(
-              (acc, item) => acc + item.quantity * item.price,
-              0
-            )}`}</span>
-          </div>
+//  <div className="summary">
+//         <h2 className="summary-title">Order Summary</h2>
+//         <div className="summary-item">
+//           <span className="summary-item-text">Sub Total</span>
+//           <span className="summary-item-price">{item.price}</span>
+//         </div>
+//         <div className="Shipping">
+//           <span className="summary-shipping-text">Shipping: </span>
+//           <span className="summary-shipping-price">100</span>
+//         </div>
+//         <div className="totalAll">
+//           <span className="summary-shipping-text">Total </span>
+//           <span className="summary-shipping-price">{`Rs${cartItems.reduce(
+//             (acc, item) => acc + item.quantity * item.price,
+//             0
+//           )}`}</span>
+//         </div>
 
-          <button onClick={checkOutHandler}>Check Out</button>
-        </div> */
-}
+//         <button onClick={checkOutHandler}>Check Out</button>
+//       </div>

@@ -52,7 +52,7 @@ const Logo = styled('div')`
 const theme = createTheme({
   palette: {
     neutral: {
-      light: '#CFD2D4',
+      light: '#F3F3F3',
       main: '#CFD8DB',
       dark: '#455A61',
     },
@@ -64,7 +64,7 @@ const theme = createTheme({
     },
     background: {
       default: '#FFFFFF',
-      alt: '#9f9ea7',
+      alt: '#fff',
     },
   },
 });
@@ -112,7 +112,7 @@ const Navbar = () => {
         </Logo>
         {isNonMobileScreens && (
           <FlexBetween
-            backgroundColor={neutralLight}
+            backgroundColor="#f7f8f9"
             borderRadius="9px"
             gap="3rem"
             padding="0.1rem 1.5rem"
@@ -127,7 +127,7 @@ const Navbar = () => {
       {isNonMobileScreens ? (
         <FlexBetween gap="2rem">
           <IconButton>
-            {theme.palette.mode === 'dark' ? (
+            {theme.palette.mode === { dark } ? (
               <DarkMode sx={{ fontSize: '25px' }} />
             ) : (
               <LightMode sx={{ color: dark, fontSize: '25px' }} />

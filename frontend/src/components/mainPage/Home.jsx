@@ -9,6 +9,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import Loader from './FrontFeatures/Loading/Loader';
 import { useAlert } from 'react-alert';
+import { styled } from '@mui/system';
+
+const StyledContainer = styled(Container)`
+  width: 100%;
+`;
 
 const HomePage = () => {
   const alert = useAlert();
@@ -26,12 +31,13 @@ const HomePage = () => {
   const styles = {
     container: {
       display: 'flex',
-      margin: '2vmax auto',
+      margin: '3vmax auto',
       width: '80vw',
       flexWrap: 'wrap',
       justifyContent: 'center',
       maxWidth: '100%',
     },
+
     h2: {
       textAlign: 'center',
       fontFamily: 'Roboto',
@@ -54,18 +60,12 @@ const HomePage = () => {
         <Box>
           <Feed />
           <Promotions />
-          <Container
-            style={{
-              backgroundColor: 'lightgray',
-              width: '100%',
-              height: '5%',
-            }}
-          >
+          <StyledContainer>
             <h2 className="h2" style={styles.h2}>
               Main Features
             </h2>
             <Category />
-          </Container>
+          </StyledContainer>
           <h2 className="h2" style={styles.h2}>
             Products
           </h2>

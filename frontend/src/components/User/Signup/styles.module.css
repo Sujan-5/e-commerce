@@ -1,8 +1,8 @@
 .signup_container {
   width: 100%;
   min-height: 100vh;
-  /* background-color: #b5b0b0; */
-  background-image: url(../../../../public/images/login&signup/farm.png);
+  background-color: #f7f7f8;
+  /* background-image: url(../../../../public/images/login&signup/farm.png); */
   background-repeat: no-repeat;
   background-size: cover;
   display: flex;

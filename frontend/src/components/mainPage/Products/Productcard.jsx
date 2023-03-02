@@ -26,11 +26,11 @@ const Products = ({ product }) => {
         <img src={defaultImage} alt={product.name} />
       )}
       <p>{product.name}</p>
+      <span>{`Rs. ${product.price}`}</span>
       <div>
         <ReactStars {...options} />{' '}
         <span>&nbsp;&nbsp; {product.numofReviews} Reviews</span>
       </div>
-      <span>{`Rs. ${product.price}`}</span>
     </Link>
   );
 };

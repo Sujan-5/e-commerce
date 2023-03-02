@@ -38,7 +38,7 @@ const UserProfile = () => {
               {/* <img src={user.avatar?.url} alt={user.name} /> */}
 
               {/* verified profile start*/}
-              <div className="container">
+              <div className="containerProf">
                 <div className="profile">
                   <Avatar className="avatar" src={user.avatar?.url} />
                   <div className="userWappper">

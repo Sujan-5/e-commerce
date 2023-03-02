@@ -1,6 +1,5 @@
 import React from 'react';
 import { Box, styled, Stack, Typography } from '@mui/material';
-
 import milkImage from '../../../displayProductImages/milk.jpg';
 import fruits from '../../../displayProductImages/fruits.jpg';
 import snacks from '../../../displayProductImages/snacks.jpg';
@@ -9,15 +8,25 @@ const StyledBox = styled(Box)({
   height: 200,
   width: '100%',
   cursor: 'pointer',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  color: 'black',
   backgroundRepeat: 'no-repeat',
   backgroundPosition: 'center',
   backgroundSize: 'cover',
+  transition: 'transform .2s ease-in-out',
+  '&:hover': {
+    transform: 'scale(1.1)',
+  },
 });
 
 const StyledTypography = styled(Typography)({
   margin: '20% 50px 25% 50px',
   background: 'white',
   opacity: '0.8',
+  borderRadius: 20,
+  padding: '10px 20px',
 });
 const Category = () => {
   return (

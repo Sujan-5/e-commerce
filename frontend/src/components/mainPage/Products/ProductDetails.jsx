@@ -89,10 +89,8 @@ const ProductDetails = () => {
                   >
                     Add to Cart
                   </button>
-                  {/* for BUY NOW 
-              <button disabled={product.Stock < 1 ? true : false} onClick={addToCartHandler}>
-                Buy Now
-              </button> */}
+                  {/* for BUY NOW  */}
+                  <button>Buy Now</button>
                 </div>
                 <p>
                   Status:
@@ -114,7 +112,8 @@ const ProductDetails = () => {
                 </p>
               </div>
               <div className="block4">
-                Description : <p>{product.description}</p>
+                <h3>Description : </h3>
+                <p>{product.description}</p>
               </div>
 
               <button className="Review">Review this product</button>
