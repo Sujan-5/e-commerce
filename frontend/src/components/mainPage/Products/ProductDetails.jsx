@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Fragment, useEffect } from 'react';
 import Carousel from 'react-material-ui-carousel';
+import { Link } from 'react-router-dom';
 import {
   getProductDetails,
   errorClear,
@@ -10,7 +11,6 @@ import { useParams } from 'react-router-dom';
 import './productdetails.css';
 import ReviewSection from '../Reviews/ReviewSection';
 import Rating from '@mui/material/Rating';
-import Navbar from '../HomePage/Navbar';
 import Loader from '../FrontFeatures/Loading/Loader';
 import { useAlert } from 'react-alert';
 import PageNavigation from '../FrontFeatures/PageNavigation/PageNavigation';
@@ -83,12 +83,14 @@ const ProductDetails = () => {
               <div className="block3">
                 <h1>{`Rs ${product.price}`}</h1>
                 <div className="block31">
-                  <button
-                    disabled={product.stock === 0}
-                    onClick={addToCartHandler}
-                  >
-                    Add to Cart
-                  </button>
+                  <Link to="/cart">
+                    <button
+                      disabled={product.stock === 0}
+                      onClick={addToCartHandler}
+                    >
+                      Add to Cart
+                    </button>
+                  </Link>
                   {/* for BUY NOW  */}
                   <button>Buy Now</button>
                 </div>

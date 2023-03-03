@@ -62,7 +62,6 @@ export const UpdatePassword = () => {
                 <h2 className="updatePH2">Update Password</h2>
                 <form
                   className="updatePassForm"
-                  encType="multipart/form-data"
                   onSubmit={updatePasswordSubmit}
                 >
                   <div className="oldPass">

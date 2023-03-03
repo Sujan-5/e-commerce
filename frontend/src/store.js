@@ -18,7 +18,10 @@ import {
 
 //user
 import { userReducer } from './reduxFeature/reducers/Users/userReducer';
-import { accountReducer } from './reduxFeature/reducers/Users/profileReducer';
+import {
+  accountReducer,
+  passwordForgotReducer,
+} from './reduxFeature/reducers/Users/profileReducer';
 import { cartReducer } from './reduxFeature/reducers/ShoppingCart/cartReducer';
 
 const reducer = combineReducers({
@@ -35,6 +38,7 @@ const reducer = combineReducers({
   //user
   user: userReducer,
   account: accountReducer,
+  forgotPassword: passwordForgotReducer,
 
   //cart
   cart: cartReducer,

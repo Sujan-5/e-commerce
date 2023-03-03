@@ -75,7 +75,7 @@ const Login = () => {
                     className={styles.input}
                   />
                 </div>
-                <Link to="/forgot-password" style={{ alignSelf: 'flex-start' }}>
+                <Link to="/forgot/password" style={{ alignSelf: 'flex-start' }}>
                   <p style={{ padding: '0 12px' }}>Forgot Password ?</p>
                 </Link>
 

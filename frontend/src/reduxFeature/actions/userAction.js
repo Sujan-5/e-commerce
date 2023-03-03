@@ -30,6 +30,11 @@ import {
   PASSWORD_UPDATE_SUCCESS,
   PASSWORD_UPDATE_FAIL,
 
+  //forgot password
+  PASSWORD_FORGOT_REQUEST,
+  PASSWORD_FORGOT_SUCCESS,
+  PASSWORD_FORGOT_FAIL,
+
   //error
   ERROR_CLEAR,
 } from '../reducers/Users/userConstants';
@@ -46,7 +51,7 @@ export const login = (email, password) => async (dispatch) => {
       { email, password },
       config
     );
-    console.log(data);
+
     dispatch({ type: LOGIN_SUCCESS, payload: data.user });
   } catch (error) {
     dispatch({ type: LOGIN_FAIL, payload: error.response.data.message });
@@ -133,6 +138,28 @@ export const editPassword = (dataOfUser) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: PASSWORD_UPDATE_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+//forgot password
+export const passwordForgot = (email) => async (dispatch) => {
+  try {
+    dispatch({ type: PASSWORD_FORGOT_REQUEST });
+
+    const config = { headers: { 'Content-Type': 'application/json' } };
+
+    const { data } = await axios.post(
+      `/api/log/password/forgot-password`,
+      email,
+      config
+    );
+
+    dispatch({ type: PASSWORD_FORGOT_SUCCESS, payload: data.message });
+  } catch (error) {
+    dispatch({
+      type: PASSWORD_FORGOT_FAIL,
       payload: error.response.data.message,
     });
   }

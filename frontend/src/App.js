@@ -2,10 +2,7 @@ import { Route, Routes, Navigate } from 'react-router-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Login from './components/User/Login';
 import Signup from './components/User/Signup';
-
-// import EmailVerify from './components/EmailVerify';
-import ForgotPassword from './components/ForgotPassword';
-
+import ForgotPassword from './components/User/ForgotPassword/index';
 import Home from './components/mainPage/Home';
 import Footer from './components/mainPage/HomePage/Footer';
 import ProductDetails from './components/mainPage/Products/ProductDetails';
@@ -47,14 +44,15 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/signup" exact element={<Signup />} />
         <Route path="/login" exact element={<Login />} />
+        <Route path="/update/password" element={<UpdatePassword />} exact />
         <Route path="/" exact element={<Navigate replace to="/home" />} />
-        <Route path="/forgot-password" element={<ForgotPassword />} />
+
         <Route path="/searchproducts" element={<Search />} />
         <Route path="/cart" element={<CartS />} />
         <Route element={<PrivateRoute />}>
           <Route path="/account" element={<UserProfile />} exact />
           <Route path="/update/profile" element={<UpdateProfile />} exact />
-          <Route path="/update/password" element={<UpdatePassword />} exact />
+          <Route path="/forgot/password" element={<ForgotPassword />} />
           <Route path="/admin/dashboard" element={<Dashboard />} />
           <Route path="/admin/products" element={<AllProducts />} />
           <Route path="/admin/product" element={<CreateProduct />} />
