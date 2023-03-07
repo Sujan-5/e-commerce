@@ -120,7 +120,7 @@ const Signup = () => {
                     <FaceIcon className={styles.icon} />
                     <input
                       type="text"
-                      placeholder="First Name : e.g. John"
+                      placeholder="First Name"
                       name="firstName"
                       onChange={registerHandleChange}
                       value={firstName}
@@ -131,7 +131,7 @@ const Signup = () => {
                   <div className={styles.signUpName}>
                     <input
                       type="text"
-                      placeholder="Last Name : e.g. Doe"
+                      placeholder="Last Name"
                       name="lastName"
                       onChange={registerHandleChange}
                       value={lastName}
@@ -145,7 +145,7 @@ const Signup = () => {
                   <MailOutlineIcon className={styles.icon} />
                   <input
                     type="email"
-                    placeholder="Email : e.g. example@gmail.com"
+                    placeholder="Email "
                     name="email"
                     onChange={registerHandleChange}
                     value={email}
@@ -157,7 +157,7 @@ const Signup = () => {
                   <LocationCityIcon className={styles.icon} />
                   <input
                     type="text"
-                    placeholder="Address : e.g. narayantar, jorpati"
+                    placeholder="Address"
                     name="address"
                     onChange={registerHandleChange}
                     value={address}
@@ -169,7 +169,7 @@ const Signup = () => {
                   <SmartphoneIcon className={styles.icon} />
                   <input
                     type="Number"
-                    placeholder="Contacts : e.g. 98000000000"
+                    placeholder="Contacts"
                     name="contact"
                     onChange={registerHandleChange}
                     value={contact}

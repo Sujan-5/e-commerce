@@ -1,6 +1,6 @@
 import React from 'react';
 import { Fragment, useState, useEffect } from 'react';
-import './createproduct.css';
+import './updateProduct.css';
 import { Button } from '@material-ui/core';
 import { useParams } from 'react-router-dom';
 import { LeftSidebar } from '../LeftSidebar';
@@ -54,8 +54,15 @@ const Updateproduct = () => {
     } else {
       setName(product.name);
       setPrice(product.price);
-      setCategory(product.category);
-      setStock(product.Stock);
+      // setCategory(product.category);
+
+      const categoryObject = categoryList.find(
+        (c) => c._id === product.category
+      );
+
+      setCategory(categoryObject ? categoryObject.title : '');
+
+      setStock(product.stock);
       setDescription(product.description);
       setPastImages(product.images);
     }
@@ -80,6 +87,7 @@ const Updateproduct = () => {
     alert,
     error,
     navigate,
+    categoryList,
     isUpdated,
     productId,
     product,
@@ -126,10 +134,10 @@ const Updateproduct = () => {
     <Fragment>
       <div className="dashboard">
         <LeftSidebar />
-        <div className="createProductContainer">
-          <h1 className="headingProd">Create Product</h1>
+        <div className="updateProductContainer">
+          <h1 className="headingUpdateProd">Update Product</h1>
           <form
-            className="productForm"
+            className="productUpdateForm"
             encType="multipart/form-data"
             onSubmit={productUpdateSummitHandler}
           >
@@ -156,7 +164,7 @@ const Updateproduct = () => {
             <div>
               <DescriptionIcon />
               <textarea
-                type="number"
+                type="text"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 placeholder="Product Description"
@@ -173,7 +181,7 @@ const Updateproduct = () => {
                 <option>Choose Category</option>
                 {categoryList &&
                   categoryList.map((option) => (
-                    <option key={option.value} value={option.value}>
+                    <option key={option._id} value={option.value}>
                       {option.title}
                     </option>
                   ))}
@@ -191,7 +199,7 @@ const Updateproduct = () => {
               />
             </div>
 
-            <div id="productformfile">
+            <div id="productUpdateformfile">
               <input
                 type="file"
                 name="avatar"
@@ -201,25 +209,25 @@ const Updateproduct = () => {
               />
             </div>
 
-            <div id="createProductFormImage">
+            <div id="updateProductFormImage">
               {pastimages &&
                 pastimages.map((image, index) => (
                   <img key={index} src={image.url} alt="Past Product Preview" />
                 ))}
             </div>
 
-            <div id="createProductFormImage">
+            <div id="updateProductFormImage">
               {imagesPreview.map((image, index) => (
                 <img key={index} src={image} alt="Product Preview" />
               ))}
             </div>
 
             <Button
-              id="createProductBtn"
+              id="updateProductBtn"
               type="submit"
               disabled={loading ? true : false}
             >
-              Create
+              Update
             </Button>
           </form>
         </div>

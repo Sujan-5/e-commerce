@@ -19,9 +19,6 @@ export const LeftSidebar = () => {
   return (
     <div className="sidebar">
       <Link to="/admin/dashboard">
-        <img src={logo} alt="Ecommerce" />
-      </Link>
-      <Link to="/admin/dashboard">
         <p>
           <DashboardIcon /> Dashboard
         </p>
@@ -33,10 +30,14 @@ export const LeftSidebar = () => {
         >
           <TreeItem nodeId="1" label="Products">
             <Link to="/admin/product">
-              <TreeItem nodeId="3" label="Create" icon={<AddIcon />} />
+              <TreeItem nodeId="3" label="Create Product" icon={<AddIcon />} />
             </Link>
             <Link to="/admin/products">
-              <TreeItem nodeId="2" label="All" icon={<PostAddIcon />} />
+              <TreeItem
+                nodeId="2"
+                label="All Products"
+                icon={<PostAddIcon />}
+              />
             </Link>
           </TreeItem>
         </TreeView>

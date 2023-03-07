@@ -1,12 +1,12 @@
-.newProductContainer {
-  width: 90%;
+.updateProductContainer {
+  width: 100%;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  height: 80vh;
+  height: 100vh;
 }
 
-.newProductContainer h1 {
+.headingUpdateProd {
   font: 300 2rem;
   padding: 1vmax;
   box-sizing: border-box;
@@ -14,7 +14,7 @@
   transition: all 0.5s;
 }
 
-.newProductForm {
+.productUpdateForm {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -29,15 +29,16 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.newProductForm > div {
+.productUpdateForm > div {
   display: flex;
   width: 100%;
   align-items: center;
   margin: 0.5rem 0;
 }
-.newProductForm > div > input,
-.newProductForm > div > select,
-.newProductForm > div > textarea {
+
+.productUpdateForm > div > input,
+.productUpdateForm > div > select,
+.productUpdateForm > div > textarea {
   padding: 1.5vmax 3vmax;
   width: 100%;
   box-sizing: border-box;
@@ -48,25 +49,24 @@
   transition: all 0.2s;
 }
 
-.newProductForm > div > input:focus,
-.newProductForm > div > select:focus,
-.newProductForm > div > textarea:focus {
+.productUpdateForm > div > input:focus,
+.productUpdateForm > div > select:focus,
+.productUpdateForm > div > textarea:focus {
   border-bottom: 2px solid tomato;
 }
 
-.newProductForm > div > svg {
+.productUpdateForm > div > svg {
   position: absolute;
   transform: translateX(1vmax);
   font-size: 1.6vmax;
   color: rgba(0, 0, 0, 0.623);
 }
 
-#productformfile > input {
+#productUpdateformfile > input {
   display: none;
-  text-decoration: dotted;
 }
 
-#productformfile > input::file-selector-button {
+#productUpdateformfile > input::file-selector-button {
   cursor: pointer;
   width: 100%;
   z-index: 2;
@@ -84,20 +84,20 @@
   border-radius: 4px;
 }
 
-#productformfile > input::file-selector-button:hover {
+#productUpdateformfile > input::file-selector-button:hover {
   background-color: rgb(235, 235, 235);
 }
 
-#createProductFormImage {
+#updateProductFormImage {
   width: 100%;
   overflow: auto;
 }
 
-#createProductFormImage > img {
+#updateProductFormImage > img {
   width: 3vmax;
   margin: 0 1vmax;
 }
-#createProductBtn {
+#updateProductBtn {
   border: none;
   background-color: rgb(0, 0, 0);
   color: white;
@@ -111,41 +111,27 @@
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.219);
 }
 
-#createProductBtn:hover {
+#updateProductBtn:hover {
   background-color: rgb(91, 89, 89);
 }
 
 @media screen and (max-width: 600px) {
-  .createProductContainer {
-    background-color: rgb(255, 255, 255);
+  .updateProductContainer {
+    width: 40%;
+    height: auto;
   }
-  .newProductForm {
-    padding: 6vmax;
+  .productUpdateForm {
+    padding: 2vmax;
   }
 
-  .newProductForm > div > input,
-  .newProductForm > div > select,
-  .newProductForm > div > textarea {
+  .productUpdateForm > div > input,
+  .productUpdateForm > div > select,
+  .productUpdateForm > div > textarea {
     padding: 2.5vmax 5vmax;
     font: 300 1.7vmax cursive;
   }
-
-  .newProductForm > div > svg {
-    font-size: 2.8vmax;
-  }
-
-  #productformfile > img {
-    width: 8vmax;
-    border-radius: 100%;
-  }
-
-  #productformfile > input::file-selector-button {
-    height: 7vh;
-    font: 400 1.8vmax cursive;
-  }
-
-  #createProductBtn {
-    font: 300 1.9vmax 'Roboto';
+  #updateProductBtn {
+    font: 400 1.9vmax 'Roboto';
     padding: 1.8vmax;
   }
 }

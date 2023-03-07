@@ -3,21 +3,11 @@
   background-color: rgb(255, 255, 255);
   display: flex;
   flex-direction: column;
-  padding: 4rem 0;
+  padding: 1rem 0;
+  border-right: 1px solid #e6e6e6;
+  padding-right: 1rem;
 }
 
-.sidebar > a:first-child {
-  padding: 0;
-}
-.sidebar > a > img {
-  width: 50%;
-  margin-left: 10%;
-  transition: all 0.5s;
-}
-
-.sidebar > a > img:hover {
-  filter: drop-shadow(0 0 10px rgb(246, 246, 246));
-}
 .sidebar a {
   text-decoration: none;
   color: rgba(0, 0, 0, 0.493);
@@ -30,12 +20,42 @@
   transform: scale(1.1);
 }
 
-.sidebar a > P {
+.sidebar a.active {
+  color: tomato;
+}
+
+.sidebar a > p {
   display: flex;
   align-items: center;
 }
+
 .sidebar a > p > svg {
   margin-right: 0.5rem;
+}
+
+.sidebar a.product:hover,
+.sidebar a.category:hover {
+  background-color: #f6f6f6;
+}
+
+.MuiTreeView-root {
+  margin-top: 1rem;
+}
+
+.MuiTreeItem-root {
+  margin-left: 1rem;
+}
+
+.MuiTreeItem-content:hover {
+  background-color: #f6f6f6;
+  cursor: pointer;
+}
+
+.MuiTreeItem-label {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-left: 0.5rem;
 }
 
 .MuiTypography-root {

@@ -6,7 +6,6 @@ import {
   Select,
   MenuItem,
   FormControl,
-  // Avatar,
   useMediaQuery,
   Button,
   Badge,

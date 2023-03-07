@@ -65,7 +65,7 @@ const CreateProduct = () => {
     });
     formData.set('description', description);
     formData.set('category', category);
-    formData.set('Stock', Stock);
+    formData.set('stock', Stock);
 
     dispatch(createProduct(formData));
   };
@@ -106,10 +106,10 @@ const CreateProduct = () => {
     <Fragment>
       <div className="dashboard">
         <LeftSidebar />
-        <div className="createProductContainer">
+        <div className="newProductContainer">
           <h1 className="headingProd">Create Product</h1>
           <form
-            className="productForm"
+            className="newProductForm"
             encType="multipart/form-data"
             onSubmit={productSummitHandler}
           >
@@ -152,7 +152,7 @@ const CreateProduct = () => {
                 <option>Choose Category</option>
                 {categoryList &&
                   categoryList.map((option) => (
-                    <option key={option.value} value={option.value}>
+                    <option key={option._id} value={option.value}>
                       {option.title}
                     </option>
                   ))}

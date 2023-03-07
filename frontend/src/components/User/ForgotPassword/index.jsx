@@ -51,7 +51,7 @@ const ForgotPassword = () => {
               onSubmit={handleForgotSubmit}
             >
               <h1>Forgot Password</h1>
-              <div>
+              <div className={styles.forgotEmail}>
                 <MailOutlineIcon />
                 <input
                   type="email"
@@ -60,7 +60,6 @@ const ForgotPassword = () => {
                   onChange={(e) => setEmail(e.target.value)}
                   value={email}
                   required
-                  className={styles.input}
                 />
               </div>
 

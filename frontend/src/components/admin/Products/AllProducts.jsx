@@ -115,7 +115,7 @@ export const AllProducts = ({ history }) => {
     products.forEach((prod) => {
       rows.push({
         id: counter++,
-        stock: prod.Stock,
+        stock: prod.stock,
         price: prod.price,
         name: prod.name,
         productId: prod._id,

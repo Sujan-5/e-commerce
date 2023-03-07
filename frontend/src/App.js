@@ -28,6 +28,7 @@ import UpdateProfile from './components/User/UserProfile/UpdateProfile';
 import { UpdatePassword } from './components/User/Updatepassword/UpdatePassword';
 import { CartS } from './components/ShoppingCart/CartS';
 import Navbar from './components/mainPage/HomePage/Navbar';
+import ResetPassword from './components/User/ResetPassword/ResetPassword';
 
 function App() {
   const dispatch = useDispatch();
@@ -44,7 +45,8 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/signup" exact element={<Signup />} />
         <Route path="/login" exact element={<Login />} />
-        <Route path="/update/password" element={<UpdatePassword />} exact />
+        <Route path="/forgot/password" element={<ForgotPassword />} />
+        <Route path="/password/reset/:token" element={<ResetPassword />} />
         <Route path="/" exact element={<Navigate replace to="/home" />} />
 
         <Route path="/searchproducts" element={<Search />} />
@@ -52,7 +54,7 @@ function App() {
         <Route element={<PrivateRoute />}>
           <Route path="/account" element={<UserProfile />} exact />
           <Route path="/update/profile" element={<UpdateProfile />} exact />
-          <Route path="/forgot/password" element={<ForgotPassword />} />
+          <Route path="/update/password" element={<UpdatePassword />} exact />
           <Route path="/admin/dashboard" element={<Dashboard />} />
           <Route path="/admin/products" element={<AllProducts />} />
           <Route path="/admin/product" element={<CreateProduct />} />

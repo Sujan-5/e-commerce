@@ -85,7 +85,7 @@ export const updateProductDetails = (id, productData) => async (dispatch) => {
 
     const { data } = await axios.put(
       `/api/v1/admin/product/${id}`,
-      productData,
+      JSON.stringify(productData),
       config
     );
 

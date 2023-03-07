@@ -16,6 +16,11 @@ import {
   PASSWORD_FORGOT_SUCCESS,
   PASSWORD_FORGOT_FAIL,
 
+  //Reset Password
+  PASSWORD_RESET_REQUEST,
+  PASSWORD_RESET_SUCCESS,
+  PASSWORD_RESET_FAIL,
+
   //error
   ERROR_CLEAR,
 } from './userConstants';
@@ -65,6 +70,7 @@ export const accountReducer = (state = {}, action) => {
 export const passwordForgotReducer = (state = {}, action) => {
   switch (action.type) {
     case PASSWORD_FORGOT_REQUEST:
+    case PASSWORD_RESET_REQUEST:
       return {
         ...state,
         loading: true,
@@ -77,7 +83,15 @@ export const passwordForgotReducer = (state = {}, action) => {
         message: action.payload,
       };
 
+    case PASSWORD_RESET_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        success: action.payload,
+      };
+
     case PASSWORD_FORGOT_FAIL:
+    case PASSWORD_RESET_FAIL:
       return {
         ...state,
         loading: false,

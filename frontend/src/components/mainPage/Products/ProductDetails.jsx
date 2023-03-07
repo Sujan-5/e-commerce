@@ -47,6 +47,10 @@ const ProductDetails = () => {
     alert.success('Item Added To Cart');
   };
 
+  const buyProductHandler = () => {
+    dispatch(addToCart(params.id, quantity));
+  };
+
   return (
     <Fragment>
       {loading ? (
@@ -83,16 +87,22 @@ const ProductDetails = () => {
               <div className="block3">
                 <h1>{`Rs ${product.price}`}</h1>
                 <div className="block31">
+                  <button
+                    disabled={product.stock === 0}
+                    onClick={addToCartHandler}
+                  >
+                    Add to Cart
+                  </button>
+
+                  {/* for BUY NOW  */}
                   <Link to="/cart">
                     <button
                       disabled={product.stock === 0}
-                      onClick={addToCartHandler}
+                      onClick={buyProductHandler}
                     >
-                      Add to Cart
+                      Buy Now
                     </button>
                   </Link>
-                  {/* for BUY NOW  */}
-                  <button>Buy Now</button>
                 </div>
                 <p>
                   Status:

@@ -35,6 +35,11 @@ import {
   PASSWORD_FORGOT_SUCCESS,
   PASSWORD_FORGOT_FAIL,
 
+  //Reset Password
+  PASSWORD_RESET_REQUEST,
+  PASSWORD_RESET_SUCCESS,
+  PASSWORD_RESET_FAIL,
+
   //error
   ERROR_CLEAR,
 } from '../reducers/Users/userConstants';
@@ -160,6 +165,28 @@ export const passwordForgot = (email) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: PASSWORD_FORGOT_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+//forgot password
+export const passwordReset = (token, passwords) => async (dispatch) => {
+  try {
+    dispatch({ type: PASSWORD_RESET_REQUEST });
+
+    const config = { headers: { 'Content-Type': 'application/json' } };
+
+    const { data } = await axios.put(
+      `/api/log/password/reset/${token}`,
+      passwords,
+      config
+    );
+
+    dispatch({ type: PASSWORD_RESET_SUCCESS, payload: data.success });
+  } catch (error) {
+    dispatch({
+      type: PASSWORD_RESET_FAIL,
       payload: error.response.data.message,
     });
   }
