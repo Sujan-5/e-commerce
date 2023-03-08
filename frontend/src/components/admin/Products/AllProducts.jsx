@@ -108,7 +108,7 @@ export const AllProducts = ({ history }) => {
     },
   ];
 
-  let counter = 0;
+  let counter = 1;
   const rows = [];
 
   products &&

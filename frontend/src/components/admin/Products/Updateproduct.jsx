@@ -47,6 +47,7 @@ const Updateproduct = () => {
   } = useSelector((state) => state.categories);
 
   const productId = params.id;
+  console.log(productId);
 
   useEffect(() => {
     if (product && product._id !== productId) {
@@ -105,7 +106,7 @@ const Updateproduct = () => {
     });
     formData.set('description', description);
     formData.set('category', category);
-    formData.set('Stock', Stock);
+    formData.set('stock', Stock);
 
     dispatch(updateProductDetails(productId, formData));
   };

@@ -29,6 +29,7 @@ import { UpdatePassword } from './components/User/Updatepassword/UpdatePassword'
 import { CartS } from './components/ShoppingCart/CartS';
 import Navbar from './components/mainPage/HomePage/Navbar';
 import ResetPassword from './components/User/ResetPassword/ResetPassword';
+import Shipping from './components/ShippingAndChekout/Shipping';
 
 function App() {
   const dispatch = useDispatch();
@@ -48,13 +49,16 @@ function App() {
         <Route path="/forgot/password" element={<ForgotPassword />} />
         <Route path="/password/reset/:token" element={<ResetPassword />} />
         <Route path="/" exact element={<Navigate replace to="/home" />} />
-
         <Route path="/searchproducts" element={<Search />} />
         <Route path="/cart" element={<CartS />} />
+        <Route path="/product/:id" element={<ProductDetails />} />
         <Route element={<PrivateRoute />}>
           <Route path="/account" element={<UserProfile />} exact />
           <Route path="/update/profile" element={<UpdateProfile />} exact />
           <Route path="/update/password" element={<UpdatePassword />} exact />
+          <Route path="/shipping" element={<Shipping />} />
+        </Route>
+        <Route element={<PrivateRoute />}>
           <Route path="/admin/dashboard" element={<Dashboard />} />
           <Route path="/admin/products" element={<AllProducts />} />
           <Route path="/admin/product" element={<CreateProduct />} />
@@ -66,7 +70,6 @@ function App() {
           {/* <Route path="/admin/category/:id" element={<PrivateRoute element={<UpdateCategory />} />} /> */}
           *
           <Route path="/admin/product/:id" element={<Updateproduct />} />
-          <Route path="/product/:id" element={<ProductDetails />} />
         </Route>
       </Routes>
       <Footer />

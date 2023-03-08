@@ -97,8 +97,9 @@ export const CartS = () => {
                 )}`}</p>
               </div>
               <div></div>
+
               <div className="checkoutBTN">
-                <button>CheckOut</button>
+                <button onClick={checkOutHandler}>CheckOut</button>
               </div>
             </div>
           </div>
