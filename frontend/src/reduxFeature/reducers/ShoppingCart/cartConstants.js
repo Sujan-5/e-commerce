@@ -1,3 +1,5 @@
 export const CART_ADD = 'CART_ADD';
 
 export const DELETE_ITEMS = 'DELETE_ITEMS';
+
+export const SHIPPING_DETAILS_SAVE = 'SHIPPING_DETAILS_SAVE';

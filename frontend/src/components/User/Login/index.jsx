@@ -25,7 +25,7 @@ const Login = () => {
     dispatch(login(emailLogin, passLogin));
   };
 
-  // const navi = location.search ? location.search.split("=")[1] : "/account";
+  const navi = location.search ? location.search.split('=')[1] : '/home';
 
   useEffect(() => {
     if (error) {
@@ -33,7 +33,7 @@ const Login = () => {
       dispatch(errorClear());
     }
     if (isAuthenticated) {
-      navigate('/home');
+      navigate(navi);
     }
   }, [dispatch, error, alert, navigate, isAuthenticated]);
 

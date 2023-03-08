@@ -1,4 +1,8 @@
-import { CART_ADD, DELETE_ITEMS } from '../reducers/ShoppingCart/cartConstants';
+import {
+  CART_ADD,
+  DELETE_ITEMS,
+  SHIPPING_DETAILS_SAVE,
+} from '../reducers/ShoppingCart/cartConstants';
 import axios from 'axios';
 
 export const addToCart = (id, quantity) => async (dispatch, getState) => {
@@ -26,4 +30,14 @@ export const deleteFromCart = (id) => async (dispatch, getState) => {
     payload: id,
   });
   localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems));
+};
+
+// saving shipping info
+export const saveShippingDetails = (data) => async (dispatch) => {
+  dispatch({
+    type: SHIPPING_DETAILS_SAVE,
+    payload: data,
+  });
+
+  localStorage.setItem('shippingDetails', JSON.stringify(data));
 };

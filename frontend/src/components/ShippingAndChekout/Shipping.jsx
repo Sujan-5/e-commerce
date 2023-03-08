@@ -1,17 +1,20 @@
 import React from 'react';
 import { Fragment, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './shipping.css';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import LocationCity from '@material-ui/icons/LocationCity';
 import PlaceIcon from '@mui/icons-material/Place';
 import SmartphoneIcon from '@mui/icons-material/Smartphone';
 import FaceIcon from '@material-ui/icons/Face';
-// import { useAlert } from 'react-alert';
+import { useAlert } from 'react-alert';
 import MultiSteps from './MultiSteps';
+import { saveShippingDetails } from '../../reduxFeature/actions/cartAction';
 
 const Shipping = () => {
-  //   const dispatch = useDispatch();
-  //   const alert = useAlert();
+  const dispatch = useDispatch();
+  const alert = useAlert();
+  const navigate = useNavigate();
 
   const { shippingDetails } = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.user);
@@ -24,6 +27,18 @@ const Shipping = () => {
   const [province, SetProvince] = useState(
     shippingDetails.province || 'Bagmati Province'
   );
+
+  const handleShippingSubmit = (e) => {
+    e.preventDefault();
+
+    if (contact.length < 10 || contact.length > 10) {
+      alert.error('Phone number should be 10 digits long');
+      return;
+    }
+
+    dispatch(saveShippingDetails({ contact, city, address, province }));
+    navigate('/confirm/order');
+  };
 
   return (
     <Fragment>

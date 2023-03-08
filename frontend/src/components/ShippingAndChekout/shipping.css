@@ -48,7 +48,8 @@
   border-radius: 10px;
 }
 
-.shhpingAddress {
+.shhpingAddress,
+.shippingAddress {
   display: flex;
   border: none;
   border-bottom: 2.5px solid #b8b6b6;
@@ -68,19 +69,6 @@
   font-size: 16px;
   font-weight: 400;
   margin-left: 10px;
-}
-
-.shippingAddress {
-  display: flex;
-  border: none;
-  border-bottom: 2.5px solid #b8b6b6;
-  outline: none;
-  width: 100%;
-  margin-bottom: 20px;
-  border-radius: 10px;
-  background-color: #ffffff;
-  padding: 10px;
-  transition: background-color 0.3s ease;
 }
 
 .shippingAddress input {
@@ -124,4 +112,57 @@
 
 .ShippingAddressBtn:hover {
   background-color: #1565c0;
+}
+
+@media screen and (max-width: 600px) {
+  .shippingContainer {
+    display: grid;
+    place-items: center;
+    margin-bottom: 75%;
+  }
+
+  .shippingDetails {
+    width: 80%;
+    height: 50vmax;
+    display: flex;
+    margin-bottom: -60%;
+    margin-left: 0%;
+    border: none;
+    box-shadow: #fff;
+  }
+
+  .shippingBox {
+    margin-left: 10%;
+    margin-bottom: -10%;
+    width: 100%;
+    height: 50vmax;
+  }
+
+  .shippingBox h2 {
+    font-size: 1rem;
+    font-weight: 250;
+    color: #000000;
+    text-align: center;
+    margin: 1rem 0 40rem;
+    text-shadow: 1px 1px 1px #ccc;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  .shippingForm {
+    padding: 10px;
+    margin-bottom: -10%;
+    margin-left: -70%;
+  }
+
+  .shippingAddress,
+  .shhpingAddress {
+    width: 80%;
+    overflow: hidden;
+  }
+
+  .shhpingAddress input,
+  .shippingAddress input {
+    margin-top: 10px;
+  }
 }

@@ -5,6 +5,7 @@ import {
   StepLabel,
   Step,
 } from '@material-ui/core';
+import './multiSteps.css';
 import React, { Fragment } from 'react';
 import LocalShippingIcon from '@material-ui/icons/LocalShipping';
 import LibraryAddCheckIcon from '@material-ui/icons/LibraryAddCheck';

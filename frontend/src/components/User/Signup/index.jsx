@@ -61,6 +61,11 @@ const Signup = () => {
     } else {
       resetFormData();
     }
+
+    if (contact.length < 10 || contact.length > 10) {
+      alert.error('Phone Number should be 10 digits Long');
+      return;
+    }
   };
 
   const resetFormData = () => {
@@ -175,6 +180,7 @@ const Signup = () => {
                     value={contact}
                     required
                     className={styles.input}
+                    size="10"
                   />
                 </div>
 
