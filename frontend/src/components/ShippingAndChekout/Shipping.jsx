@@ -37,7 +37,7 @@ const Shipping = () => {
     }
 
     dispatch(saveShippingDetails({ contact, city, address, province }));
-    navigate('/confirm/order');
+    navigate('/order/details');
   };
 
   return (
@@ -47,7 +47,7 @@ const Shipping = () => {
         <div className="shippingDetails">
           <div className="shippingBox">
             <h2>Shipping Details</h2>
-            <form className="shippingForm">
+            <form className="shippingForm" onSubmit={handleShippingSubmit}>
               <div className="shippingAddress">
                 <FaceIcon />
                 <input
@@ -73,7 +73,7 @@ const Shipping = () => {
                 <LocationCity />
                 <input
                   type="text"
-                  placeholder="Contact"
+                  placeholder="Province"
                   value={province}
                   onChange={(e) => SetProvince(e.target.value)}
                   readOnly

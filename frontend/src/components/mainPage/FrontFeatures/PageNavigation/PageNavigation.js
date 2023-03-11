@@ -14,7 +14,7 @@ const PageNavigation = ({ title }) => {
     },
     link: {
       fontSize: '1.2rem',
-      color: 'black',
+      color: '#1a9cb7',
       textDecoration: 'none',
     },
   };
@@ -22,9 +22,9 @@ const PageNavigation = ({ title }) => {
   return (
     <div style={styles.wrapper}>
       <NavLink to="/" style={styles.link}>
-        Home
-      </NavLink>
-      /{title}
+        Home&nbsp;
+      </NavLink>{' '}
+      {'>'} {title}
     </div>
   );
 };

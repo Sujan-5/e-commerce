@@ -11,6 +11,7 @@ import { useParams } from 'react-router-dom';
 import './productdetails.css';
 import ReviewSection from '../Reviews/ReviewSection';
 import Rating from '@mui/material/Rating';
+import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import Loader from '../FrontFeatures/Loading/Loader';
 import { useAlert } from 'react-alert';
 import PageNavigation from '../FrontFeatures/PageNavigation/PageNavigation';
@@ -105,7 +106,7 @@ const ProductDetails = () => {
                   </Link>
                 </div>
                 <p>
-                  Status:
+                  Status:{' '}
                   <b
                     className={
                       product.stock <= 0
@@ -123,15 +124,29 @@ const ProductDetails = () => {
                   </b>
                 </p>
               </div>
-              <div className="block4">
-                <h3>Description : </h3>
-                <p>{product.description}</p>
+              <div className="delivery">
+                <h3>Delivery</h3>
+                <div className="standardDelivery">
+                  <LocalShippingIcon />
+                  <div className="deliveryInfo">
+                    <p className="deliveryType">Standard Delivery</p>
+                    <p className="deliveryTime">1 Day</p>
+                    <p className="deliveryPrice">Rs. 50</p>
+                  </div>
+                </div>
+                <p className="cashDelivery">Cash on Delivery Available</p>
               </div>
-
+            </div>
+          </div>
+          <div className="Desc">
+            <div className="block4">
+              <h3>Description : </h3>
+              <p>{product.description}</p>
+            </div>
+            <div className="reviewButton">
               <button className="Review">Review this product</button>
             </div>
           </div>
-
           <h3 className="reviewHead">Ratings & Reviews</h3>
           {product.reviews && product.reviews[0] ? (
             <div className="reviews">

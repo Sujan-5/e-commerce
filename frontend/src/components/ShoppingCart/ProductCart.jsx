@@ -6,7 +6,7 @@ import './cart.css';
 const ProductCart = ({ item, deleteCartItems }) => {
   return (
     <div className="bottom">
-      <img className="productimage" src={item.image} alt="ssa" />
+      <img className="productimage" src={item?.image} alt="ssa" />
       <div className="productCartdetails">
         <Link tp={`/product/${item.product}`} className="productName">
           {item.name}

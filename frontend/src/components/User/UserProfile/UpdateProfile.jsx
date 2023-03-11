@@ -40,9 +40,6 @@ const UpdateProfile = () => {
     if (avatar) {
       form.set('avatar', avatar);
     }
-    // for (let key of form.keys()) {
-    //   console.log(key + ': ' + form.get(key));
-    // }
     dispatch(editProfileDetails(form));
   };
 

@@ -15,6 +15,8 @@ export const CartS = () => {
 
   const { cartItems } = useSelector((state) => state.cart);
 
+  const { user } = useSelector((state) => state.user);
+
   const increaseQty = (id, quantity, stock) => {
     const newQty = quantity + 1;
     if (stock <= quantity) {
@@ -36,7 +38,11 @@ export const CartS = () => {
   };
 
   const checkOutHandler = () => {
-    navigate('/login?redirect=shipping');
+    if (user) {
+      navigate('/shipping');
+    } else {
+      navigate('/login');
+    }
   };
   return (
     <Fragment>

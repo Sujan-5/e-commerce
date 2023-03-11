@@ -10,6 +10,7 @@ import React, { Fragment } from 'react';
 import LocalShippingIcon from '@material-ui/icons/LocalShipping';
 import LibraryAddCheckIcon from '@material-ui/icons/LibraryAddCheck';
 import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,12 +33,16 @@ const MultiSteps = ({ activeStep }) => {
       icon: <LocalShippingIcon />,
     },
     {
-      label: <Typography>Order Confirm</Typography>,
+      label: <Typography>Order Details</Typography>,
       icon: <LibraryAddCheckIcon />,
     },
     {
       label: <Typography>CheckOut</Typography>,
       icon: <AccountBalanceIcon />,
+    },
+    {
+      label: <Typography>Deliverd</Typography>,
+      icon: <CheckCircleIcon />,
     },
   ];
 

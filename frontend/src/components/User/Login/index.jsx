@@ -25,15 +25,13 @@ const Login = () => {
     dispatch(login(emailLogin, passLogin));
   };
 
-  const navi = location.search ? location.search.split('=')[1] : '/home';
-
   useEffect(() => {
     if (error) {
       alert.error(error);
       dispatch(errorClear());
     }
     if (isAuthenticated) {
-      navigate(navi);
+      navigate('/home');
     }
   }, [dispatch, error, alert, navigate, isAuthenticated]);
 

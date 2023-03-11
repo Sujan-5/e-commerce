@@ -30,6 +30,7 @@ import { CartS } from './components/ShoppingCart/CartS';
 import Navbar from './components/mainPage/HomePage/Navbar';
 import ResetPassword from './components/User/ResetPassword/ResetPassword';
 import Shipping from './components/ShippingAndChekout/Shipping';
+import OrderDetails from './components/ShippingAndChekout/OrderDetails';
 
 function App() {
   const dispatch = useDispatch();
@@ -57,6 +58,7 @@ function App() {
           <Route path="/update/profile" element={<UpdateProfile />} exact />
           <Route path="/update/password" element={<UpdatePassword />} exact />
           <Route path="/shipping" element={<Shipping />} />
+          <Route path="/order/details" element={<OrderDetails />} />
         </Route>
         <Route element={<PrivateRoute />}>
           <Route path="/admin/dashboard" element={<Dashboard />} />
