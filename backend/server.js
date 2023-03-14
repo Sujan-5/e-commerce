@@ -32,7 +32,11 @@ cloudinary.config({
 
 //middlewares************************************************************************************************
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    option: '*',
+  })
+);
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(fileUpload());

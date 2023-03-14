@@ -15,7 +15,6 @@ import ProductReviews from './components/admin/Reviews/ProductReviews';
 import Updateproduct from './components/admin/Products/Updateproduct';
 import Category from './components/admin/Category/Category';
 // import UpdateCategory from './components/admin/Category/UpdateCategory';
-import Search from './components/mainPage/Filters/Search';
 import { CategoryList } from './components/admin/Category/CategoryList';
 import { useEffect } from 'react';
 import { getAllCategory } from './reduxFeature/actions/categoryAction';
@@ -31,6 +30,8 @@ import Navbar from './components/mainPage/HomePage/Navbar';
 import ResetPassword from './components/User/ResetPassword/ResetPassword';
 import Shipping from './components/ShippingAndChekout/Shipping';
 import OrderDetails from './components/ShippingAndChekout/OrderDetails';
+import Productcard from './components/mainPage/Products/Productcard';
+import StockPage from './components/admin/Stock/StockPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -50,7 +51,7 @@ function App() {
         <Route path="/forgot/password" element={<ForgotPassword />} />
         <Route path="/password/reset/:token" element={<ResetPassword />} />
         <Route path="/" exact element={<Navigate replace to="/home" />} />
-        <Route path="/searchproducts" element={<Search />} />
+        <Route path="/search/:keyword" element={Productcard} />
         <Route path="/cart" element={<CartS />} />
         <Route path="/product/:id" element={<ProductDetails />} />
         <Route element={<PrivateRoute />}>
@@ -72,6 +73,7 @@ function App() {
           {/* <Route path="/admin/category/:id" element={<PrivateRoute element={<UpdateCategory />} />} /> */}
           *
           <Route path="/admin/product/:id" element={<Updateproduct />} />
+          <Route path="/admin/:id/stock" element={<StockPage />} />
         </Route>
       </Routes>
       <Footer />

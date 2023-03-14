@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import ReactStars from 'react-rating-stars-component';
-import Pagination from '@mui/material/Pagination';
+// import Pagination from '@mui/material/Pagination';
 
 import './product.css';
 

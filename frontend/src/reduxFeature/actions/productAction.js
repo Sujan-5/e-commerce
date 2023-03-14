@@ -27,25 +27,27 @@ import {
 } from '../reducers/Products/productConstants';
 
 //get products for home page
-export const getProduct = () => async (dispatch) => {
-  try {
-    dispatch({
-      type: PRODUCT_ALL_REQUEST,
-    });
+export const getProduct =
+  (keyword = '') =>
+  async (dispatch) => {
+    try {
+      dispatch({
+        type: PRODUCT_ALL_REQUEST,
+      });
 
-    const { data } = await axios.get('/api/v1/products');
+      const { data } = await axios.get(`/api/v1/products?keyword=${keyword}`);
 
-    dispatch({
-      type: PRODUCT_ALL_SUCCESS,
-      payload: data,
-    });
-  } catch (error) {
-    dispatch({
-      type: PRODUCT_ALL_FAIL,
-      payload: error.response.data.message,
-    });
-  }
-};
+      dispatch({
+        type: PRODUCT_ALL_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: PRODUCT_ALL_FAIL,
+        payload: error.response.data.message,
+      });
+    }
+  };
 
 // Create admin Product
 export const createProduct = (productData) => async (dispatch) => {

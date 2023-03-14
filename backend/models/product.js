@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const stockHistoryItemSchema = require('./stockHistoryItemSchema');
 
 const productSchema = new Schema({
   name: {
@@ -24,7 +25,7 @@ const productSchema = new Schema({
     type: String,
     required: [true, 'Please enter product description'],
   },
-  rating: {
+  ratings: {
     type: Number,
     default: 0,
   },
@@ -42,7 +43,6 @@ const productSchema = new Schema({
   ],
   category: {
     type: mongoose.Schema.Types.ObjectId,
-    // type: String,
     ref: 'Category',
     required: [true, 'Please enter product category'],
   },
@@ -52,12 +52,20 @@ const productSchema = new Schema({
     maxLength: [5, 'Product name cannot exeed 5 characters'],
     default: 0,
   },
+
+  stock_history: [stockHistoryItemSchema],
+
   numofReviews: {
     type: Number,
     default: 0,
   },
   reviews: [
     {
+      user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'user',
+        required: true,
+      },
       name: {
         type: String,
         required: true,
@@ -72,6 +80,13 @@ const productSchema = new Schema({
       },
     },
   ],
+
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'user',
+    required: true,
+  },
+
   createdAt: {
     type: Date,
     default: Date.now,

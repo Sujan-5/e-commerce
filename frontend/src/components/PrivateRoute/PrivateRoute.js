@@ -13,7 +13,7 @@ const PrivateRoute = ({ element: Component, ...rest }) => {
         <Outlet
           {...rest}
           render={(props) => {
-            if (!isAuthenticated) {
+            if (isAuthenticated === false) {
               navigate('/login');
             }
             return <Component {...props} />;

@@ -10,22 +10,27 @@ import { useEffect } from 'react';
 import Loader from './FrontFeatures/Loading/Loader';
 import { useAlert } from 'react-alert';
 import { styled } from '@mui/system';
+import { useParams } from 'react-router-dom';
 
 const StyledContainer = styled(Container)`
   width: 100%;
 `;
 
 const HomePage = () => {
+  const params = useParams();
+
   const alert = useAlert();
   const dispatch = useDispatch();
   const { loading, error, products } = useSelector((state) => state.products);
+
+  const keyword = params.keyword;
 
   useEffect(() => {
     if (error) {
       return alert.error(error);
     }
-    dispatch(getProduct());
-  }, [dispatch, error, alert]);
+    dispatch(getProduct(keyword));
+  }, [dispatch, error, alert, keyword]);
 
   //styles
   const styles = {

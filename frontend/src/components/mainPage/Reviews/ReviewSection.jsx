@@ -1,23 +1,22 @@
 import React from 'react';
-import Rating from '@mui/material/Rating';
+import { Rating } from '@mui/material';
 import './reviewSection.css';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const ReviewSection = ({ review }) => {
   const options = {
-    edit: false,
-    color: 'rgba(20,20,20,0.1)',
-    activeColor: 'tamato',
-    size: window.innerWidth < 600 ? 20 : 25,
     value: review.rating,
-    isHalf: true,
+    readOnly: true,
+    precision: 0.5,
   };
 
   return (
     <div className="reviewSec">
-      <AccountCircleIcon className="img" />
-      <p>{review.name}</p>
-      <Rating {...options} />
+      <div className="avatar">
+        <AccountCircleIcon className="img" />
+        <p className="reviewName">{review.name}</p>
+      </div>
+      <Rating {...options} className="rating" />
       <span className="reviewComment">{review.comment}</span>
     </div>
   );

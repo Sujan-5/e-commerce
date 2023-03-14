@@ -18,6 +18,7 @@ import { Fragment } from 'react';
 import { useAlert } from 'react-alert';
 import { useNavigate } from 'react-router-dom';
 import { PRODUCT_DELETE_RESET } from '../../../reduxFeature/reducers/Products/productConstants';
+import AddBoxIcon from '@mui/icons-material/AddBox';
 
 export const AllProducts = ({ history }) => {
   const dispatch = useDispatch();
@@ -102,6 +103,10 @@ export const AllProducts = ({ history }) => {
             <Button onClick={() => deleteProductHandler(productId)}>
               <DeleteIcon />
             </Button>
+
+            <Link to={`/admin/${productId}/stock`}>
+              <AddBoxIcon />
+            </Link>
           </Fragment>
         );
       },

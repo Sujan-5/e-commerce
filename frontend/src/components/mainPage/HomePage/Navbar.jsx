@@ -11,7 +11,6 @@ import {
   Badge,
 } from '@mui/material';
 import {
-  Search,
   DarkMode,
   LightMode,
   Menu,
@@ -25,6 +24,7 @@ import Login from '@mui/icons-material/Login';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAlert } from 'react-alert';
 import { logout } from '../../../reduxFeature/actions/userAction';
+import Search from '../Filters/SearchFilter';
 
 const FlexBetween = styled(Box)({
   display: 'flex',
@@ -116,10 +116,8 @@ const Navbar = () => {
             gap="3rem"
             padding="0.1rem 1.5rem"
           >
-            <InputBase placeholder="Search..." />
-            <IconButton>
-              <Search />
-            </IconButton>
+            {/* <Outlet render={(props) => return <Search {...props}/>} /> */}
+            <Search />
           </FlexBetween>
         )}
       </FlexBetween>

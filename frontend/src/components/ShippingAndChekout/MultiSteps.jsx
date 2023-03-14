@@ -41,7 +41,7 @@ const MultiSteps = ({ activeStep }) => {
       icon: <AccountBalanceIcon />,
     },
     {
-      label: <Typography>Deliverd</Typography>,
+      label: <Typography>Success</Typography>,
       icon: <CheckCircleIcon />,
     },
   ];

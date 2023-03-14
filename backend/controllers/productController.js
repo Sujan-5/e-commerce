@@ -42,46 +42,38 @@ exports.newProduct = catchAsyncError(async (req, res, next) => {
   }
 });
 
-//try for stock
-// exports.newProduct = catchAsyncError(async (req, res, next) => {
-//   const { name, price, description, category, stock, images } = req.body;
+// try for stock
 
-//   const categoryDoc = await Category.findOne({ title: category });
-//   if (!categoryDoc) {
-//     return res.status(404).json({
-//       message: `Category "${category}" not found`,
-//     });
-//   }
+exports.getProductId = catchAsyncError(async (req, res, next) => {
+  try {
+    const product = await Product.findById(req.params.id);
+    res.json(product);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Server error');
+  }
+});
 
-//   const product = new Product({
-//     name,
-//     slug: slugify(name),
-//     price,
-//     description,
-//     category: categoryDoc._id,
-//     stock,
-//     images,
-//   });
+exports.updateProductStock = catchAsyncError(async (req, res, next) => {
+  try {
+    const product = await Product.findById(req.params.id);
+    // Update stock
+    product.stock += req.body.stock;
 
-//   try {
-//     const result = await product.save();
-//     const stockHistory = new StockHistory({
-//       product: result._id,
-//       quantity: stock,
-//     });
-//     await stockHistory.save();
-//     res.status(201).json({
-//       message: 'Product created successfully',
-//       product: result,
-//     });
-//   } catch (error) {
-//     console.error(error);
-//     res.status(400).json({
-//       message: 'Product creation failed',
-//       error: error,
-//     });
-//   }
-// });
+    // Add stock record to history
+    product.stock_history.push({
+      quantity: req.body.stock,
+      date: Date.now(),
+    });
+
+    await product.save();
+
+    res.json(product);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Server error');
+  }
+});
 
 //Get all products => /api/v1/products **************************************************************************************************************
 exports.getProducts = catchAsyncError(async (req, res, next) => {
@@ -206,3 +198,92 @@ exports.deleteProduct = catchAsyncError(async (req, res, next) => {
 //     res.status(500).send('Server Error');
 //   }
 // });
+
+// create a new review
+exports.createNewReview = catchAsyncError(async (req, res, next) => {
+  const { rating, comment, productId } = req.body;
+
+  const review = {
+    user: req.user._id,
+    name: req.user.firstName,
+    rating: Number(rating),
+    comment,
+  };
+
+  const product = await Product.findById(productId);
+
+  const isReviewed = product.reviews.find(
+    (rev) => rev.user.toString() === req.user._id.toString()
+  );
+
+  if (isReviewed) {
+    product.reviews.forEach((review) => {
+      if (review.user.toString() === req.user._id.toString()) {
+        review.comment = comment;
+        review.rating = rating;
+      }
+    });
+  } else {
+    product.reviews.push(review);
+    product.numofReviews = product.reviews.length;
+  }
+
+  product.ratings =
+    product.reviews.reduce((acc, item) => item.rating + acc, 0) /
+    product.reviews.length;
+
+  await product.save({ validateBeforeSave: false });
+
+  res.status(200).json({ success: true });
+});
+
+// get all new review
+exports.getAllProductReviews = catchAsyncError(async (req, res, next) => {
+  const product = await Product.findById(req.query.id);
+
+  if (!product) {
+    return next(new ErrorHandler('Product not found', 404));
+  }
+
+  res.status(200).json({
+    success: true,
+    reviews: product.reviews,
+  });
+});
+
+// delete review
+exports.deleteProductReview = catchAsyncError(async (req, res, next) => {
+  const product = await Product.findById(req.query.productId);
+
+  if (!product) {
+    return next(new ErrorHandler('Product not found', 404));
+  }
+
+  const reviews = product.reviews.filter(
+    (revi) => revi._id.toString() !== req.query.id.toString()
+  );
+
+  const numofReviews = reviews.length;
+
+  const ratings =
+    product.reviews.reduce((acc, item) => item.rating + acc, 0) /
+    reviews.length;
+
+  await Product.findByIdAndUpdate(
+    req.query.productId,
+    {
+      reviews,
+      ratings,
+      numofReviews,
+    },
+    {
+      new: true,
+      runValidators: true,
+      useFindAndModify: false,
+    }
+  );
+
+  res.status(200).json({
+    success: true,
+  });
+});

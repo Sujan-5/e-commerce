@@ -23,6 +23,7 @@ import {
   passwordForgotReducer,
 } from './reduxFeature/reducers/Users/profileReducer';
 import { cartReducer } from './reduxFeature/reducers/ShoppingCart/cartReducer';
+import { writeReviewReducer } from './reduxFeature/reducers/Review/reviewReducer';
 
 const reducer = combineReducers({
   //products
@@ -42,6 +43,9 @@ const reducer = combineReducers({
 
   //cart
   cart: cartReducer,
+
+  //review
+  review: writeReviewReducer,
 });
 
 let initialState = {

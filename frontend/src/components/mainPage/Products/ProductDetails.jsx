@@ -89,7 +89,7 @@ const ProductDetails = () => {
                 <h1>{`Rs ${product.price}`}</h1>
                 <div className="block31">
                   <button
-                    disabled={product.stock === 0}
+                    disabled={product.stock === 0} //for BUG previously this line was not here
                     onClick={addToCartHandler}
                   >
                     Add to Cart
@@ -151,7 +151,7 @@ const ProductDetails = () => {
           {product.reviews && product.reviews[0] ? (
             <div className="reviews">
               {product.reviews.map((review) => (
-                <ReviewSection review={review} />
+                <ReviewSection key={review._id} review={review} />
               ))}
             </div>
           ) : (

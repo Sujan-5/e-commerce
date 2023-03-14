@@ -1,23 +1,51 @@
 .reviewSec {
-  flex: none;
-
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.226);
-  border: 1px solid rgba(56, 56, 56, 0.116);
-  width: 30vmax;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 1vmax;
-  padding: 3vmax;
+  padding: 16px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  transition: transform 0.2s ease-in-out;
 }
+
+.reviewSec:hover {
+  transform: scale(1.02);
+}
+
+.avatar {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
 .img {
-  width: 5vmax;
+  width: 48px;
+  height: 48px;
+  margin-right: 16px;
+  color: #ccc;
+  background-color: #f8f8f8;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.reviewSec > p {
-  color: rgba(0, 0, 0, 0.836);
-  font: 600 0.9vmax 'Roboto';
+
+.reviewName {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0;
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.25);
 }
+
+.rating {
+  font-size: 24px;
+  color: #ffd700;
+}
+
 .reviewComment {
-  color: rgba(0, 0, 0, 0.445);
-  font: 300 0.8vmax cursive;
+  font-size: 16px;
+  margin: 12px 0 0 0;
+  text-align: center;
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.25);
+  color: #555;
 }
