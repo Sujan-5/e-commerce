@@ -40,7 +40,7 @@ router
 router.route('/:id').get(getProductId);
 
 router
-  .route('/:id/stock')
+  .route('/stock/:id')
   .put(isAuthenticatedUser, authorizeRoles('admin'), updateProductStock);
 
 router

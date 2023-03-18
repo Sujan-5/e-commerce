@@ -14,7 +14,7 @@ const ReviewSection = ({ review }) => {
     <div className="reviewSec">
       <div className="avatar">
         <AccountCircleIcon className="img" />
-        <p className="reviewName">{review.name}</p>
+        <p className="reviewName">{review.firstName}</p>
       </div>
       <Rating {...options} className="rating" />
       <span className="reviewComment">{review.comment}</span>

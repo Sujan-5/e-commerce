@@ -104,7 +104,7 @@ export const AllProducts = ({ history }) => {
               <DeleteIcon />
             </Button>
 
-            <Link to={`/admin/${productId}/stock`}>
+            <Link to={`/admin/stock/${productId}`}>
               <AddBoxIcon />
             </Link>
           </Fragment>

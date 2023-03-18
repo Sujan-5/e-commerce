@@ -24,6 +24,7 @@ import {
 } from './reduxFeature/reducers/Users/profileReducer';
 import { cartReducer } from './reduxFeature/reducers/ShoppingCart/cartReducer';
 import { writeReviewReducer } from './reduxFeature/reducers/Review/reviewReducer';
+import { productStockReducer } from './reduxFeature/reducers/Products/stockReducer';
 
 const reducer = combineReducers({
   //products
@@ -31,6 +32,7 @@ const reducer = combineReducers({
   createProduct: createProductReducer,
   product: productReducer,
   productDetails: getProductDetailsReducer,
+  stock: productStockReducer,
 
   //categories
   categories: categoryReducer,

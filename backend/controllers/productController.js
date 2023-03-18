@@ -57,8 +57,16 @@ exports.getProductId = catchAsyncError(async (req, res, next) => {
 exports.updateProductStock = catchAsyncError(async (req, res, next) => {
   try {
     const product = await Product.findById(req.params.id);
+
     // Update stock
-    product.stock += req.body.stock;
+    const stock = req.body.stock;
+
+    if (isNaN(stock)) {
+      return res.status(400).json({ error: 'Invalid stock value' });
+    }
+
+    const oldStock = product.stock;
+    product.stock = product.stock + stock;
 
     // Add stock record to history
     product.stock_history.push({
@@ -66,9 +74,25 @@ exports.updateProductStock = catchAsyncError(async (req, res, next) => {
       date: Date.now(),
     });
 
+    const stockUpdateHistory = product.stock_history.filter(
+      (record) => record.quantity === stock
+    );
+
+    // Set the user field to the ID of the currently authenticated user
+    product.user = req.user._id;
+
     await product.save();
 
-    res.json(product);
+    // Construct the response object
+    const response = {
+      id: product._id,
+      name: product.name,
+      stock: product.stock,
+      oldStock: oldStock,
+      stockUpdateHistory: stockUpdateHistory,
+    };
+
+    res.json(response);
   } catch (err) {
     console.error(err);
     res.status(500).send('Server error');

@@ -31,7 +31,8 @@ import ResetPassword from './components/User/ResetPassword/ResetPassword';
 import Shipping from './components/ShippingAndChekout/Shipping';
 import OrderDetails from './components/ShippingAndChekout/OrderDetails';
 import Productcard from './components/mainPage/Products/Productcard';
-import StockPage from './components/admin/Stock/StockPage';
+// import StockPage from './components/admin/Stock/StockPage';
+import AddStock from './components/admin/Stock/AddStock';
 
 function App() {
   const dispatch = useDispatch();
@@ -73,7 +74,7 @@ function App() {
           {/* <Route path="/admin/category/:id" element={<PrivateRoute element={<UpdateCategory />} />} /> */}
           *
           <Route path="/admin/product/:id" element={<Updateproduct />} />
-          <Route path="/admin/:id/stock" element={<StockPage />} />
+          <Route path="/admin/stock/:id" element={<AddStock />} />
         </Route>
       </Routes>
       <Footer />

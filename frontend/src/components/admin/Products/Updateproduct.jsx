@@ -47,7 +47,6 @@ const Updateproduct = () => {
   } = useSelector((state) => state.categories);
 
   const productId = params.id;
-  console.log(productId);
 
   useEffect(() => {
     if (product && product._id !== productId) {
