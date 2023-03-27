@@ -7,7 +7,8 @@ import {
 } from '../reducers/Products/productConstants';
 
 export const updateProductStock =
-  (productId, stock, stockHistory) => async (dispatch) => {
+  (productId, stockData, stockHistory) => async (dispatch) => {
+    console.log(stockData);
     try {
       const config = {
         headers: { 'Content-Type': 'application/json' },
@@ -15,7 +16,7 @@ export const updateProductStock =
 
       const response = await axios.put(
         `/api/v1/stock/${productId}`,
-        JSON.stringify(stock),
+        stockData,
         config
       );
 
@@ -28,7 +29,7 @@ export const updateProductStock =
 
       dispatch({
         type: ADD_STOCK_HISTORY,
-        payload: { stock, stockHistory },
+        payload: { stock: stockData.stock, stockHistory },
       });
     } catch (error) {
       dispatch({

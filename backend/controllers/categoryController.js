@@ -42,6 +42,12 @@ exports.getCategory = catchAsyncError(async (req, res, next) => {
   }
 });
 
+exports.getOneCategory = catchAsyncError(async (req, res, next) => {
+  const cat = await Category.findOne({ title: req.body.title });
+
+  return res.status(200).json(cat);
+});
+
 exports.updateCategory = catchAsyncError(async (req, res, next) => {
   const { id } = req.params;
   try {

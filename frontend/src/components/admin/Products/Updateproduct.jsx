@@ -106,7 +106,7 @@ const Updateproduct = () => {
     formData.set('description', description);
     formData.set('category', category);
     formData.set('stock', Stock);
-
+    console.log(formData.category);
     dispatch(updateProductDetails(productId, formData));
   };
 

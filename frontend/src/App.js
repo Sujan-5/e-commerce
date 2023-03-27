@@ -33,6 +33,7 @@ import OrderDetails from './components/ShippingAndChekout/OrderDetails';
 import Productcard from './components/mainPage/Products/Productcard';
 // import StockPage from './components/admin/Stock/StockPage';
 import AddStock from './components/admin/Stock/AddStock';
+import { ProductsPage } from './components/mainPage/Products/ProductsPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -52,7 +53,7 @@ function App() {
         <Route path="/forgot/password" element={<ForgotPassword />} />
         <Route path="/password/reset/:token" element={<ResetPassword />} />
         <Route path="/" exact element={<Navigate replace to="/home" />} />
-        <Route path="/search/:keyword" element={Productcard} />
+        <Route path="/allProducts" element={<ProductsPage />} />
         <Route path="/cart" element={<CartS />} />
         <Route path="/product/:id" element={<ProductDetails />} />
         <Route element={<PrivateRoute />}>

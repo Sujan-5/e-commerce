@@ -4,6 +4,9 @@ import {
   PRODUCT_ALL_REQUEST,
   PRODUCT_ALL_SUCCESS,
   PRODUCT_ALL_FAIL,
+  ALL_PRODUCT_REQUEST_HOME,
+  ALL_PRODUCT_SUCCESS_HOME,
+  ALL_PRODUCT_FAIL_HOME,
   ERRORS_CLEAR,
 
   //admin products
@@ -26,16 +29,18 @@ import {
   PRODUCT_NEW_ADMIN_FAIL,
 } from '../reducers/Products/productConstants';
 
-//get products for home page
+//get products for product page
 export const getProduct =
-  (keyword = '') =>
+  (currentPage = 1) =>
   async (dispatch) => {
     try {
       dispatch({
         type: PRODUCT_ALL_REQUEST,
       });
 
-      const { data } = await axios.get(`/api/v1/products?keyword=${keyword}`);
+      let urll = `/api/v1/products?page=${currentPage}`;
+
+      const { data } = await axios.get(urll);
 
       dispatch({
         type: PRODUCT_ALL_SUCCESS,
@@ -48,6 +53,27 @@ export const getProduct =
       });
     }
   };
+
+//get products for home page
+export const getProductsHome = () => async (dispatch) => {
+  try {
+    dispatch({
+      type: ALL_PRODUCT_REQUEST_HOME,
+    });
+
+    const { data } = await axios.get(`/api/v1/products/home`);
+
+    dispatch({
+      type: ALL_PRODUCT_SUCCESS_HOME,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: ALL_PRODUCT_FAIL_HOME,
+      payload: error.response.data.message,
+    });
+  }
+};
 
 // Create admin Product
 export const createProduct = (productData) => async (dispatch) => {
@@ -82,12 +108,12 @@ export const updateProductDetails = (id, productData) => async (dispatch) => {
     dispatch({ type: PRODUCT_UPDATE_REQUEST });
 
     const config = {
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'multipart/form-data' },
     };
 
     const { data } = await axios.put(
       `/api/v1/admin/product/${id}`,
-      JSON.stringify(productData),
+      productData,
       config
     );
 

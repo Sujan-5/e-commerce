@@ -4,13 +4,13 @@ import { Box, Container } from '@mui/material';
 import Promotions from './HomePage/Promotions';
 import Products from './Products/Productcard';
 import Category from './HomePage/Category';
-import { getProduct } from '../../reduxFeature/actions/productAction';
+import { getProductsHome } from '../../reduxFeature/actions/productAction';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import Loader from './FrontFeatures/Loading/Loader';
 import { useAlert } from 'react-alert';
 import { styled } from '@mui/system';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 const StyledContainer = styled(Container)`
   width: 100%;
@@ -23,14 +23,12 @@ const HomePage = () => {
   const dispatch = useDispatch();
   const { loading, error, products } = useSelector((state) => state.products);
 
-  const keyword = params.keyword;
-
   useEffect(() => {
     if (error) {
       return alert.error(error);
     }
-    dispatch(getProduct(keyword));
-  }, [dispatch, error, alert, keyword]);
+    dispatch(getProductsHome());
+  }, [dispatch, error, alert]);
 
   //styles
   const styles = {
@@ -54,6 +52,18 @@ const HomePage = () => {
       color: 'rgb(0, 0, 0, 0.7)',
       marginTop: '10px',
       marginBottom: '20px',
+    },
+    button: {
+      display: 'grid',
+      justifyContent: 'center',
+      padding: '0.5rem 1.5rem',
+      fontSize: '1.1rem',
+      color: '#fff',
+      backgroundColor: '#000000',
+      border: 'none',
+      borderRadius: '5px',
+      cursor: 'pointer',
+      transition: 'background-color 0.2s ease',
     },
   };
 
@@ -80,6 +90,9 @@ const HomePage = () => {
                 <Products product={product} key={product._id} />
               ))}
           </div>
+          <Link to="/allProducts">
+            <button style={styles.button}>View More</button>
+          </Link>
         </Box>
       )}
     </Box>

@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const {
   getCategory,
+  getOneCategory,
   updateCategory,
   deleteCategory,
   getAllCategory,
@@ -21,5 +22,7 @@ router
 router
   .route('/category/all')
   .get(isAuthenticatedUser, authorizeRoles('admin'), getAllCategory);
+
+router.route('/category/one').get(getOneCategory);
 
 module.exports = router;

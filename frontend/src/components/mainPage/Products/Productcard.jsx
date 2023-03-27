@@ -19,7 +19,6 @@ const Products = ({ product }) => {
 
   return (
     <Link className="productCard" to={`/product/${product._id}`}>
-      {/* <img src={product.images[0].url} alt={product.name} /> */}
       {product.images && product.images.length > 0 ? (
         <img src={product.images[0].url} alt={product.name} />
       ) : (

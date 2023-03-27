@@ -54,6 +54,7 @@ exports.getProductId = catchAsyncError(async (req, res, next) => {
   }
 });
 
+//add stock of a product
 exports.updateProductStock = catchAsyncError(async (req, res, next) => {
   try {
     const product = await Product.findById(req.params.id);
@@ -101,23 +102,45 @@ exports.updateProductStock = catchAsyncError(async (req, res, next) => {
 
 //Get all products => /api/v1/products **************************************************************************************************************
 exports.getProducts = catchAsyncError(async (req, res, next) => {
-  const resPerPage = 16;
+  const resPerPage = 2;
   const productsCount = await Product.countDocuments();
 
-  const keyFeature = new features(Product.find(), req.query).search().filter();
+  const keyFeature = new features(Product.find(), req.query)
+    .search()
+    .filter()
+    .pagination();
 
-  let products = await keyFeature.query;
+  // let products = await keyFeature.query;
+  // let productFilteredCount = products.length;
 
-  keyFeature.pagination(resPerPage);
+  // keyFeature.pagination(resPerPage);
 
-  let productFilteredCount = products.length;
+  const products = await keyFeature.query;
 
   res.status(200).json({
     sucess: true,
     products,
     productsCount,
     resPerPage,
-    productFilteredCount,
+    // productFilteredCount,
+  });
+});
+
+// Get All Products --Home page
+exports.getAllProductsHome = catchAsyncError(async (req, res) => {
+  const resPerPage = 3;
+  const productsCount = await Product.countDocuments();
+  const apiFeatures = new features(Product.find(), req.query)
+    .search()
+    .filter()
+    .pagination(resPerPage);
+  const products = await apiFeatures.query;
+
+  res.status(200).json({
+    success: true,
+    products,
+    resPerPage,
+    productsCount,
   });
 });
 
@@ -139,46 +162,22 @@ exports.updateProduct = catchAsyncError(async (req, res, next) => {
     return next(new ErrorHandler('Product not found', 404));
   }
   if (req.body.category) {
+    console.log(req.body.category);
     const categoryDoc = await Category.findOne({ title: req.body.category });
     if (!categoryDoc) {
       return res.status(404).json({
         message: `Category "${req.body.category}" not found`,
       });
     }
-    product.category = categoryDoc._id;
+    product.category = req.body.category;
   }
-  product = await Product.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-    runValidators: true,
-    useFindAndModify: false,
-  });
-  res.status(200).json({
-    success: true,
+
+  await product.save();
+
+  return res.status(200).json({
     product,
   });
 });
-
-//for stock
-// exports.updateProduct = catchAsyncError(async (req, res, next) => {
-//   try {
-//     const productId = req.params.productId;
-//     const { addedQuantity } = req.body;
-//     const product = await Product.findByIdAndUpdate(
-//       productId,
-//       { $inc: { stock: addedQuantity } },
-//       { new: true }
-//     );
-//     const stockHistory = new Stock({
-//       productId,
-//       addedQuantity,
-//     });
-//     await stockHistory.save();
-//     res.json(product);
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).send('Server Error');
-//   }
-// });
 
 //single product details **************************************************************************************************************
 exports.singleProduct = catchAsyncError(async (req, res, next) => {
@@ -208,20 +207,6 @@ exports.deleteProduct = catchAsyncError(async (req, res, next) => {
     message: 'Product Deleted Sucessfully',
   });
 });
-
-//to get the stock history
-// exports.getProductStockHistory = catchAsyncError(async (req, res, next) => {
-//   try {
-//     const productId = req.params.productId;
-//     const stockHistory = await Stock.find({ productId })
-//       .sort({ updatedAt: -1 })
-//       .select('addedQuantity updatedAt -_id');
-//     res.json(stockHistory);
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).send('Server Error');
-//   }
-// });
 
 // create a new review
 exports.createNewReview = catchAsyncError(async (req, res, next) => {

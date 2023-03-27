@@ -3,6 +3,9 @@ import {
   PRODUCT_ALL_REQUEST,
   PRODUCT_ALL_SUCCESS,
   PRODUCT_ALL_FAIL,
+  ALL_PRODUCT_REQUEST_HOME,
+  ALL_PRODUCT_SUCCESS_HOME,
+  ALL_PRODUCT_FAIL_HOME,
   ERRORS_CLEAR,
 
   //admin products
@@ -30,18 +33,21 @@ import {
 
 export const productsReducer = (state = { products: [] }, action) => {
   switch (action.type) {
-    case PRODUCT_ALL_REQUEST: //home
+    case PRODUCT_ALL_REQUEST: //product page
+    case ALL_PRODUCT_REQUEST_HOME: //home
     case ADMIN_PRODUCT_REQUEST: //admin
       return {
         loading: true,
         products: [],
       };
-    case PRODUCT_ALL_SUCCESS:
+    case PRODUCT_ALL_SUCCESS: //product page
+    case ALL_PRODUCT_SUCCESS_HOME: //home
       return {
         loading: false,
         products: action.payload.products,
         productsCount: action.payload.productsCount,
-        resultPerPage: action.payload.resultPerPage,
+        resPerPage: action.payload.resPerPage,
+        // productFilteredCount: action.payload.productFilteredCount,
       };
 
     case ADMIN_PRODUCT_SUCCESS: //admin
@@ -50,7 +56,8 @@ export const productsReducer = (state = { products: [] }, action) => {
         products: action.payload,
       };
 
-    case PRODUCT_ALL_FAIL: //home
+    case PRODUCT_ALL_FAIL: //product page
+    case ALL_PRODUCT_FAIL_HOME: //home
     case ADMIN_PRODUCT_FAIL: //admin
       return {
         loading: false,
