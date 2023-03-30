@@ -22,6 +22,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     dispatch(login(emailLogin, passLogin));
   };
 
@@ -31,6 +32,7 @@ const Login = () => {
       dispatch(errorClear());
     }
     if (isAuthenticated) {
+      alert.success('Login Successfull');
       navigate('/home');
     }
   }, [dispatch, error, alert, navigate, isAuthenticated]);

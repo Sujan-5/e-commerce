@@ -16,7 +16,7 @@ const Signup = () => {
   const alert = useAlert();
   const [setError] = useState();
 
-  const { error, loading } = useSelector((state) => state.user);
+  const { error, loading, success } = useSelector((state) => state.user);
 
   const [data, setData] = useState({
     firstName: '',
@@ -104,7 +104,10 @@ const Signup = () => {
       alert.error(error);
       dispatch(errorClear());
     }
-  }, [dispatch, error, alert]);
+    if (success) {
+      alert.success(success);
+    }
+  }, [dispatch, error, alert, success]);
 
   return (
     <Fragment>

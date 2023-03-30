@@ -118,7 +118,6 @@ const CreateProduct = () => {
               <input
                 type="text"
                 placeholder="Product Name"
-                required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               />

@@ -8,10 +8,12 @@ import {
   addToCart,
   deleteFromCart,
 } from '../../reduxFeature/actions/cartAction';
+import { useAlert } from 'react-alert';
 
 export const CartS = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const alert = useAlert();
 
   const { cartItems } = useSelector((state) => state.cart);
 
@@ -20,6 +22,7 @@ export const CartS = () => {
   const increaseQty = (id, quantity, stock) => {
     const newQty = quantity + 1;
     if (stock <= quantity) {
+      alert.error('No Product in stock');
       return;
     }
     dispatch(addToCart(id, newQty));
@@ -41,9 +44,11 @@ export const CartS = () => {
     if (user) {
       navigate('/shipping');
     } else {
+      alert.error('Please Login to access this resouces');
       navigate('/login');
     }
   };
+
   return (
     <Fragment>
       {cartItems.length === 0 ? (
@@ -114,24 +119,3 @@ export const CartS = () => {
     </Fragment>
   );
 };
-
-//  <div className="summary">
-//         <h2 className="summary-title">Order Summary</h2>
-//         <div className="summary-item">
-//           <span className="summary-item-text">Sub Total</span>
-//           <span className="summary-item-price">{item.price}</span>
-//         </div>
-//         <div className="Shipping">
-//           <span className="summary-shipping-text">Shipping: </span>
-//           <span className="summary-shipping-price">100</span>
-//         </div>
-//         <div className="totalAll">
-//           <span className="summary-shipping-text">Total </span>
-//           <span className="summary-shipping-price">{`Rs${cartItems.reduce(
-//             (acc, item) => acc + item.quantity * item.price,
-//             0
-//           )}`}</span>
-//         </div>
-
-//         <button onClick={checkOutHandler}>Check Out</button>
-//       </div>

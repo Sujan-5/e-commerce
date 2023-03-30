@@ -4,7 +4,6 @@ const ErrorHandler = require('../utils/errorhandler');
 const catchAsyncError = require('../Middleware/catchAsyncErrors');
 const features = require('../utils/features');
 const slugify = require('slugify');
-// const Stock = require('../models/stock');
 
 //create new product = /api/v1/product/new for ADMIN **************************************************************************************************************
 exports.newProduct = catchAsyncError(async (req, res, next) => {
