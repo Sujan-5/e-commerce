@@ -8,15 +8,18 @@ const categorySchema = new Schema(
       required: [true, 'Please enter Category'],
       unique: true,
     },
-    slug: {
-      type: String,
-      slug: 'title',
-      required: true,
-      unique: true,
-    },
-    // parentId: {
-    //   type: String,
-    // },
+    image: [
+      {
+        public_id: {
+          type: String,
+          required: true,
+        },
+        url: {
+          type: String,
+          required: true,
+        },
+      },
+    ],
   },
   {
     timestamps: true,

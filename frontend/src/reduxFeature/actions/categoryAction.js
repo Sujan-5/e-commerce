@@ -18,29 +18,12 @@ import {
   CATEGORY_DELETE_REQUEST,
   CATEGORY_DELETE_SUCCESS,
   CATEGORY_DELETE_FAIL,
+
+  //all category
+  CATEGORY_DETAILS_REQUEST,
+  CATEGORY_DETAILS_SUCCESS,
+  CATEGORY_DETAILS_FAIL,
 } from '../reducers/category/categoryConstants';
-
-// export const getAllCategory = () => {
-//   return async (dispatch) => {
-//     dispatch({ type: CATEGORY_ALL_REQUEST });
-//     const res = await axios.get(`/api/v1/category/all`);
-//     console.log(res);
-
-//     if (res.status === 200) {
-//       const { categoryList } = res.data;
-
-//       dispatch({
-//         type: CATEGORY_ALL_SUCCESS,
-//         payload: { categories: categoryList },
-//       });
-//     } else {
-//       dispatch({
-//         type: CATEGORY_ALL_FAIL,
-//         payload: { error: res.data.error },
-//       });
-//     }
-//   };
-// };
 
 export const getAllCategory = () => async (dispatch) => {
   try {
@@ -63,41 +46,13 @@ export const getAllCategory = () => async (dispatch) => {
     });
   }
 };
-// export const getAllCategory = () => async (dispatch) => {
-//   try {
-//     dispatch({ type: CATEGORY_ALL_REQUEST });
-
-//     const response = await axios.get('/api/v1/category/all');
-//     if (!response) {
-//       throw new Error('No response from the API');
-//     }
-
-//     const { data } = response;
-
-//     if (!data) {
-//       throw new Error('No data in the response from the API');
-//     }
-
-//     const categoryList = data;
-
-//     dispatch({
-//       type: CATEGORY_ALL_SUCCESS,
-//       payload: { res: categoryList },
-//     });
-//   } catch (error) {
-//     dispatch({
-//       type: CATEGORY_ALL_FAIL,
-//       payload: error.message,
-//     });
-//   }
-// };
 
 export const addCategory = (form) => async (dispatch) => {
   try {
     dispatch({ type: NEW_CATEGORY_REQUEST });
 
     const env = {
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'multipart/form-data' },
     };
 
     const { data } = await axios.post(`/api/v1/category/new`, form, env);
@@ -111,6 +66,7 @@ export const addCategory = (form) => async (dispatch) => {
       type: NEW_CATEGORY_FAIL,
       payload: error.response.data.message,
     });
+    console.log(error.response.data.message);
   }
 };
 
@@ -120,7 +76,7 @@ export const updateCategoryDetails = (id, categoryData) => async (dispatch) => {
     dispatch({ type: CATEGORY_UPDATE_REQUEST });
 
     const config = {
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'multipart/form-data' },
     };
 
     const { data } = await axios.put(
@@ -155,6 +111,24 @@ export const deleteCategory = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: CATEGORY_DELETE_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const getadminCategoryDetails = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: CATEGORY_DETAILS_REQUEST });
+
+    const { data } = await axios.get(`/api/v1/category/${id}`);
+
+    dispatch({
+      type: CATEGORY_DETAILS_SUCCESS,
+      payload: data.category,
+    });
+  } catch (error) {
+    dispatch({
+      type: CATEGORY_DETAILS_FAIL,
       payload: error.response.data.message,
     });
   }

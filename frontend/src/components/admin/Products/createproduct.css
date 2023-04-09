@@ -1,9 +1,10 @@
 .newProductContainer {
-  width: 90%;
+  width: 100%;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  height: 80vh;
+  background-color: aliceblue;
+  height: auto;
 }
 
 .newProductContainer h1 {
@@ -21,8 +22,8 @@
   margin: auto;
   padding: 3vmax;
   justify-content: space-evenly;
-  height: 80%;
-  width: 40vh;
+  width: 70vh;
+  height: 100vh;
   background-color: #fff;
   border: 1px solid rgba(0, 0, 0, 0.267);
   border-radius: 8px;

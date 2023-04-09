@@ -27,8 +27,6 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
     avatar: {
       public_id: cloudInary.public_id,
       url: cloudInary.secure_url,
-      // public_id: 'sample',
-      // url: 'sampleURL',
     },
   });
 

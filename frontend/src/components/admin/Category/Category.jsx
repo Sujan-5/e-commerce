@@ -2,7 +2,6 @@ import React from 'react';
 import { Fragment, useState, useEffect } from 'react';
 import { Button } from '@material-ui/core';
 import { LeftSidebar } from '../LeftSidebar';
-import AccountTreeIcon from '@material-ui/icons/AccountTree';
 import SpellcheckIcon from '@material-ui/icons/Spellcheck';
 import { useDispatch, useSelector } from 'react-redux';
 import './category.css';
@@ -19,10 +18,13 @@ const Category = () => {
   const navigate = useNavigate();
   const alert = useAlert();
 
-  const { error, success } = useSelector((state) => state.createCategory);
+  const { loading, error, success } = useSelector(
+    (state) => state.createCategory
+  );
 
-  const [categoryName, setName] = useState('');
-  const [parentCategoryId, setParentCategoryId] = useState('');
+  const [title, setName] = useState('');
+  const [image, setImage] = useState('/profile.png');
+  const [imagePreview, setImagePreview] = useState('/profile.png');
 
   useEffect(() => {
     if (error) {
@@ -37,12 +39,29 @@ const Category = () => {
     }
   }, [dispatch, alert, navigate, error, success]);
 
-  const productSummitHandler = () => {
-    const form = new FormData();
+  const productSummitHandler = (e) => {
+    e.preventDefault();
+    const formData = new FormData();
 
-    form.append('title', categoryName);
-    form.append('parentId', parentCategoryId);
-    dispatch(addCategory(form));
+    formData.set('title', title);
+    formData.append('image', image);
+
+    dispatch(addCategory(formData));
+  };
+
+  const categoryHandleChange = (e) => {
+    const file = e.target.files[0];
+
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        setImagePreview([reader.result]);
+        setImage(reader.result);
+      }
+    };
+
+    reader.readAsDataURL(file);
   };
 
   return (
@@ -51,35 +70,47 @@ const Category = () => {
         <LeftSidebar />
         <div className="categoryContainer">
           <h1 className="headingProd">Add Category</h1>
-          <form className="categoryForm" onSubmit={productSummitHandler}>
-            {/* <form className="categoryForm"> */}
+          <form
+            className="categoryForm"
+            encType="multipart/form-data"
+            onSubmit={productSummitHandler}
+          >
             <div>
               <SpellcheckIcon />
               <input
-                value={categoryName}
-                placeholder={`Category Name`}
-                onChange={(e) => setName(e.target.value)}
+                placeholder="Category Name"
                 type="text"
+                value={title}
                 required
+                onChange={(e) => setName(e.target.value)}
               />
             </div>
-            {/* setParentCategoryId */}
-            {/* <div>
-              <AccountTreeIcon />
-              <select
-                value={parentCategoryId}
-                onChange={(e) => setParentCategoryId(e.target.value)}
-              >
-                <option>Choose Category</option>
-                {createCategoryList(category.categories).map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.title}
-                  </option>
-                ))}
-              </select>
-            </div> */}
 
-            <Button id="createProductBtn" type="submit">
+            <div id="categoryyy">
+              {imagePreview && (
+                <div className="image-preview">
+                  <div className="image-preview-container">
+                    <img src={imagePreview} alt="Category Preview" />
+                  </div>
+                </div>
+              )}
+              <input
+                type="file"
+                name="avatar"
+                accept="image/*"
+                id="categoryImage"
+                onChange={categoryHandleChange}
+              />
+              <label htmlFor="categoryImage" className="custom-file-upload">
+                Choose File
+              </label>
+            </div>
+
+            <Button
+              id="createProductBtn"
+              type="submit"
+              disabled={loading ? true : false}
+            >
               Add
             </Button>
           </form>

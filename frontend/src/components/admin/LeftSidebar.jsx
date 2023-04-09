@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from '../../displayProductImages/logo.png';
 import { Link } from 'react-router-dom';
 import TreeView from '@mui/lab/TreeView';
 import TreeItem from '@mui/lab/TreeItem';

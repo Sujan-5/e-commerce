@@ -2,7 +2,6 @@ import React from 'react';
 import { Fragment, useState, useEffect } from 'react';
 import './createproduct.css';
 import { Button } from '@material-ui/core';
-// import { Link } from 'react-router-dom';
 import { LeftSidebar } from '../LeftSidebar';
 import StorageIcon from '@material-ui/icons/Storage';
 import AccountTreeIcon from '@material-ui/icons/AccountTree';
@@ -35,11 +34,7 @@ const CreateProduct = () => {
   const [images, setImages] = useState([]);
   const [imagesPreview, setImagesPreview] = useState([]);
 
-  // const categories = useSelector((state) => state.categories);
-
-  const {
-    categories: { categoryList },
-  } = useSelector((state) => state.categories);
+  const { categories } = useSelector((state) => state.categories);
 
   useEffect(() => {
     if (error) {
@@ -149,8 +144,8 @@ const CreateProduct = () => {
                 onChange={(e) => setCategory(e.target.value)}
               >
                 <option>Choose Category</option>
-                {categoryList &&
-                  categoryList.map((option) => (
+                {categories &&
+                  categories.map((option) => (
                     <option key={option._id} value={option.value}>
                       {option.title}
                     </option>
@@ -180,14 +175,8 @@ const CreateProduct = () => {
 
             <div id="createProductFormImage">
               {imagesPreview.map((image, index) => (
-                <img key={index} src={image} alt="Avatar Preview" />
+                <img key={index} src={image} alt="Product Preview" />
               ))}
-              {/* {imgToRemove != image.public_id && (
-                <i
-                  className="fa fa-times-circle"
-                  onClick={() => handleRemoveImg(image)}
-                ></i>
-              )} */}
             </div>
 
             <Button

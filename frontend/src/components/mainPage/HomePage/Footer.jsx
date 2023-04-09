@@ -22,12 +22,7 @@ const Terms = styled('div')`
 
 const Footer = () => {
   return (
-    <Box
-      sx={{ background: '#202029', height: '300px' }}
-      mt={5}
-
-      // direction={{ xs: 'row', sm: 'row' }}
-    >
+    <Box sx={{ background: '#202029', height: '300px' }} mt={5}>
       <Stack direction={{ xs: 'row', md: 'row' }} p={7}>
         <Box flex={2}>
           <Text>Contact Us</Text>

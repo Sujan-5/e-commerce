@@ -18,6 +18,11 @@ import {
   CATEGORY_DELETE_SUCCESS,
   CATEGORY_DELETE_FAIL,
   CATEGORY_DELETE_RESET,
+
+  //all category
+  CATEGORY_DETAILS_REQUEST,
+  CATEGORY_DETAILS_SUCCESS,
+  CATEGORY_DETAILS_FAIL,
 } from './categoryConstants';
 
 const initialState = {
@@ -121,6 +126,34 @@ export const categoryUDReducer = (state = {}, action) => {
         ...state,
         isUpdated: false,
       };
+    case ERRORS_CLEAR:
+      return {
+        ...state,
+        error: null,
+      };
+    default:
+      return state;
+  }
+};
+
+export const getCategoryDetailsReducer = (state = { category: {} }, action) => {
+  switch (action.type) {
+    case CATEGORY_DETAILS_REQUEST:
+      return {
+        loading: true,
+        ...state,
+      };
+    case CATEGORY_DETAILS_SUCCESS:
+      return {
+        loading: false,
+        category: action.payload,
+      };
+    case CATEGORY_DETAILS_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+
     case ERRORS_CLEAR:
       return {
         ...state,

@@ -1,27 +1,15 @@
 import React from 'react';
-import { Fragment } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 
-const PrivateRoute = ({ element: Component, ...rest }) => {
-  const navigate = useNavigate();
-  const { loading, isAuthenticated } = useSelector((state) => state.user);
+import { Outlet, Navigate } from 'react-router-dom';
 
-  return (
-    <Fragment>
-      {!loading && (
-        <Outlet
-          {...rest}
-          render={(props) => {
-            if (isAuthenticated === false) {
-              navigate('/login');
-            }
-            return <Component {...props} />;
-          }}
-        />
-      )}
-    </Fragment>
-  );
+const PrivateRoute = ({ user, isAdmin, isAuthenticated, children }) => {
+  if (isAuthenticated === false) {
+    <Navigate to={'/login'} />;
+  }
+  if (user && user.role === 'admin' && !isAdmin) {
+    return <Navigate to={'/'} />;
+  }
+  return children ? children : <Outlet />;
 };
 
 export default PrivateRoute;

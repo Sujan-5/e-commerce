@@ -16,8 +16,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { Fragment } from 'react';
 import { useAlert } from 'react-alert';
-// import { useNavigate } from 'react-router-dom';
-// import { PRODUCT_DELETE_RESET } from '../../../reduxFeature/reducers/Products/productConstants';
 
 export const CategoryList = () => {
   const dispatch = useDispatch();
@@ -26,12 +24,9 @@ export const CategoryList = () => {
 
   // const navigate = useNavigate();
 
-  const {
-    error,
-    categories: { categoryList },
-  } = useSelector((state) => state.categories);
+  const { error, categories } = useSelector((state) => state.categories);
 
-  const deleteProductHandler = (id) => {
+  const deleteCategoryHandler = (id) => {
     dispatch(deleteCategory(id));
   };
 
@@ -40,8 +35,7 @@ export const CategoryList = () => {
       alert.error(error);
       dispatch(errorClear());
     }
-
-    // dispatch(getAllCategory());
+    dispatch(getAllCategory());
   }, [dispatch, alert, error]);
 
   const columns = [
@@ -69,11 +63,11 @@ export const CategoryList = () => {
         const categoryId = params.getValue(params.id, 'categoryId');
         return (
           <Fragment>
-            <Link to={`/admin/product/${categoryId}`}>
+            <Link to={`/admin/category/${categoryId}`}>
               <EditIcon />
             </Link>
 
-            <Button onClick={() => deleteProductHandler(categoryId)}>
+            <Button onClick={() => deleteCategoryHandler(categoryId)}>
               <DeleteIcon />
             </Button>
           </Fragment>
@@ -84,8 +78,8 @@ export const CategoryList = () => {
   let counter = 1;
   const rows = [];
 
-  categoryList &&
-    categoryList.forEach((cate) => {
+  categories &&
+    categories.forEach((cate) => {
       rows.push({
         id: counter++,
         title: cate.title,

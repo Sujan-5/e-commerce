@@ -1,83 +1,78 @@
 const Category = require('../models/category');
 const catchAsyncError = require('../Middleware/catchAsyncErrors');
-const slugify = require('slugify');
+const cloudinary = require('cloudinary');
 
-function createCategories(categories, parentId = null) {
-  const categoryList = [];
-  let category;
-
-  if (parentId == null) {
-    category = categories.filter((cat) => cat.parentId == undefined);
-  } else {
-    category = categories.filter((cat) => cat.parentId == parentId);
-  }
-
-  for (let cate of category) {
-    categoryList.push({
-      _id: cate._id,
-      title: cate.title,
-      slug: cate.slug,
-      parentId: cate.parentId,
-      // children: createCategories(categories, cate._id),
-    });
-  }
-  return categoryList;
-}
-
-exports.getCategory = catchAsyncError(async (req, res, next) => {
+exports.createCategory = catchAsyncError(async (req, res, next) => {
   try {
-    const categoryObj = {
-      title: req.body.title,
-      slug: slugify(req.body.title),
-    };
-    if (req.body.parentId) {
-      categoryObj.parentId = req.body.parentId;
-    }
+    const result = await cloudinary.v2.uploader.upload(req.body.image, {
+      folder: 'category',
+    });
 
-    const cat = new Category(categoryObj);
-    const savedCategory = await cat.save();
-    return res.status(201).json({ category: savedCategory });
+    const { title } = req.body;
+
+    const category = new Category({
+      title,
+      image: {
+        public_id: result.public_id,
+        url: result.secure_url,
+      },
+    });
+
+    const resultt = await category.save();
+    res.status(201).json({
+      success: true,
+      category: resultt,
+    });
   } catch (error) {
-    return res.status(400).json({ error });
+    res.status(400).send({ message: error.message });
   }
 });
 
+//single category
 exports.getOneCategory = catchAsyncError(async (req, res, next) => {
-  const cat = await Category.findOne({ title: req.body.title });
-
-  return res.status(200).json(cat);
+  try {
+    const category = await Category.findById(req.params.id);
+    if (category == null) {
+      return res.status(404).send({ message: 'Category not found' });
+    }
+    res.send(category);
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+  }
 });
 
 exports.updateCategory = catchAsyncError(async (req, res, next) => {
-  const { id } = req.params;
   try {
-    const updateCat = await Category.findByIdAndUpdate(id, req.body, {
+    const category = await Category.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
     });
-    res.json(updateCat);
+    if (!category) {
+      return res.status(404).send({ message: 'Category not found' });
+    }
+    res.status(200).send(category);
   } catch (error) {
-    throw new Error(error);
+    res.status(400).send({ message: error.message });
   }
 });
 
 exports.deleteCategory = catchAsyncError(async (req, res, next) => {
-  const { id } = req.params;
   try {
-    const deleteCat = await Category.findByIdAndDelete(id);
-
-    res.json(deleteCat);
+    const category = await Category.findById(req.params.id);
+    if (category == null) {
+      return res.status(404).send({ message: 'Category not found' });
+    }
+    await category.remove();
+    res.send({ message: 'Category deleted' });
   } catch (error) {
-    throw new Error(error);
+    res.status(500).send({ message: error.message });
   }
 });
 
 exports.getAllCategory = catchAsyncError(async (req, res, next) => {
-  Category.find({}).exec((error, categories) => {
-    if (error) return res.status(400).json({ error });
-
-    if (categories) {
-      const categoryList = createCategories(categories);
-      res.status(200).json({ categoryList });
-    }
-  });
+  try {
+    const categories = await Category.find();
+    res.send(categories);
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+  }
 });

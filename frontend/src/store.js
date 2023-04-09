@@ -14,6 +14,7 @@ import {
 import {
   categoryReducer,
   createCategoryReducer,
+  getCategoryDetailsReducer,
 } from './reduxFeature/reducers/category/categoryReducer';
 
 //user
@@ -37,6 +38,7 @@ const reducer = combineReducers({
   //categories
   categories: categoryReducer,
   createCategory: createCategoryReducer,
+  categoryDetails: getCategoryDetailsReducer,
 
   //user
   user: userReducer,

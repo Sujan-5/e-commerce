@@ -4,17 +4,42 @@ const ErrorHandler = require('../utils/errorhandler');
 const catchAsyncError = require('../Middleware/catchAsyncErrors');
 const features = require('../utils/features');
 const slugify = require('slugify');
+const cloudinary = require('cloudinary');
 
 //create new product = /api/v1/product/new for ADMIN **************************************************************************************************************
 exports.newProduct = catchAsyncError(async (req, res, next) => {
-  const { name, price, description, category, stock, images } = req.body;
+  let pImages = [];
 
-  const categoryDoc = await Category.findOne({ title: category });
-  if (!categoryDoc) {
-    return res.status(404).json({
-      message: `Category "${category}" not found`,
+  if (typeof req.body.images === 'string') {
+    pImages.push(req.body.images);
+  } else {
+    pImages = req.body.images;
+  }
+
+  const productImages = [];
+
+  for (let i = 0; i < pImages.length; i++) {
+    const element = await cloudinary.v2.uploader.upload(pImages[i], {
+      folder: 'products',
+    });
+    productImages.push({
+      public_id: element.public_id,
+      url: element.secure_url,
     });
   }
+
+  req.body.images = productImages;
+
+  const { name, price, description, category, stock, images } = req.body;
+
+  const categoryDoc = await Category.findById(category);
+  if (!categoryDoc) {
+    return res.status(404).json({
+      message: `Category not found`,
+    });
+  }
+
+  req.body.user = req.user.id;
 
   const product = new Product({
     name,
@@ -24,6 +49,7 @@ exports.newProduct = catchAsyncError(async (req, res, next) => {
     category: categoryDoc._id,
     stock,
     images,
+    user: req.body.user,
   });
 
   try {

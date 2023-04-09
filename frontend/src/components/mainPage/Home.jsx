@@ -56,6 +56,7 @@ const HomePage = () => {
     button: {
       display: 'grid',
       justifyContent: 'center',
+      alignItems: 'center',
       padding: '0.5rem 1.5rem',
       fontSize: '1.1rem',
       color: '#fff',
@@ -64,6 +65,7 @@ const HomePage = () => {
       borderRadius: '5px',
       cursor: 'pointer',
       transition: 'background-color 0.2s ease',
+      margin: '0 auto',
     },
   };
 
@@ -90,9 +92,11 @@ const HomePage = () => {
                 <Products product={product} key={product._id} />
               ))}
           </div>
-          <Link to="/allProducts">
-            <button style={styles.button}>View More</button>
-          </Link>
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <Link to="/allProducts" style={{ textDecoration: 'none' }}>
+              <button style={styles.button}>View More</button>
+            </Link>
+          </div>
         </Box>
       )}
     </Box>
