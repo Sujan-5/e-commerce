@@ -80,14 +80,14 @@ export const createProduct = (productData) => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_NEW_ADMIN_REQUEST });
 
-    // const env = {
-    //   headers: { 'Content-Type': 'application/json' },
-    // };
+    const env = {
+      headers: { 'Content-Type': 'application/json' },
+    };
 
     const { data } = await axios.post(
       `/api/v1/admin/create/product`,
-      productData
-      // env
+      productData,
+      env
     );
 
     dispatch({

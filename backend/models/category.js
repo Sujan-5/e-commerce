@@ -8,6 +8,10 @@ const categorySchema = new Schema(
       required: [true, 'Please enter Category'],
       unique: true,
     },
+    slug: {
+      type: String,
+      slug: 'title', // generate a slug based on the title field
+    },
     image: [
       {
         public_id: {

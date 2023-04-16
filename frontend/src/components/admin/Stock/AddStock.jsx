@@ -34,6 +34,7 @@ const AddStock = () => {
     const stockData = { stock: newStock };
 
     dispatch(updateProductStock(productId, stockData));
+    dispatch(getadminProductDetails(productId));
   };
 
   return (

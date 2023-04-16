@@ -33,7 +33,7 @@ const ForgotPassword = () => {
       alert.error(error);
       dispatch(errorClear());
     }
-
+    console.log(message);
     if (message) {
       alert.success(message);
     }

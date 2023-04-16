@@ -52,7 +52,7 @@ export const addCategory = (form) => async (dispatch) => {
     dispatch({ type: NEW_CATEGORY_REQUEST });
 
     const env = {
-      headers: { 'Content-Type': 'multipart/form-data' },
+      headers: { 'Content-Type': 'application/json' },
     };
 
     const { data } = await axios.post(`/api/v1/category/new`, form, env);

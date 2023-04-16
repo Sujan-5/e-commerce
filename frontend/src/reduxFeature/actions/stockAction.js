@@ -8,7 +8,6 @@ import {
 
 export const updateProductStock =
   (productId, stockData, stockHistory) => async (dispatch) => {
-    console.log(stockData);
     try {
       const config = {
         headers: { 'Content-Type': 'application/json' },
@@ -20,11 +19,11 @@ export const updateProductStock =
         config
       );
 
-      const data = await response.json();
+      // const data = await response.json();
 
       dispatch({
         type: STOCK_UPDATE_SUCCESS,
-        payload: data.success,
+        payload: response.data.success,
       });
 
       dispatch({

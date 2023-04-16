@@ -1,6 +1,7 @@
 const Category = require('../models/category');
 const catchAsyncError = require('../Middleware/catchAsyncErrors');
 const cloudinary = require('cloudinary');
+const slugify = require('slugify');
 
 exports.createCategory = catchAsyncError(async (req, res, next) => {
   try {
@@ -9,9 +10,11 @@ exports.createCategory = catchAsyncError(async (req, res, next) => {
     });
 
     const { title } = req.body;
+    const slug = slugify(title, { lower: true, remove: /[*+~.()'"!:@]/g });
 
     const category = new Category({
       title,
+      slug,
       image: {
         public_id: result.public_id,
         url: result.secure_url,

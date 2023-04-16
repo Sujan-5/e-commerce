@@ -97,6 +97,7 @@ const CreateProduct = () => {
   //     })
   //     .catch((e) => console.log(e));
   // }
+
   return (
     <Fragment>
       <div className="dashboard">
@@ -146,7 +147,7 @@ const CreateProduct = () => {
                 <option>Choose Category</option>
                 {categories &&
                   categories.map((option) => (
-                    <option key={option._id} value={option.value}>
+                    <option key={option._id} value={option.title}>
                       {option.title}
                     </option>
                   ))}

@@ -26,6 +26,10 @@ import {
 import { cartReducer } from './reduxFeature/reducers/ShoppingCart/cartReducer';
 import { writeReviewReducer } from './reduxFeature/reducers/Review/reviewReducer';
 import { productStockReducer } from './reduxFeature/reducers/Products/stockReducer';
+import {
+  adminOrdersReducer,
+  upAndDelOrdersReducer,
+} from './reduxFeature/reducers/Orders/orderReducer';
 
 const reducer = combineReducers({
   //products
@@ -34,6 +38,10 @@ const reducer = combineReducers({
   product: productReducer,
   productDetails: getProductDetailsReducer,
   stock: productStockReducer,
+
+  //orders
+  orders: adminOrdersReducer,
+  order: upAndDelOrdersReducer,
 
   //categories
   categories: categoryReducer,

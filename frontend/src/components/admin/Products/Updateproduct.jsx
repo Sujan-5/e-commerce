@@ -42,9 +42,7 @@ const Updateproduct = () => {
   const [pastimages, setPastImages] = useState([]);
   const [imagesPreview, setImagesPreview] = useState([]);
 
-  const {
-    categories: { categoryList },
-  } = useSelector((state) => state.categories);
+  const { categories } = useSelector((state) => state.categories);
 
   const productId = params.id;
 
@@ -56,8 +54,8 @@ const Updateproduct = () => {
       setPrice(product.price);
       // setCategory(product.category);
 
-      const categoryObject = categoryList.find(
-        (c) => c._id === product.category
+      const categoryObject = categories.find(
+        (c) => c.title === product.category
       );
 
       setCategory(categoryObject ? categoryObject.title : '');
@@ -87,7 +85,7 @@ const Updateproduct = () => {
     alert,
     error,
     navigate,
-    categoryList,
+    categories,
     isUpdated,
     productId,
     product,
@@ -106,7 +104,7 @@ const Updateproduct = () => {
     formData.set('description', description);
     formData.set('category', category);
     formData.set('stock', Stock);
-    console.log(formData.category);
+
     dispatch(updateProductDetails(productId, formData));
   };
 
@@ -179,9 +177,9 @@ const Updateproduct = () => {
                 onChange={(e) => setCategory(e.target.value)}
               >
                 <option>Choose Category</option>
-                {categoryList &&
-                  categoryList.map((option) => (
-                    <option key={option._id} value={option.value}>
+                {categories &&
+                  categories.map((option) => (
+                    <option key={option._id} value={option.title}>
                       {option.title}
                     </option>
                   ))}

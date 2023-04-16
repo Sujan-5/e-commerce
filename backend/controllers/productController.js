@@ -29,24 +29,24 @@ exports.newProduct = catchAsyncError(async (req, res, next) => {
   }
 
   req.body.images = productImages;
-
-  const { name, price, description, category, stock, images } = req.body;
-
-  const categoryDoc = await Category.findById(category);
-  if (!categoryDoc) {
-    return res.status(404).json({
-      message: `Category not found`,
-    });
-  }
-
   req.body.user = req.user.id;
+
+  const { name, price, description, stock, category, images } = req.body;
+  // const categoryTitle = req.body.category;
+
+  // const categoryDoc = await Category.findOne({ title: categoryTitle });
+  // if (!categoryDoc) {
+  //   return res.status(404).json({
+  //     message: `Category not found`,
+  //   });
+  // }
 
   const product = new Product({
     name,
     slug: slugify(name),
     price,
     description,
-    category: categoryDoc._id,
+    category,
     stock,
     images,
     user: req.body.user,
@@ -66,6 +66,67 @@ exports.newProduct = catchAsyncError(async (req, res, next) => {
     });
   }
 });
+
+// exports.newProduct = catchAsyncError(async (req, res, next) => {
+//   let pImages = [];
+
+//   if (typeof req.body.images === 'string') {
+//     pImages.push(req.body.images);
+//   } else {
+//     pImages = req.body.images;
+//   }
+
+//   const productImages = [];
+
+//   for (let i = 0; i < pImages.length; i++) {
+//     const element = await cloudinary.v2.uploader.upload(pImages[i], {
+//       folder: 'products',
+//     });
+//     productImages.push({
+//       public_id: element.public_id,
+//       url: element.secure_url,
+//     });
+//   }
+
+//   req.body.images = productImages;
+//   req.body.user = req.user.id;
+
+//   const { name, price, description, category, stock, images } = req.body;
+
+//   const categoryDoc = await Category.findById(req.params.id);
+//   if (!categoryDoc) {
+//     return res.status(404).json({
+//       message: `Category not found`,
+//     });
+//   }
+
+//   // req.body.user = req.user.id;
+
+//   const product = new Product({
+//     name,
+//     slug: slugify(name),
+//     price,
+//     description,
+//     category: categoryDoc._id,
+//     stock,
+//     images,
+//     user: req.body.user,
+//   });
+
+//   try {
+//     const result = await product.save();
+//     res.status(201).json({
+//       success: true,
+//       product: result,
+//     });
+//   } catch (error) {
+//     console.error(error);
+//     res.status(400).json({
+//       message: 'Product creation failed',
+//       error: error,
+//     });
+//   }
+// });
 
 // try for stock
 
@@ -129,17 +190,10 @@ exports.updateProductStock = catchAsyncError(async (req, res, next) => {
 exports.getProducts = catchAsyncError(async (req, res, next) => {
   const resPerPage = 2;
   const productsCount = await Product.countDocuments();
-
   const keyFeature = new features(Product.find(), req.query)
     .search()
     .filter()
-    .pagination();
-
-  // let products = await keyFeature.query;
-  // let productFilteredCount = products.length;
-
-  // keyFeature.pagination(resPerPage);
-
+    .pagination(resPerPage);
   const products = await keyFeature.query;
 
   res.status(200).json({
@@ -147,7 +201,6 @@ exports.getProducts = catchAsyncError(async (req, res, next) => {
     products,
     productsCount,
     resPerPage,
-    // productFilteredCount,
   });
 });
 
@@ -182,22 +235,25 @@ exports.getAdminProducts = catchAsyncError(async (req, res, next) => {
 //update Products (ADMIN)**************************************************************************************************************
 exports.updateProduct = catchAsyncError(async (req, res, next) => {
   let product = await Product.findById(req.params.id);
-
   if (!product) {
     return next(new ErrorHandler('Product not found', 404));
   }
+
   if (req.body.category) {
-    console.log(req.body.category);
     const categoryDoc = await Category.findOne({ title: req.body.category });
     if (!categoryDoc) {
       return res.status(404).json({
-        message: `Category "${req.body.category}" not found`,
+        message: `Category not found`,
       });
     }
-    product.category = req.body.category;
   }
+  product = await Product.findByIdAndUpdate(
+    req.params.id,
+    { $set: req.body },
+    { new: true }
+  );
 
-  await product.save();
+  console.log(product);
 
   return res.status(200).json({
     product,

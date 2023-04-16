@@ -9,7 +9,6 @@ import ProductDetails from './components/mainPage/Products/ProductDetails';
 import { Dashboard } from './components/admin/Dashboard';
 import { AllProducts } from './components/admin/Products/AllProducts';
 import CreateProduct from './components/admin/Products/CreateProduct';
-import Orders from './components/admin/Orders/Orders';
 import AllUsers from './components/admin/Users/AllUsers';
 import ProductReviews from './components/admin/Reviews/ProductReviews';
 import Updateproduct from './components/admin/Products/Updateproduct';
@@ -35,6 +34,7 @@ import Productcard from './components/mainPage/Products/Productcard';
 import AddStock from './components/admin/Stock/AddStock';
 import { ProductsPage } from './components/mainPage/Products/ProductsPage';
 import UserOrder from './components/Orders/UserOrder';
+import OrdersList from './components/admin/Orders/OrdersList';
 
 function App() {
   const dispatch = useDispatch();
@@ -67,19 +67,11 @@ function App() {
           <Route path="/order/details" element={<OrderDetails />} />
           <Route path="/orders" element={<UserOrder />} />
         </Route>
-        <Route
-          element={
-            <PrivateRoute
-              isAuthenticated={isAuthenticated}
-              user={user?.role}
-              isAdmin={user?.isAdmin}
-            />
-          }
-        >
+        <Route element={<PrivateRoute isAuthenticated={isAuthenticated} />}>
           <Route path="/admin/dashboard" element={<Dashboard />} />
           <Route path="/admin/products" element={<AllProducts />} />
           <Route path="/admin/product" element={<CreateProduct />} />
-          <Route path="/admin/orders" element={<Orders />} />
+          <Route path="/admin/orders" element={<OrdersList />} />
           <Route path="/admin/users" element={<AllUsers />} />
           <Route path="/admin/reviews" element={<ProductReviews />} />
           <Route path="/admin/category" element={<Category />} />

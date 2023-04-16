@@ -50,16 +50,17 @@ const Category = () => {
       navigate('/admin/categories');
       dispatch({ type: CATEGORY_UPDATE_RESET });
     }
-  }, [dispatch, alert, navigate, error, isUpdated, categoryId, categories]);
+  }, [dispatch, alert, navigate, error, isUpdated, categoryId, category]);
 
-  const productSummitHandler = () => {
+  const productSummitHandler = (e) => {
+    e.preventDefault();
     const form = new FormData();
     form.set('title', title);
-    image.forEach((img) => {
-      form.append('images', img);
+    image.forEach((image) => {
+      form.append('images', image);
     });
 
-    dispatch(updateCategoryDetails(form));
+    dispatch(updateCategoryDetails(categoryId, form));
   };
 
   const productImageChange = (e) => {
@@ -94,7 +95,7 @@ const Category = () => {
               <SpellcheckIcon />
               <input
                 value={title}
-                placeholder={`Category Name`}
+                placeholder="Category Name"
                 onChange={(e) => setTitle(e.target.value)}
                 type="text"
                 required

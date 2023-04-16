@@ -139,9 +139,7 @@ exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
 
   await user.save({ validateBeforeSave: false });
 
-  const resetPasswordUrl = `${req.protocol}://${req.get(
-    'host'
-  )}/api/log/password/reset/${tokenReset}`;
+  const resetPasswordUrl = `${process.env.FRONTEND_URL}/password/reset/${tokenReset}`;
 
   const message = `Your password reset Token is: \n\n ${resetPasswordUrl}`;
   try {
@@ -150,7 +148,9 @@ exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
       subject: `Password Recovery`,
       message,
     });
-
+    console.log(
+      `Email sent to ${user.email} successfully with message: ${message}`
+    );
     res.status(200).json({
       sucess: true,
       message: `Email sent to ${user.email} sucessfully`,

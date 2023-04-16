@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { LeftSidebar } from '../LeftSidebar';
 import { DataGrid } from '@material-ui/data-grid';
 import { Button } from '@material-ui/core';
@@ -16,15 +16,19 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { Fragment } from 'react';
 import { useAlert } from 'react-alert';
+import { CATEGORY_DELETE_RESET } from '../../../reduxFeature/reducers/category/categoryConstants';
 
 export const CategoryList = () => {
   const dispatch = useDispatch();
 
   const alert = useAlert();
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const { error, categories } = useSelector((state) => state.categories);
+
+  const { category } = useSelector((state) => state.category) || {};
+  const { error: deleteError, isDeleted } = category || {};
 
   const deleteCategoryHandler = (id) => {
     dispatch(deleteCategory(id));
@@ -35,8 +39,18 @@ export const CategoryList = () => {
       alert.error(error);
       dispatch(errorClear());
     }
+    if (deleteError) {
+      alert.error(deleteError);
+      dispatch(errorClear());
+    }
+
+    if (isDeleted) {
+      alert.success('Category Deleted Successfully');
+      navigate('/admin/categories');
+      dispatch({ type: CATEGORY_DELETE_RESET });
+    }
     dispatch(getAllCategory());
-  }, [dispatch, alert, error]);
+  }, [dispatch, alert, error, isDeleted, deleteError, navigate]);
 
   const columns = [
     {

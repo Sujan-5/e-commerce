@@ -34,7 +34,7 @@ const Category = () => {
 
     if (success) {
       alert.success('Category Created Successfully');
-      navigate('/admin/products');
+      navigate('/admin/categories');
       dispatch({ type: NEW_CATEGORY_RESET });
     }
   }, [dispatch, alert, navigate, error, success]);
@@ -51,16 +51,15 @@ const Category = () => {
 
   const categoryHandleChange = (e) => {
     const file = e.target.files[0];
+    if (!file) return; // exit early if no file is selected
 
     const reader = new FileReader();
-
     reader.onload = () => {
       if (reader.readyState === 2) {
         setImagePreview([reader.result]);
         setImage(reader.result);
       }
     };
-
     reader.readAsDataURL(file);
   };
 
