@@ -1,30 +1,29 @@
 const mongoose = require('mongoose');
 
 const orderSchema = new mongoose.Schema({
-  shippingInfo: {
-    firstName: {
-      type: String,
-      required: true,
-    },
-    address: {
-      type: String,
-      required: true,
-    },
-    city: {
-      type: String,
-      required: true,
-    },
-
-    province: {
-      type: String,
-      required: true,
-    },
-
-    contact: {
-      type: Number,
-      required: true,
-    },
+  firstName: {
+    type: String,
+    required: true,
   },
+  address: {
+    type: String,
+    required: true,
+  },
+  city: {
+    type: String,
+    required: true,
+  },
+
+  province: {
+    type: String,
+    required: true,
+  },
+
+  contact: {
+    type: Number,
+    // required: true,
+  },
+
   orderItems: [
     {
       name: {
@@ -55,11 +54,11 @@ const orderSchema = new mongoose.Schema({
   paymentInfo: {
     id: {
       type: String,
-      required: true,
+      // required: true,
     },
     status: {
       type: String,
-      required: true,
+      // required: true,
     },
   },
   paidAt: {

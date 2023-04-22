@@ -4,6 +4,7 @@ import MultiSteps from './MultiSteps';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import KhaltiPayment from '../KhaltiApi/KhaltiPayment';
+import axios from 'axios';
 
 const OrderDetails = () => {
   const navigate = useNavigate();
@@ -29,20 +30,30 @@ const OrderDetails = () => {
 
   useEffect(() => {
     const orderObject = {
-      shippingInfo: {
-        firstName: shippingDetails.firstName,
-        address: shippingDetails.address,
-        city: shippingDetails.city,
-        province: shippingDetails.province,
-        contact: shippingDetails.contact,
-      },
+      firstName: shippingDetails.firstName,
+      address: shippingDetails.address,
+      city: shippingDetails.city,
+      province: shippingDetails.province,
+      contact: shippingDetails.contact,
+
       orderItems: cartItems,
 
       totalPrice: totalPrice,
       orderStatus: 'processing',
     };
+    console.log('check', orderObject);
     setOrder(orderObject);
   }, []);
+
+  // const handleOrder = async () => {
+  //   try {
+  //     const config = { headers: { 'Content-Type': 'multipart/form-data' } };
+  //     const { data } = await axios.post(`/api/ord/order/create`, order, config);
+  //     console.log(data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   return (
     <Fragment>
@@ -111,7 +122,7 @@ const OrderDetails = () => {
                 <p>All Total: </p>
                 <span>Rs. {totalPrice}</span>
               </div>
-
+              {/* <button onClick={handleOrder}>pay</button> */}
               <KhaltiPayment order={order} />
             </div>
           </div>
