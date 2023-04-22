@@ -32,14 +32,6 @@ exports.newProduct = catchAsyncError(async (req, res, next) => {
   req.body.user = req.user.id;
 
   const { name, price, description, stock, category, images } = req.body;
-  // const categoryTitle = req.body.category;
-
-  // const categoryDoc = await Category.findOne({ title: categoryTitle });
-  // if (!categoryDoc) {
-  //   return res.status(404).json({
-  //     message: `Category not found`,
-  //   });
-  // }
 
   const product = new Product({
     name,

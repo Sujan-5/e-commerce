@@ -9,7 +9,7 @@ import Loader from '../FrontFeatures/Loading/Loader';
 import Product from './Productcard';
 import PageNavigation from '../FrontFeatures/PageNavigation/PageNavigation';
 // import { useParams } from 'react-router-dom';
-import RangeSlider from '@material-ui/core/Slider';
+// import RangeSlider from '@material-ui/core/Slider';
 import Pagination from 'react-js-pagination';
 
 export const ProductsPage = () => {
@@ -17,6 +17,8 @@ export const ProductsPage = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
   const [price, setPrice] = useState([0, 2000]);
+  const [minPrice, setMinPrice] = useState(0);
+  const [maxPrice, setMaxPrice] = useState(0);
 
   const setCurrentPageNo = (e) => {
     setCurrentPage(e);
@@ -26,13 +28,21 @@ export const ProductsPage = () => {
     setPrice(newPrice);
   };
 
+  const handleMinPriceChange = (event) => {
+    setMinPrice(event.target.value);
+  };
+
+  const handleMaxPriceChange = (event) => {
+    setMaxPrice(event.target.value);
+  };
+
   const { loading, products, error, productsCount, resPerPage } = useSelector(
     (state) => state.products
   );
 
   useEffect(() => {
-    dispatch(getProduct(currentPage, price));
-  }, [dispatch, currentPage, price]);
+    dispatch(getProduct(currentPage, minPrice, maxPrice));
+  }, [dispatch, currentPage, minPrice, maxPrice]);
 
   return (
     <Fragment>
@@ -49,6 +59,27 @@ export const ProductsPage = () => {
           </div>
 
           <div className="filterBox">
+            <h3>Price Range</h3>
+            <div className="priceInputFields">
+              <input
+                type="number"
+                placeholder="Min"
+                value={minPrice}
+                onChange={handleMinPriceChange}
+              />
+              <input
+                type="number"
+                placeholder="Max"
+                value={maxPrice}
+                onChange={handleMaxPriceChange}
+              />
+              <button onClick={() => setPrice([minPrice, maxPrice])}>
+                Filter
+              </button>
+            </div>
+          </div>
+
+          {/* <div className="filterBox">
             <h3>Price</h3>
             <RangeSlider
               value={price}
@@ -58,7 +89,7 @@ export const ProductsPage = () => {
               min={0}
               max={2000}
             />
-          </div>
+          </div> */}
 
           {resPerPage < productsCount && (
             <div className="paginationBox">

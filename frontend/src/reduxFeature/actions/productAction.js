@@ -31,14 +31,14 @@ import {
 
 //get products for product page
 export const getProduct =
-  (currentPage = 1) =>
+  (currentPage = 1, minPrice = 0, maxPrice = 2000) =>
   async (dispatch) => {
     try {
       dispatch({
         type: PRODUCT_ALL_REQUEST,
       });
 
-      let urll = `/api/v1/products?page=${currentPage}`;
+      let urll = `/api/v1/products?page=${currentPage}&minPrice=${minPrice}&maxPrice=${maxPrice}`;
 
       const { data } = await axios.get(urll);
 

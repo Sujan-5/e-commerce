@@ -1,10 +1,12 @@
 import React, { Fragment } from 'react';
 import './orderDetails.css';
 import MultiSteps from './MultiSteps';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 const OrderDetails = () => {
+  const navigate = useNavigate();
+
   const { shippingDetails, cartItems } = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.user);
 
@@ -21,6 +23,16 @@ const OrderDetails = () => {
 
   const fullAddress = `${shippingDetails.address}, ${shippingDetails.city}, ${shippingDetails.province}`;
   const fullName = `${user.firstName} ${user.lastName}`;
+
+  const paymentOption = () => {
+    const options = {
+      allTotal,
+      shippingCharges,
+      totalPrice,
+    };
+    sessionStorage.setItem('orderInfo', JSON.stringify(options));
+    navigate('/payment');
+  };
 
   return (
     <Fragment>
@@ -89,7 +101,9 @@ const OrderDetails = () => {
                 <p>All Total: </p>
                 <span>Rs. {totalPrice}</span>
               </div>
-              <button>Proceed To Payment</button>
+              <Link to="/payment" style={{ textDecoration: 'none' }}>
+                <button onClick={paymentOption}>Proceed To Payment</button>
+              </Link>
             </div>
           </div>
         </div>

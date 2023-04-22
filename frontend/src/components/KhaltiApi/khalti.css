@@ -1,0 +1,56 @@
+.payContainer {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+}
+
+.paySummary {
+  margin-right: 10vmax;
+  width: 28vmax;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 0.5rem;
+  margin-top: 2vh;
+}
+
+.paySummary h1 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.paySummaryBox {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.paySummaryBox div {
+  display: flex;
+  /* align-items: center; */
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.paySummaryBox div p {
+  font-weight: bold;
+}
+
+.paySummaryBox div span {
+  font-size: 1.2rem;
+}
+.paySummary button {
+  background-color: #4b7bec;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  padding: 1rem;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.paySummary button:hover {
+  background-color: #3867d6;
+}

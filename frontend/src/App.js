@@ -35,6 +35,7 @@ import AddStock from './components/admin/Stock/AddStock';
 import { ProductsPage } from './components/mainPage/Products/ProductsPage';
 import UserOrder from './components/Orders/UserOrder';
 import OrdersList from './components/admin/Orders/OrdersList';
+import KhaltiPayment from './components/KhaltiApi/KhaltiPayment';
 
 function App() {
   const dispatch = useDispatch();
@@ -65,6 +66,7 @@ function App() {
           <Route path="/update/password" element={<UpdatePassword />} exact />
           <Route path="/shipping" element={<Shipping />} />
           <Route path="/order/details" element={<OrderDetails />} />
+          <Route path="/payment" element={<KhaltiPayment />} />
           <Route path="/orders" element={<UserOrder />} />
         </Route>
         <Route element={<PrivateRoute isAuthenticated={isAuthenticated} />}>

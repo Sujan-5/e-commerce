@@ -123,13 +123,13 @@ const Navbar = () => {
       </FlexBetween>
       {isNonMobileScreens ? (
         <FlexBetween gap="2rem">
-          <IconButton>
+          {/* <IconButton>
             {theme.palette.mode === { dark } ? (
               <DarkMode sx={{ fontSize: '25px' }} />
             ) : (
               <LightMode sx={{ color: dark, fontSize: '25px' }} />
             )}
-          </IconButton>
+          </IconButton> */}
           <Link to="/cart" style={{ textDecoration: 'none' }}>
             <Badge badgeContent={`${cartItems.length}`} color="primary">
               <ShoppingCart sx={{ fontSize: '25px' }} />

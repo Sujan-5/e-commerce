@@ -16,7 +16,7 @@ const ProductCart = ({ item, deleteCartItems }) => {
           onClick={() => deleteCartItems(item.product)}
           className="cartdeleteButton"
         >
-          <DeleteOutlineIcon sx={{ color: 'red' }} />
+          <DeleteOutlineIcon sx={{ color: 'red', width: '50px' }} />
         </p>
       </div>
     </div>
