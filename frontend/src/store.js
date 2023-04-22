@@ -13,6 +13,7 @@ import {
 //category
 import {
   categoryReducer,
+  categoryUDReducer,
   createCategoryReducer,
   getCategoryDetailsReducer,
 } from './reduxFeature/reducers/category/categoryReducer';
@@ -47,6 +48,7 @@ const reducer = combineReducers({
   categories: categoryReducer,
   createCategory: createCategoryReducer,
   categoryDetails: getCategoryDetailsReducer,
+  category: categoryUDReducer,
 
   //user
   user: userReducer,

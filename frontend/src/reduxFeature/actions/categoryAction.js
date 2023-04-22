@@ -71,7 +71,7 @@ export const addCategory = (form) => async (dispatch) => {
 };
 
 // Update admin CATEGORY
-export const updateCategoryDetails = (id, categoryData) => async (dispatch) => {
+export const updateCategoryDetails = (id, form) => async (dispatch) => {
   try {
     dispatch({ type: CATEGORY_UPDATE_REQUEST });
 
@@ -79,11 +79,7 @@ export const updateCategoryDetails = (id, categoryData) => async (dispatch) => {
       headers: { 'Content-Type': 'multipart/form-data' },
     };
 
-    const { data } = await axios.put(
-      `/api/v1/category/${id}`,
-      categoryData,
-      config
-    );
+    const { data } = await axios.put(`/api/v1/category/${id}`, form, config);
 
     dispatch({
       type: CATEGORY_UPDATE_SUCCESS,

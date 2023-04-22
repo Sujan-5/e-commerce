@@ -18,7 +18,7 @@ const Shipping = () => {
 
   const { shippingDetails } = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.user);
-
+  const [firstName, setFirstName] = useState(user?.firstName);
   const [contact, setContact] = useState(
     shippingDetails.contact || user.contact
   );
@@ -36,7 +36,9 @@ const Shipping = () => {
       return;
     }
 
-    dispatch(saveShippingDetails({ contact, city, address, province }));
+    dispatch(
+      saveShippingDetails({ firstName, contact, city, address, province })
+    );
     navigate('/order/details');
   };
 
@@ -53,8 +55,9 @@ const Shipping = () => {
                 <input
                   type="text"
                   placeholder="Name"
-                  value={user.firstName}
+                  value={user?.firstName}
                   readOnly
+                  onChange={(e) => setFirstName(e.target.value)}
                 />
               </div>
 

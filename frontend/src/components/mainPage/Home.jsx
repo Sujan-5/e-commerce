@@ -66,6 +66,7 @@ const HomePage = () => {
       cursor: 'pointer',
       transition: 'background-color 0.2s ease',
       margin: '0 auto',
+      marginBottom: '10px',
     },
   };
 

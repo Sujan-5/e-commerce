@@ -21,9 +21,13 @@ const Category = () => {
   const alert = useAlert();
   const params = useParams();
 
-  const { error, loading, isUpdated, category } = useSelector(
-    (state) => state.categoryDetails
-  );
+  const { error, category } = useSelector((state) => state.categoryDetails);
+
+  const {
+    loading,
+    error: updateError,
+    isUpdated,
+  } = useSelector((state) => state.category);
 
   const [title, setTitle] = useState('');
   const [image, setImage] = useState([]);
@@ -45,12 +49,26 @@ const Category = () => {
       dispatch(errorClear());
     }
 
+    if (updateError) {
+      alert.error(updateError);
+      dispatch(errorClear());
+    }
+
     if (isUpdated) {
       alert.success('Category Updated Successfully');
       navigate('/admin/categories');
       dispatch({ type: CATEGORY_UPDATE_RESET });
     }
-  }, [dispatch, alert, navigate, error, isUpdated, categoryId, category]);
+  }, [
+    dispatch,
+    alert,
+    navigate,
+    error,
+    updateError,
+    isUpdated,
+    categoryId,
+    category,
+  ]);
 
   const productSummitHandler = (e) => {
     e.preventDefault();
@@ -90,15 +108,19 @@ const Category = () => {
         <LeftSidebar />
         <div className="categoryContainer">
           <h1 className="headingProd">Add Category</h1>
-          <form className="categoryForm" onSubmit={productSummitHandler}>
+          <form
+            className="categoryForm"
+            encType="multipart/form-data"
+            onSubmit={productSummitHandler}
+          >
             <div>
               <SpellcheckIcon />
               <input
-                value={title}
                 placeholder="Category Name"
-                onChange={(e) => setTitle(e.target.value)}
                 type="text"
                 required
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
               />
             </div>
 

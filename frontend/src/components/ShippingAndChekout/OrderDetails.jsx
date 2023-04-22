@@ -1,11 +1,14 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import './orderDetails.css';
 import MultiSteps from './MultiSteps';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import KhaltiPayment from '../KhaltiApi/KhaltiPayment';
 
 const OrderDetails = () => {
   const navigate = useNavigate();
+
+  const [order, setOrder] = useState('');
 
   const { shippingDetails, cartItems } = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.user);
@@ -22,17 +25,24 @@ const OrderDetails = () => {
   const totalPrice = allTotal + shippingCharges;
 
   const fullAddress = `${shippingDetails.address}, ${shippingDetails.city}, ${shippingDetails.province}`;
-  const fullName = `${user.firstName} ${user.lastName}`;
+  const fullName = `${user?.firstName} ${user?.lastName}`;
 
-  const paymentOption = () => {
-    const options = {
-      allTotal,
-      shippingCharges,
-      totalPrice,
+  useEffect(() => {
+    const orderObject = {
+      shippingInfo: {
+        firstName: shippingDetails.firstName,
+        address: shippingDetails.address,
+        city: shippingDetails.city,
+        province: shippingDetails.province,
+        contact: shippingDetails.contact,
+      },
+      orderItems: cartItems,
+
+      totalPrice: totalPrice,
+      orderStatus: 'processing',
     };
-    sessionStorage.setItem('orderInfo', JSON.stringify(options));
-    navigate('/payment');
-  };
+    setOrder(orderObject);
+  }, []);
 
   return (
     <Fragment>
@@ -40,7 +50,7 @@ const OrderDetails = () => {
       <div className="orderContainer">
         <div>
           <div className="userShippingDetails">
-            <h1>{user.firstName}'s Shipping Details</h1>
+            <h1>{user?.firstName}'s Shipping Details</h1>
             <div className="shippingDetailsBox">
               <div>
                 <p>Name: </p>
@@ -101,9 +111,8 @@ const OrderDetails = () => {
                 <p>All Total: </p>
                 <span>Rs. {totalPrice}</span>
               </div>
-              <Link to="/payment" style={{ textDecoration: 'none' }}>
-                <button onClick={paymentOption}>Proceed To Payment</button>
-              </Link>
+
+              <KhaltiPayment order={order} />
             </div>
           </div>
         </div>

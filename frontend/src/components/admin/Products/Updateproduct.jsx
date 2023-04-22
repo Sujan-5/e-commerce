@@ -52,7 +52,6 @@ const Updateproduct = () => {
     } else {
       setName(product.name);
       setPrice(product.price);
-      // setCategory(product.category);
 
       const categoryObject = categories.find(
         (c) => c.title === product.category
@@ -136,7 +135,6 @@ const Updateproduct = () => {
           <h1 className="headingUpdateProd">Update Product</h1>
           <form
             className="productUpdateForm"
-            encType="multipart/form-data"
             onSubmit={productUpdateSummitHandler}
           >
             <div>
@@ -210,7 +208,11 @@ const Updateproduct = () => {
             <div id="updateProductFormImage">
               {pastimages &&
                 pastimages.map((image, index) => (
-                  <img key={index} src={image.url} alt="Past Product Preview" />
+                  <img
+                    key={index}
+                    src={image?.url}
+                    alt="Past Product Preview"
+                  />
                 ))}
             </div>
 

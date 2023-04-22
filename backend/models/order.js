@@ -1,7 +1,11 @@
 const mongoose = require('mongoose');
 
 const orderSchema = new mongoose.Schema({
-  deliveryInfo: {
+  shippingInfo: {
+    firstName: {
+      type: String,
+      required: true,
+    },
     address: {
       type: String,
       required: true,
@@ -11,12 +15,16 @@ const orderSchema = new mongoose.Schema({
       required: true,
     },
 
-    phoneNum: {
+    province: {
+      type: String,
+      required: true,
+    },
+
+    contact: {
       type: Number,
       required: true,
     },
   },
-
   orderItems: [
     {
       name: {
@@ -27,24 +35,23 @@ const orderSchema = new mongoose.Schema({
         type: Number,
         required: true,
       },
-      quantity: {
-        type: Number,
+
+      image: {
+        type: String,
         required: true,
       },
       product: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'product',
+        type: mongoose.Schema.ObjectId,
+        ref: 'Product',
         required: true,
       },
     },
   ],
-
   user: {
     type: mongoose.Schema.ObjectId,
     ref: 'user',
     required: true,
   },
-
   paymentInfo: {
     id: {
       type: String,
@@ -55,38 +62,36 @@ const orderSchema = new mongoose.Schema({
       required: true,
     },
   },
-
   paidAt: {
     type: Date,
     required: true,
   },
-
-  itemPrice: {
+  itemsPrice: {
     type: Number,
-    default: 0,
     required: true,
+    default: 0,
   },
-
+  taxPrice: {
+    type: Number,
+    required: true,
+    default: 0,
+  },
   shippingPrice: {
     type: Number,
-    default: 0,
     required: true,
+    default: 0,
   },
-
   totalPrice: {
     type: Number,
-    default: 0,
     required: true,
+    default: 0,
   },
-
   orderStatus: {
     type: String,
     required: true,
     default: 'Processing',
   },
-
   deliveredAt: Date,
-
   createdAt: {
     type: Date,
     default: Date.now,

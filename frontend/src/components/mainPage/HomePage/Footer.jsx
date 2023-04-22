@@ -9,47 +9,70 @@ const SocialBox = styled(Box)({
 });
 
 const Text = styled('div')`
-  font-size: 16px;
+  font-size: 12px;
   font-weight: 400;
   color: white;
 `;
 
 const Terms = styled('div')`
-  font-size: 16px;
+  font-size: 12px;
   font-weight: 400;
   color: white;
+  text-align: center;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  line-height: 1.5;
+`;
+
+const FooterContainer = styled(Box)`
+  background-color: #202029;
+  color: white;
+  padding: 30px 0;
+`;
+
+const FooterContent = styled(Box)`
+  max-width: 1200px;
+  margin: 0 auto;
 `;
 
 const Footer = () => {
   return (
-    <Box sx={{ background: '#202029', height: '300px' }} mt={5}>
-      <Stack direction={{ xs: 'row', md: 'row' }} p={7}>
-        <Box flex={2}>
-          <Text>Contact Us</Text>
-          <Text>Contact Us</Text>
-          <Text>Contact Us</Text>
-          <Text>Contact Us</Text>
-        </Box>
-        <Box flex={2}>
-          <Text>Data Policy</Text>
-          <Text>Data Safty</Text>
-          <Text>Email</Text>
-        </Box>
-        <Box>
-          <Text>Follow Us</Text>
-          <SocialBox>
-            <Facebook />
-            <Instagram />
-            <Twitter />
-          </SocialBox>
-        </Box>
-      </Stack>
-      <hr />
-      <Terms>
-        &copy;{new Date().getFullYear()} Citywide | All right reserved | Terms
-        of Service | Privacy
-      </Terms>
-    </Box>
+    <FooterContainer>
+      <FooterContent>
+        <Stack
+          direction={{ xs: 'column', md: 'row' }}
+          alignItems="center"
+          justifyContent="space-between"
+          p={5}
+        >
+          <Box flex={1}>
+            <Text>Contact Us</Text>
+            <Text>Narayantar, Near East Pole School</Text>
+            <Text>Jorpati, kathmandu</Text>
+            <Text>9800000000</Text>
+          </Box>
+          <Box flex={1}>
+            <Text>Data Policy</Text>
+            <Text>Data Safty</Text>
+            <Text>Email</Text>
+          </Box>
+          <Box>
+            <Text>Follow Us</Text>
+            <SocialBox>
+              <Facebook />
+              <Instagram />
+              <Twitter />
+            </SocialBox>
+          </Box>
+        </Stack>
+        {/* <hr style={{ borderTop: '1px solid white', margin: '20px 0' }} /> */}
+        <Terms>
+          &copy;{new Date().getFullYear()} Citywide | All right reserved | Terms
+          of Service | Privacy
+        </Terms>
+      </FooterContent>
+    </FooterContainer>
   );
 };
 
