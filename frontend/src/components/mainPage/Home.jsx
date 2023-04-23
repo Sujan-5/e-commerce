@@ -10,15 +10,13 @@ import { useEffect } from 'react';
 import Loader from './FrontFeatures/Loading/Loader';
 import { useAlert } from 'react-alert';
 import { styled } from '@mui/system';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const StyledContainer = styled(Container)`
   width: 100%;
 `;
 
 const HomePage = () => {
-  const params = useParams();
-
   const alert = useAlert();
   const dispatch = useDispatch();
   const { loading, error, products } = useSelector((state) => state.products);
@@ -54,7 +52,7 @@ const HomePage = () => {
       marginBottom: '20px',
     },
     button: {
-      display: 'grid',
+      display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
       padding: '0.5rem 1.5rem',

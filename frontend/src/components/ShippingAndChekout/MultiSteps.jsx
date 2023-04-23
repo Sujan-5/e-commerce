@@ -36,10 +36,7 @@ const MultiSteps = ({ activeStep }) => {
       label: <Typography>Order Details</Typography>,
       icon: <LibraryAddCheckIcon />,
     },
-    {
-      label: <Typography>CheckOut</Typography>,
-      icon: <AccountBalanceIcon />,
-    },
+
     {
       label: <Typography>Success</Typography>,
       icon: <CheckCircleIcon />,

@@ -29,13 +29,15 @@ import Navbar from './components/mainPage/HomePage/Navbar';
 import ResetPassword from './components/User/ResetPassword/ResetPassword';
 import Shipping from './components/ShippingAndChekout/Shipping';
 import OrderDetails from './components/ShippingAndChekout/OrderDetails';
-import Productcard from './components/mainPage/Products/Productcard';
+// import Productcard from './components/mainPage/Products/Productcard';
 // import StockPage from './components/admin/Stock/StockPage';
 import AddStock from './components/admin/Stock/AddStock';
 import { ProductsPage } from './components/mainPage/Products/ProductsPage';
 import UserOrder from './components/Orders/UserOrder';
 import OrdersList from './components/admin/Orders/OrdersList';
 import KhaltiPayment from './components/KhaltiApi/KhaltiPayment';
+import Success from './components/Orders/Success';
+import UpdateOrder from './components/admin/Orders/UpdateOrder';
 
 function App() {
   const dispatch = useDispatch();
@@ -68,6 +70,7 @@ function App() {
           <Route path="/order/details" element={<OrderDetails />} />
           <Route path="/payment" element={<KhaltiPayment />} />
           <Route path="/orders" element={<UserOrder />} />
+          <Route path="/order/success" element={<Success />} />
         </Route>
         <Route element={<PrivateRoute isAuthenticated={isAuthenticated} />}>
           <Route path="/admin/dashboard" element={<Dashboard />} />
@@ -79,9 +82,9 @@ function App() {
           <Route path="/admin/category" element={<Category />} />
           <Route path="/admin/categories" element={<CategoryList />} />
           <Route path="/admin/category/:id" element={<UpdateCategory />} />
-          *
           <Route path="/admin/product/:id" element={<Updateproduct />} />
           <Route path="/admin/stock/:id" element={<AddStock />} />
+          <Route path="/admin/update/order/:id" element={<UpdateOrder />} />
         </Route>
       </Routes>
       <Footer />

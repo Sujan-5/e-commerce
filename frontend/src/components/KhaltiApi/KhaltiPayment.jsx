@@ -1,5 +1,6 @@
 import KhaltiCheckout from 'khalti-checkout-web';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const KhaltiPayment = ({ order }) => {
   let config = {
@@ -25,6 +26,8 @@ const KhaltiPayment = ({ order }) => {
             config
           );
           console.log(data);
+          // redirect to success page
+          window.location.href = '/order/success';
         } catch (error) {
           console.log(error);
         }
@@ -41,7 +44,7 @@ const KhaltiPayment = ({ order }) => {
     paymentPreference: ['KHALTI', 'EBANKING', 'MOBILE_BANKING'],
   };
 
-  const orderInfo = JSON.parse(sessionStorage.getItem('orderInfo'));
+  // const orderInfo = JSON.parse(sessionStorage.getItem('orderInfo'));
 
   let checkout = new KhaltiCheckout(config);
   // let btn = document.getElementById('payment-button');
@@ -55,7 +58,7 @@ const KhaltiPayment = ({ order }) => {
 
   return (
     <button id="payment-button" onClick={handleCheckout}>
-      Pay - {`Rs. ${orderInfo && orderInfo.totalPrice}`}
+      Pay
     </button>
   );
 };

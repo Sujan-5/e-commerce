@@ -13,9 +13,13 @@ import {
   //delete order
   ORDER_DELETE_REQUEST,
   ORDER_DELETE_SUCCESS,
-  ORDER_DELETE_RESET,
   ORDER_DELETE_FAIL,
   ERRORS_CLEAR,
+
+  //details
+  ORDER_DETAILS_REQUEST,
+  ORDER_DETAILS_FAIL,
+  ORDER_DETAILS_SUCCESS,
 } from '../reducers/Orders/orderConstants';
 
 export const allOrdersAdmin = () => async (dispatch) => {
@@ -60,6 +64,22 @@ export const deleteOrdersAdmin = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: ORDER_DELETE_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+// Get Order Details
+export const allOrderDetails = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: ORDER_DETAILS_REQUEST });
+
+    const { data } = await axios.get(`/api/v1/order/${id}`);
+
+    dispatch({ type: ORDER_DETAILS_SUCCESS, payload: data.order });
+  } catch (error) {
+    dispatch({
+      type: ORDER_DETAILS_FAIL,
       payload: error.response.data.message,
     });
   }

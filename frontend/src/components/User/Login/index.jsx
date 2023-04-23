@@ -22,12 +22,12 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     dispatch(login(emailLogin, passLogin));
   };
 
   useEffect(() => {
     if (error) {
+      console.log(error);
       alert.error(error);
       dispatch(errorClear());
     }

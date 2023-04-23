@@ -8,7 +8,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   allOrdersAdmin,
-  updateOrdersAdmin,
+  // updateOrdersAdmin,
   deleteOrdersAdmin,
   errorClear,
 } from '../../../reduxFeature/actions/OrderAction';
@@ -93,7 +93,9 @@ export const OrdersList = () => {
       renderCell: (params) => {
         return (
           <Fragment>
-            <Link to={`/admin/order/${params.getValue(params.id, 'id')}`}>
+            <Link
+              to={`/admin/update/order/${params.getValue(params.id, 'id')}`}
+            >
               <EditIcon />
             </Link>
 

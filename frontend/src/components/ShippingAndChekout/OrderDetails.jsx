@@ -4,7 +4,6 @@ import MultiSteps from './MultiSteps';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import KhaltiPayment from '../KhaltiApi/KhaltiPayment';
-import axios from 'axios';
 
 const OrderDetails = () => {
   const navigate = useNavigate();

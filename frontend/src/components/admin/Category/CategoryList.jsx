@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { LeftSidebar } from '../LeftSidebar';
 import { DataGrid } from '@material-ui/data-grid';
 import { Button } from '@material-ui/core';
-import EditIcon from '@material-ui/icons/Edit';
+// import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Add from '@material-ui/icons/Add';
 import {
@@ -77,9 +77,9 @@ export const CategoryList = () => {
         const categoryId = params.getValue(params.id, 'categoryId');
         return (
           <Fragment>
-            <Link to={`/admin/category/${categoryId}`}>
+            {/* <Link to={`/admin/category/${categoryId}`}>
               <EditIcon />
-            </Link>
+            </Link> */}
 
             <Button onClick={() => deleteCategoryHandler(categoryId)}>
               <DeleteIcon />

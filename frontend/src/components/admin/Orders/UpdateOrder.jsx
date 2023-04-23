@@ -1,57 +1,79 @@
-import React, { Fragment } from 'react';
-import './orderDetails.css';
-import MultiSteps from './MultiSteps';
-import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import React, { Fragment, useState, useEffect } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+// import LeftSidebar from '../LeftSidebar';
+import { useAlert } from 'react-alert';
+import {
+  allOrderDetails,
+  errorClear,
+} from '../../../reduxFeature/actions/OrderAction';
+import { ORDER_UPDATE_RESET } from '../../../reduxFeature/reducers/Orders/orderConstants';
 
 const UpdateOrder = () => {
-  const { shippingDetails, cartItems } = useSelector((state) => state.cart);
-  const { user } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
-  const allTotal = cartItems.reduce(
-    (acc, item) => acc + item.quantity * item.price,
-    0
-  );
+  const params = useParams();
+  const alert = useAlert();
+  const [status, setStatus] = useState('');
 
-  const units = cartItems.quantity;
+  const { order, error } = useSelector((state) => state.orderDetails);
+  const { error: updateError, isUpdated } = useSelector((state) => state.order);
 
-  const shippingCharges = allTotal > 2000 ? 0 : 50;
+  const orderUpdateHandler = (e) => {
+    e.preventDefault();
+    const formdata = new FormData();
+    formdata.set('status', status);
+  };
 
-  const totalPrice = allTotal + shippingCharges;
+  const userName = `${order && order.firstName}`;
+  const userContact = `${order && order.contact}`;
+  const userAddress = `${order && order.address} ${order && order.city} ${
+    order && order.province
+  }`;
 
-  const fullAddress = `${shippingDetails.address}, ${shippingDetails.city}, ${shippingDetails.province}`;
-  const fullName = `${user.firstName} ${user.lastName}`;
+  useEffect(() => {
+    if (error) {
+      alert.error(error);
+      dispatch(errorClear());
+    }
+    if (updateError) {
+      alert.error(updateError);
+      dispatch(errorClear());
+    }
+    if (isUpdated) {
+      alert.success('Order Updated Successfully');
+      dispatch({ type: ORDER_UPDATE_RESET });
+    }
+
+    dispatch(allOrderDetails(params.id));
+  }, [dispatch, alert, error, params.id, isUpdated, updateError]);
 
   return (
     <Fragment>
-      <MultiSteps activeStep={1} />
       <div className="orderContainer">
+        {/* <LeftSidebar /> */}
         <div>
-          <div className="userShippingDetails">
-            <h1>{user.firstName}'s Shipping Details</h1>
-            <div className="shippingDetailsBox">
+          <div className="orderDetails">
+            <div className="orderDetailsBox">
               <div>
                 <p>Name: </p>
-                <span>{fullName}</span>
+                <span>{userName}</span>
               </div>
               <div>
                 <p>Contact: </p>
-                <span>{shippingDetails.contact}</span>
+                <span>{userContact}</span>
               </div>
               <div>
                 <p>Address: </p>
-                <span>{fullAddress}</span>
-                <Link to="/shipping" style={{ textDecoration: 'none' }}>
-                  <button>Edit</button>
-                </Link>
+                <span>{userAddress}</span>
               </div>
             </div>
           </div>
-          <div className="cartDetailsContainer">
+          <div className="orderCartDetails">
             <h1>Cart Items</h1>
-            <div className="cartItems">
-              {cartItems &&
-                cartItems.map((item) => (
+            <div className="orderCartItems">
+              {order.orderItems &&
+                order.orderItems.map((item) => (
                   <div key={item.product}>
                     <img src={item.image} alt="Product" />
                     <Link
@@ -73,23 +95,20 @@ const UpdateOrder = () => {
           <div className="wholeSummary">
             <h1>Order Summary</h1>
             <div className="wholeSummaryBox">
-              <div>
-                <p>Total Units:</p>
-                <span>{units}</span>
+              <div
+                style={{
+                  display: order.orderStatus === 'Delivered' ? 'none' : 'block',
+                }}
+              >
+                <form className="orderForm" onSubmit={orderUpdateHandler}>
+                  <div>
+                    <select onChange={(e) => setStatus(e.target.value)}>
+                      <option value="">Choose</option>
+                    </select>
+                  </div>
+                </form>
               </div>
-              <div>
-                <p>Total: </p>
-                <span>Rs. {allTotal}</span>
-              </div>
-              <div>
-                <p>Shipping Charges: </p>
-                <span>Rs. {shippingCharges}</span>
-              </div>
-              <div>
-                <p>All Total: </p>
-                <span>Rs. {totalPrice}</span>
-              </div>
-              <button>Proceed To Payment</button>
+              <button>Update</button>
             </div>
           </div>
         </div>
