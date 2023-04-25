@@ -38,8 +38,10 @@ app.use(
   })
 );
 app.use(cookieParser());
-app.use(bodyParser.json({ limit: '50mb' }));
-app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
+// Parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }));
+// Parse application/json
+app.use(bodyParser.json());
 app.use(fileUpload());
 
 //for routes************************************************************************************************

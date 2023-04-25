@@ -16,6 +16,15 @@ import Loader from '../FrontFeatures/Loading/Loader';
 import { useAlert } from 'react-alert';
 import PageNavigation from '../FrontFeatures/PageNavigation/PageNavigation';
 import { addToCart } from '../../../reduxFeature/actions/cartAction';
+import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Button,
+} from '@mui/material';
+import { writeReview } from '../../../reduxFeature/actions/reviewAction';
+import { WRITE_REVIEW_RESET } from '../../../reduxFeature/reducers/Review/reviewConstants';
 
 const ProductDetails = () => {
   const dispatch = useDispatch();
@@ -26,6 +35,8 @@ const ProductDetails = () => {
     (state) => state.productDetails
   );
 
+  const { success, error: reviewError } = useSelector((state) => state.review);
+
   const options = {
     size: 'large',
     value: product.ratings,
@@ -34,14 +45,44 @@ const ProductDetails = () => {
   };
 
   const [quantity] = useState(1);
+  const [open, setOpen] = useState(false);
+  const [rating, setRating] = useState(0);
+  const [comment, setComment] = useState('');
+
+  const submitReviewToggle = () => {
+    open ? setOpen(false) : setOpen(true);
+  };
+
+  const reviewSubmitHandler = () => {
+    const myForm = new FormData();
+
+    myForm.set('rating', rating);
+    myForm.set('comment', comment);
+    myForm.set('productId', params.id);
+
+    dispatch(writeReview(myForm));
+
+    setOpen(false);
+  };
 
   useEffect(() => {
     if (error) {
       alert.error(error);
       dispatch(errorClear());
     }
+
+    if (reviewError) {
+      alert.error(reviewError);
+      dispatch(errorClear());
+    }
+
+    if (success) {
+      alert.success('Review Submitted Successfully');
+      dispatch({ type: WRITE_REVIEW_RESET });
+    }
+
     dispatch(getProductDetails(params.id));
-  }, [dispatch, params.id, alert, error]);
+  }, [dispatch, params.id, alert, error, reviewError, success]);
 
   const addToCartHandler = () => {
     dispatch(addToCart(params.id, quantity));
@@ -144,10 +185,43 @@ const ProductDetails = () => {
               <p>{product.description}</p>
             </div>
             <div className="reviewButton">
-              <button className="Review">Review this product</button>
+              <button className="Review" onClick={submitReviewToggle}>
+                Review this product
+              </button>
             </div>
           </div>
           <h3 className="reviewHead">Ratings & Reviews</h3>
+
+          <Dialog
+            aria-labelledby="simple-dialog-title"
+            open={open}
+            onClose={submitReviewToggle}
+          >
+            <DialogTitle>Submit Review</DialogTitle>
+            <DialogContent className="submitDialog">
+              <Rating
+                onChange={(e) => setRating(e.target.value)}
+                value={rating}
+                size="large"
+              />
+
+              <textarea
+                className="submitDialogTextArea"
+                cols="30"
+                rows="5"
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+              ></textarea>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={submitReviewToggle} color="secondary">
+                Cancel
+              </Button>
+              <Button onClick={reviewSubmitHandler} color="primary">
+                Submit
+              </Button>
+            </DialogActions>
+          </Dialog>
 
           {product.reviews && product.reviews[0] ? (
             <div className="reviews">

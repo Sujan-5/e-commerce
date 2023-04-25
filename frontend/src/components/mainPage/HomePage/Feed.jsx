@@ -111,7 +111,7 @@ const Feed = () => {
             <Wrapper>
               <Image src={product.img} />
               <BannerContent>
-                <Slogan>Fresh, Local, Delivered</Slogan>
+                {/* <Slogan>Fresh, Local, Delivered</Slogan> */}
                 <Title variant="h2">{product.title}</Title>
                 <Description fontSize={{ xs: '9px', sm: '18px' }}>
                   {product.desc}

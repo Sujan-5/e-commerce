@@ -5,7 +5,7 @@ const catchAsyncError = require('../Middleware/catchAsyncErrors');
 
 /*********************************create order*************************************************************/
 exports.createOrder = catchAsyncError(async (req, res, next) => {
-  const {
+  let {
     firstName,
     address,
     city,
@@ -15,8 +15,8 @@ exports.createOrder = catchAsyncError(async (req, res, next) => {
     itemPrice,
     totalPrice,
   } = req.body;
-  console.log(req.body);
-
+  console.log(JSON.parse(orderItems));
+  orderItems = JSON.parse(orderItems);
   const order = await Order.create({
     firstName,
     address,

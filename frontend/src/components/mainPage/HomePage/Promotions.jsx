@@ -24,7 +24,7 @@ const MessagePromo = styled('div')(({ theme }) => ({
 }));
 
 const messages = [
-  '15% off on your first order!',
+  '5% off on your first order!',
   'Fresh, Local, Delivered',
   'Inside Valley Only!!',
 ];

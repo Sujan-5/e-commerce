@@ -104,7 +104,7 @@ const Signup = () => {
       alert.error(error);
       dispatch(errorClear());
     }
-    console.log(success);
+
     if (success) {
       alert.success(success);
     }

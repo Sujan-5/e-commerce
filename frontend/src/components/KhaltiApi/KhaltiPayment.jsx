@@ -2,7 +2,7 @@ import KhaltiCheckout from 'khalti-checkout-web';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-const KhaltiPayment = ({ order }) => {
+const KhaltiPayment = ({ order, cartItems }) => {
   let config = {
     // replace this key with yours
     publicKey: 'test_public_key_c2096a11f2e14e6890e19eeab87e78c1',
@@ -20,9 +20,10 @@ const KhaltiPayment = ({ order }) => {
         console.log(ord);
         try {
           const config = { headers: { 'Content-Type': 'multipart/form-data' } };
+          order.orderItems = JSON.stringify(cartItems);
           const { data } = await axios.post(
             `/api/ord/order/create`,
-            ord,
+            order,
             config
           );
           console.log(data);
