@@ -9,6 +9,7 @@ import {
   deleteFromCart,
 } from '../../reduxFeature/actions/cartAction';
 import { useAlert } from 'react-alert';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
 export const CartS = () => {
   const navigate = useNavigate();
@@ -94,6 +95,12 @@ export const CartS = () => {
                   </div>
                   <p className="cartsubtotal">
                     {`Rs${item.quantity * item.price}`}{' '}
+                  </p>
+                  <p
+                    onClick={() => deleteCartItems(item.product)}
+                    className="cartdeleteButton"
+                  >
+                    <DeleteOutlineIcon sx={{ color: 'red', width: '50px' }} />
                   </p>
                 </div>
               ))}

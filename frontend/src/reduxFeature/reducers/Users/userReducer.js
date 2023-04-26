@@ -55,7 +55,7 @@ export const userReducer = (state = { user: {} }, action) => {
         loading: false,
         isAuthenticated: false,
         user: null,
-        error: action.playload,
+        error: action.payload,
       };
 
     case USER_LOAD_FAIL:
@@ -63,7 +63,7 @@ export const userReducer = (state = { user: {} }, action) => {
         loading: false,
         isAuthenticated: false,
         user: null,
-        error: action.playload,
+        error: action.payload,
       };
     case LOGOUT_FAIL:
       return {
