@@ -29,6 +29,7 @@ import { writeReviewReducer } from './reduxFeature/reducers/Review/reviewReducer
 import { productStockReducer } from './reduxFeature/reducers/Products/stockReducer';
 import {
   adminOrdersReducer,
+  usersOrdersReducer,
   orderDetailsReducer,
   upAndDelOrdersReducer,
 } from './reduxFeature/reducers/Orders/orderReducer';
@@ -45,6 +46,7 @@ const reducer = combineReducers({
   orders: adminOrdersReducer,
   order: upAndDelOrdersReducer,
   orderDetails: orderDetailsReducer,
+  myOrders: usersOrdersReducer,
 
   //categories
   categories: categoryReducer,

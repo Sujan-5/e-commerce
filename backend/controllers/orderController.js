@@ -15,7 +15,7 @@ exports.createOrder = catchAsyncError(async (req, res, next) => {
     itemPrice,
     totalPrice,
   } = req.body;
-  console.log(JSON.parse(orderItems));
+
   orderItems = JSON.parse(orderItems);
   const order = await Order.create({
     firstName,

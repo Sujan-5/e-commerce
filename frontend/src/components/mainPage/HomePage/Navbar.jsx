@@ -162,7 +162,7 @@ const Navbar = () => {
                 </MenuItem>
                 {user && user.role !== 'admin' ? (
                   <Link
-                    to="/order"
+                    to="/myorder"
                     style={{ textDecoration: 'none', color: 'black' }}
                   >
                     {' '}

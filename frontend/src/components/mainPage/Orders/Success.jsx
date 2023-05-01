@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import './success.css';
 import { Link } from 'react-router-dom';
-import MultiSteps from '../ShippingAndChekout/MultiSteps';
+import MultiSteps from '../../ShippingAndChekout/MultiSteps';
 
 const Success = () => {
   return (
@@ -12,7 +12,7 @@ const Success = () => {
       <div className="successOrder">
         <CheckCircleIcon />
         <p>Your order has been placed successfully</p>
-        <Link to="/orders" style={{ textDecoration: 'none' }}>
+        <Link to="/myorder" style={{ textDecoration: 'none' }}>
           <button>View Orders</button>
         </Link>
       </div>

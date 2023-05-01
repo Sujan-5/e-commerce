@@ -21,6 +21,11 @@ import {
   ORDER_DETAILS_REQUEST,
   ORDER_DETAILS_FAIL,
   ORDER_DETAILS_SUCCESS,
+
+  //my order
+  OWN_ORDER_REQUEST,
+  OWN_ORDER_SUCCESS,
+  OWN_ORDER_FAIL,
 } from './orderConstants';
 
 export const adminOrdersReducer = (state = { orders: [] }, action) => {
@@ -111,6 +116,35 @@ export const orderDetailsReducer = (state = { order: {} }, action) => {
       };
 
     case ORDER_DETAILS_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+    case ERRORS_CLEAR:
+      return {
+        ...state,
+        error: null,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export const usersOrdersReducer = (state = { orders: [] }, action) => {
+  switch (action.type) {
+    case OWN_ORDER_REQUEST:
+      return {
+        loading: true,
+      };
+
+    case OWN_ORDER_SUCCESS:
+      return {
+        loading: false,
+        myorders: action.payload,
+      };
+
+    case OWN_ORDER_FAIL:
       return {
         loading: false,
         error: action.payload,

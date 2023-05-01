@@ -20,6 +20,11 @@ import {
   ORDER_DETAILS_REQUEST,
   ORDER_DETAILS_FAIL,
   ORDER_DETAILS_SUCCESS,
+
+  //my order
+  OWN_ORDER_REQUEST,
+  OWN_ORDER_SUCCESS,
+  OWN_ORDER_FAIL,
 } from '../reducers/Orders/orderConstants';
 
 export const allOrdersAdmin = () => async (dispatch) => {
@@ -74,12 +79,28 @@ export const allOrderDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: ORDER_DETAILS_REQUEST });
 
-    const { data } = await axios.get(`/api/v1/order/${id}`);
+    const { data } = await axios.get(`/api/ord/order/${id}`);
 
     dispatch({ type: ORDER_DETAILS_SUCCESS, payload: data.order });
   } catch (error) {
     dispatch({
       type: ORDER_DETAILS_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+// My Orders
+export const myOrders = () => async (dispatch) => {
+  try {
+    dispatch({ type: OWN_ORDER_REQUEST });
+
+    const { data } = await axios.get('/api/ord/orders/me');
+
+    dispatch({ type: OWN_ORDER_SUCCESS, payload: data.orders });
+  } catch (error) {
+    dispatch({
+      type: OWN_ORDER_FAIL,
       payload: error.response.data.message,
     });
   }

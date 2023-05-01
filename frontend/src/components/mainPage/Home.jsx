@@ -21,6 +21,8 @@ const HomePage = () => {
   const dispatch = useDispatch();
   const { loading, error, products } = useSelector((state) => state.products);
 
+  const { categories } = useSelector((state) => state.categories);
+
   useEffect(() => {
     if (error) {
       return alert.error(error);
@@ -66,6 +68,14 @@ const HomePage = () => {
       margin: '0 auto',
       marginBottom: '10px',
     },
+    categoryContainer: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      justifContent: 'space-between',
+      gap: '20px',
+      margin: '0 auto',
+      maxWidth: '1200px',
+    },
   };
 
   return (
@@ -80,7 +90,16 @@ const HomePage = () => {
             <h2 className="h2" style={styles.h2}>
               Main Features
             </h2>
-            <Category />
+            <div
+              className="container"
+              id="container"
+              style={styles.categoryContainer}
+            >
+              {categories &&
+                categories.map((category) => (
+                  <Category category={category} key={category._id} />
+                ))}
+            </div>
           </StyledContainer>
           <h2 className="h2" style={styles.h2}>
             Products

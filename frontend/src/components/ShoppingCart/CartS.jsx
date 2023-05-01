@@ -57,7 +57,7 @@ export const CartS = () => {
           <RemoveShoppingCartIcon />
 
           <p>No Product in Your Cart</p>
-          <Link to="/home">View Products</Link>
+          <Link to="/allProducts">View Products</Link>
         </div>
       ) : (
         <Fragment>

@@ -56,18 +56,6 @@ const Description = styled('div')(({ theme }) => ({
   },
 }));
 
-const Slogan = styled('div')(({ theme }) => ({
-  fontSize: '16px',
-  fontWeight: 400,
-  color: '#333',
-  [theme.breakpoints.down('xs')]: {
-    fontSize: '9px',
-  },
-  [theme.breakpoints.down('sm')]: {
-    fontSize: '18px',
-  },
-}));
-
 const Image = styled('img')(({ src, theme }) => ({
   flex: 1,
   src: `url(${src})`,
@@ -111,7 +99,6 @@ const Feed = () => {
             <Wrapper>
               <Image src={product.img} />
               <BannerContent>
-                {/* <Slogan>Fresh, Local, Delivered</Slogan> */}
                 <Title variant="h2">{product.title}</Title>
                 <Description fontSize={{ xs: '9px', sm: '18px' }}>
                   {product.desc}

@@ -17,7 +17,7 @@ import UpdateCategory from './components/admin/Category/UpdateCategory';
 import { CategoryList } from './components/admin/Category/CategoryList';
 import { useEffect } from 'react';
 import { getAllCategory } from './reduxFeature/actions/categoryAction';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import store from './store';
 import { userLoad } from './reduxFeature/actions/userAction';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
@@ -29,20 +29,15 @@ import Navbar from './components/mainPage/HomePage/Navbar';
 import ResetPassword from './components/User/ResetPassword/ResetPassword';
 import Shipping from './components/ShippingAndChekout/Shipping';
 import OrderDetails from './components/ShippingAndChekout/OrderDetails';
-// import Productcard from './components/mainPage/Products/Productcard';
-// import StockPage from './components/admin/Stock/StockPage';
 import AddStock from './components/admin/Stock/AddStock';
 import { ProductsPage } from './components/mainPage/Products/ProductsPage';
-import UserOrder from './components/Orders/UserOrder';
+import UserOrder from './components/mainPage/Orders/UserOrder';
 import OrdersList from './components/admin/Orders/OrdersList';
-import KhaltiPayment from './components/KhaltiApi/KhaltiPayment';
-import Success from './components/Orders/Success';
+import Success from './components/mainPage/Orders/Success';
 import UpdateOrder from './components/admin/Orders/UpdateOrder';
 
 function App() {
   const dispatch = useDispatch();
-
-  const { isAuthenticated, user } = useSelector((state) => state.user);
 
   useEffect(() => {
     dispatch(getAllCategory());
@@ -62,17 +57,16 @@ function App() {
         <Route path="/allProducts" element={<ProductsPage />} />
         <Route path="/cart" element={<CartS />} />
         <Route path="/product/:id" element={<ProductDetails />} />
-        <Route element={<PrivateRoute isAuthenticated={isAuthenticated} />}>
-          <Route path="/account" element={<UserProfile />} exact />
-          <Route path="/update/profile" element={<UpdateProfile />} exact />
-          <Route path="/update/password" element={<UpdatePassword />} exact />
-          <Route path="/shipping" element={<Shipping />} />
-          <Route path="/order/details" element={<OrderDetails />} />
-          <Route path="/payment" element={<KhaltiPayment />} />
-          <Route path="/orders" element={<UserOrder />} />
-          <Route path="/order/success" element={<Success />} />
-        </Route>
-        <Route element={<PrivateRoute isAuthenticated={isAuthenticated} />}>
+        {/* <Route element={<PrivateRoute />}> */}
+        <Route path="/account" element={<UserProfile />} exact />
+        <Route path="/update/profile" element={<UpdateProfile />} exact />
+        <Route path="/update/password" element={<UpdatePassword />} exact />
+        <Route path="/shipping" element={<Shipping />} exact />
+        <Route path="/order/details" element={<OrderDetails />} exact />
+        <Route path="/myorder" element={<UserOrder />} exact />
+        <Route path="/order/success" element={<Success />} exact />
+        {/* </Route> */}
+        <Route element={<PrivateRoute isAdmin={true} />}>
           <Route path="/admin/dashboard" element={<Dashboard />} />
           <Route path="/admin/products" element={<AllProducts />} />
           <Route path="/admin/product" element={<CreateProduct />} />

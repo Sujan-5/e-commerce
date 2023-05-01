@@ -1,6 +1,5 @@
 import KhaltiCheckout from 'khalti-checkout-web';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 
 const KhaltiPayment = ({ order, cartItems, totalPrice }) => {
   let config = {
