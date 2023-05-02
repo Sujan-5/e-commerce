@@ -1,7 +1,6 @@
-import React from 'react';
-import { useAlert } from 'react-alert';
 import { useSelector } from 'react-redux';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { useNavigate, Outlet } from 'react-router-dom';
+import { useAlert } from 'react-alert';
 
 const PrivateRoute = ({ children, isAdmin }) => {
   const navigate = useNavigate();
@@ -9,16 +8,16 @@ const PrivateRoute = ({ children, isAdmin }) => {
 
   const { user, isAuthenticated } = useSelector((state) => state.user);
 
-  if (isAdmin === true && user?.role !== 'admin') {
+  if (user?.role !== 'admin' && isAdmin) {
     alert.error('Only Admin Can Access This Resource');
     return navigate('/');
   }
 
-  if (isAuthenticated === false) {
-    return navigate('/login');
+  if (isAdmin && user?.role === 'admin') {
+    return children ? children : <Outlet />;
   }
 
-  return children ? children : <Outlet />;
+  return null;
 };
 
 export default PrivateRoute;

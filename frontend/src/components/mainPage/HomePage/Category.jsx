@@ -6,7 +6,7 @@ const Category = ({ category }) => {
   const defaultImage = 'https://via.placeholder.com/250x250';
 
   return (
-    <Link className="categoryCard" to={`/category/${category._id}`}>
+    <Link className="categoryCard" to={`/category/${category.title}`}>
       {category.image && category.image.length > 0 ? (
         <img src={category.image[0]?.url} alt={category.title} />
       ) : (

@@ -31,13 +31,9 @@ export const getAllCategory = () => async (dispatch) => {
 
     const { data } = await axios.get('/api/v1/category/all');
 
-    // const categoryList = data;
-    // console.log(data);
-
     dispatch({
       type: CATEGORY_ALL_SUCCESS,
       payload: data,
-      // payload: { categories: categoryList },
     });
   } catch (error) {
     dispatch({

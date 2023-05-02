@@ -5,6 +5,7 @@ const {
   deleteCategory,
   getAllCategory,
   createCategory,
+  getCategoryProduct,
 } = require('../controllers/categoryController');
 const { isAuthenticatedUser, authorizeRoles } = require('../Middleware/authe');
 
@@ -24,11 +25,11 @@ router
   .delete(isAuthenticatedUser, authorizeRoles('admin'), deleteCategory);
 
 // Get all categories
-router
-  .route('/category/all')
-  .get(isAuthenticatedUser, authorizeRoles('admin'), getAllCategory);
+router.route('/category/all').get(getAllCategory);
 
 // Get a single category by ID
 router.route('/category/:id').get(getOneCategory);
+
+router.route('/category/products/:cat').get(getCategoryProduct);
 
 module.exports = router;

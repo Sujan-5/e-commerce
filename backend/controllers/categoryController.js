@@ -1,4 +1,5 @@
 const Category = require('../models/category');
+const Product = require('../models/product');
 const catchAsyncError = require('../Middleware/catchAsyncErrors');
 const cloudinary = require('cloudinary');
 const slugify = require('slugify');
@@ -75,6 +76,21 @@ exports.getAllCategory = catchAsyncError(async (req, res, next) => {
   try {
     const categories = await Category.find();
     res.send(categories);
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+  }
+});
+
+exports.getCategoryProduct = catchAsyncError(async (req, res, next) => {
+  try {
+    const category = new RegExp(req.params.cat, 'i');
+    const product = await Product.find({ category: category });
+
+    if (product == null) {
+      return res.status(404).send({ message: 'Category not found' });
+    }
+
+    return res.send(product);
   } catch (error) {
     res.status(500).send({ message: error.message });
   }

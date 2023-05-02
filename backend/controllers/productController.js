@@ -59,69 +59,6 @@ exports.newProduct = catchAsyncError(async (req, res, next) => {
   }
 });
 
-// exports.newProduct = catchAsyncError(async (req, res, next) => {
-//   let pImages = [];
-
-//   if (typeof req.body.images === 'string') {
-//     pImages.push(req.body.images);
-//   } else {
-//     pImages = req.body.images;
-//   }
-
-//   const productImages = [];
-
-//   for (let i = 0; i < pImages.length; i++) {
-//     const element = await cloudinary.v2.uploader.upload(pImages[i], {
-//       folder: 'products',
-//     });
-//     productImages.push({
-//       public_id: element.public_id,
-//       url: element.secure_url,
-//     });
-//   }
-
-//   req.body.images = productImages;
-//   req.body.user = req.user.id;
-
-//   const { name, price, description, category, stock, images } = req.body;
-
-//   const categoryDoc = await Category.findById(req.params.id);
-//   if (!categoryDoc) {
-//     return res.status(404).json({
-//       message: `Category not found`,
-//     });
-//   }
-
-//   // req.body.user = req.user.id;
-
-//   const product = new Product({
-//     name,
-//     slug: slugify(name),
-//     price,
-//     description,
-//     category: categoryDoc._id,
-//     stock,
-//     images,
-//     user: req.body.user,
-//   });
-
-//   try {
-//     const result = await product.save();
-//     res.status(201).json({
-//       success: true,
-//       product: result,
-//     });
-//   } catch (error) {
-//     console.error(error);
-//     res.status(400).json({
-//       message: 'Product creation failed',
-//       error: error,
-//     });
-//   }
-// });
-
-// try for stock
-
 exports.getProductId = catchAsyncError(async (req, res, next) => {
   try {
     const product = await Product.findById(req.params.id);
@@ -244,8 +181,6 @@ exports.updateProduct = catchAsyncError(async (req, res, next) => {
     { $set: req.body },
     { new: true }
   );
-
-  console.log(product);
 
   return res.status(200).json({
     product,

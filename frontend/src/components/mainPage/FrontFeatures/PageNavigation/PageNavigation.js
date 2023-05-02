@@ -1,7 +1,7 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 
-const PageNavigation = ({ title }) => {
+const PageNavigation = ({ title, category }) => {
   const styles = {
     wrapper: {
       height: '4rem',
@@ -20,11 +20,26 @@ const PageNavigation = ({ title }) => {
   };
 
   return (
+    // <div style={styles.wrapper}>
+    //   <NavLink to="/" style={styles.link}>
+    //     Home&nbsp;
+    //   </NavLink>{' '}
+    //   {'>'} {title}
+    // </div>
     <div style={styles.wrapper}>
       <NavLink to="/" style={styles.link}>
         Home&nbsp;
-      </NavLink>{' '}
-      {'>'} {title}
+      </NavLink>
+      {category && (
+        <>
+          {' > '}
+          <NavLink to={`/${category}`} style={styles.link}>
+            {category}
+          </NavLink>
+        </>
+      )}
+      {' > '}
+      {title}
     </div>
   );
 };

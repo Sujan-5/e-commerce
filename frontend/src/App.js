@@ -16,7 +16,6 @@ import Category from './components/admin/Category/Category';
 import UpdateCategory from './components/admin/Category/UpdateCategory';
 import { CategoryList } from './components/admin/Category/CategoryList';
 import { useEffect } from 'react';
-import { getAllCategory } from './reduxFeature/actions/categoryAction';
 import { useDispatch } from 'react-redux';
 import store from './store';
 import { userLoad } from './reduxFeature/actions/userAction';
@@ -35,6 +34,8 @@ import UserOrder from './components/mainPage/Orders/UserOrder';
 import OrdersList from './components/admin/Orders/OrdersList';
 import Success from './components/mainPage/Orders/Success';
 import UpdateOrder from './components/admin/Orders/UpdateOrder';
+import { getAllCategory } from './reduxFeature/actions/categoryAction';
+import CategoryCard from './components/mainPage/HomePage/CategoryCard';
 
 function App() {
   const dispatch = useDispatch();
@@ -65,6 +66,7 @@ function App() {
         <Route path="/order/details" element={<OrderDetails />} exact />
         <Route path="/myorder" element={<UserOrder />} exact />
         <Route path="/order/success" element={<Success />} exact />
+        <Route path="/category/:cat" element={<CategoryCard />} exact />
         {/* </Route> */}
         <Route element={<PrivateRoute isAdmin={true} />}>
           <Route path="/admin/dashboard" element={<Dashboard />} />

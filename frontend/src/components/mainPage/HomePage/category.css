@@ -130,3 +130,28 @@
 .categoryCard:hover .shopNowBtn {
   opacity: 1;
 }
+
+/***********************************************category card******************************************************************/
+
+.categoryProducts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  /* justify-content: space-between; */
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.categoryProducts h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  justify-content: center;
+}
+
+.categoryPContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
