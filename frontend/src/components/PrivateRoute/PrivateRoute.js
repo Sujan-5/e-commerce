@@ -1,14 +1,12 @@
-import { useSelector } from 'react-redux';
 import { useNavigate, Outlet } from 'react-router-dom';
 import { useAlert } from 'react-alert';
 import { useEffect } from 'react';
 
-const PrivateRoute = ({ children, isAdmin }) => {
+const PrivateRoute = ({ children, isAdmin, user, isAuthenticated }) => {
   const navigate = useNavigate();
   const alert = useAlert();
 
-  const { user, isAuthenticated } = useSelector((state) => state.user);
-  // console.log(state.user);
+  console.log(user, isAuthenticated);
 
   useEffect(() => {
     if (isAuthenticated === false) {

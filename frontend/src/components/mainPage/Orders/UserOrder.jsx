@@ -55,7 +55,7 @@ const UserOrder = () => {
       sortable: false,
       renderCell: (params) => {
         return (
-          <Link to={`/order/${params.getValue(params.id, 'id')}`}>
+          <Link to={`/myorder/details/${params.getValue(params.id, 'id')}`}>
             <LaunchIcon />
           </Link>
         );

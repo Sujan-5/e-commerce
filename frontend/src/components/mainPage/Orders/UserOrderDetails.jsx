@@ -1,8 +1,7 @@
 import React, { Fragment, useEffect } from 'react';
-import './orderDetails.css';
+import './userOrderDetails.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
-import { Typography } from '@material-ui/core';
 import Loader from '../FrontFeatures/Loading/Loader';
 import { useAlert } from 'react-alert';
 import {
@@ -32,21 +31,19 @@ const OrderDetails = () => {
         <Loader />
       ) : (
         <Fragment>
-          <div className="orderDetailsPage">
-            <div className="orderDetailsContainer">
+          <div className="userOrderDetailsPage">
+            <div className="userOrderDetails">
               <h1>Order #{order && order._id}</h1>
               <h2>Shipping Info</h2>
-              <div className="orderDetailsContainerBox">
+              <div className="userOrderDetailsBox">
                 <div>
                   <p>Name:</p>
                   <span>{order.user && order.user.firstName}</span>
                 </div>
-                {/* <div>
+                <div>
                   <p>Phone:</p>
-                  <span>
-                    {order.shippingInfo && order.shippingInfo.phoneNo}
-                  </span>
-                </div> */}
+                  <span>{order && order.contact}</span>
+                </div>
                 <div>
                   <p>Address:</p>
                   <span>
@@ -55,8 +52,8 @@ const OrderDetails = () => {
                   </span>
                 </div>
               </div>
-              <Typography>Payment</Typography>
-              <div className="orderDetailsContainerBox">
+              <h2>Payment</h2>
+              <div className="userOrderDetailsBox">
                 <div>
                   <p
                     className={
@@ -79,8 +76,8 @@ const OrderDetails = () => {
                 </div>
               </div>
 
-              <Typography>Order Status</Typography>
-              <div className="orderDetailsContainerBox">
+              <h2>Order Status</h2>
+              <div className="userOrderDetailsBox">
                 <div>
                   <p
                     className={
@@ -96,7 +93,7 @@ const OrderDetails = () => {
             </div>
 
             <div className="orderDetailsCartItems">
-              <Typography>Order Items:</Typography>
+              <h2>Order Items:</h2>
               <div className="orderDetailsCartItemsContainer">
                 {order.orderItems &&
                   order.orderItems.map((item) => (
@@ -106,8 +103,7 @@ const OrderDetails = () => {
                         {item.name}
                       </Link>{' '}
                       <span>
-                        {item.quantity} X ₹{item.price} ={' '}
-                        <b>₹{item.price * item.quantity}</b>
+                        {item.quantity} X ₹{item.price} = <b>₹{item.price}</b>
                       </span>
                     </div>
                   ))}

@@ -13,7 +13,6 @@ exports.createOrder = catchAsyncError(async (req, res, next) => {
     contact,
     orderItems,
     paymentInfo,
-
     totalPrice,
   } = req.body;
 
