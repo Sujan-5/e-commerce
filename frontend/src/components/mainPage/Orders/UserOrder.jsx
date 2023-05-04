@@ -87,14 +87,14 @@ const UserOrder = () => {
       {loading ? (
         <Loader />
       ) : (
-        <div className="myOrdersPage">
+        <div className="userOrderContainer">
           <h1 className="orderHead">My Orders</h1>
           <DataGrid
             rows={rows}
             columns={columns}
             pageSize={10}
             disableSelectionOnClick
-            className="myOrdersTable"
+            className="userOrdersTable"
             autoHeight
           />
         </div>

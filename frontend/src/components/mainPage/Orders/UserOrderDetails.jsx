@@ -5,7 +5,10 @@ import { Link, useParams } from 'react-router-dom';
 import { Typography } from '@material-ui/core';
 import Loader from '../FrontFeatures/Loading/Loader';
 import { useAlert } from 'react-alert';
-import { errorClear } from '../../../reduxFeature/actions/OrderAction';
+import {
+  allOrderDetails,
+  errorClear,
+} from '../../../reduxFeature/actions/OrderAction';
 
 const OrderDetails = () => {
   const params = useParams();
@@ -21,7 +24,7 @@ const OrderDetails = () => {
       dispatch(errorClear());
     }
 
-    dispatch(getOrderDetails(params.id));
+    dispatch(allOrderDetails(params.id));
   }, [dispatch, alert, error, params.id]);
   return (
     <Fragment>
@@ -31,10 +34,8 @@ const OrderDetails = () => {
         <Fragment>
           <div className="orderDetailsPage">
             <div className="orderDetailsContainer">
-              <Typography component="h1">
-                Order #{order && order._id}
-              </Typography>
-              <Typography>Shipping Info</Typography>
+              <h1>Order #{order && order._id}</h1>
+              <h2>Shipping Info</h2>
               <div className="orderDetailsContainerBox">
                 <div>
                   <p>Name:</p>

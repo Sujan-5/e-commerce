@@ -1,4 +1,4 @@
-.myOrdersPage {
+.userOrderContainer {
   width: 105vw;
 
   display: flex;
@@ -8,7 +8,7 @@
   height: 100vh;
 }
 
-.myOrdersTable {
+.userOrdersTable {
   font-family: Arial, sans-serif;
   background-color: #ffffff;
   border: 1px solid #dddddd;
@@ -19,13 +19,13 @@
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
 }
 
-.myOrdersTable th,
-.myOrdersTable td {
+.userOrdersTable th,
+.userOrdersTable td {
   padding: 12px;
   text-align: left;
 }
 
-.myOrdersTable th {
+.userOrdersTable th {
   background-color: #f5f5f5;
   font-weight: bold;
   color: #444444;
@@ -34,19 +34,19 @@
   border-bottom: 1px solid #dddddd;
 }
 
-.myOrdersTable td {
+.userOrdersTable td {
   border-bottom: 1px solid #dddddd;
 }
 
-.myOrdersTable .greenColor {
+.userOrdersTable .greenColor {
   color: green;
 }
 
-.myOrdersTable .redColor {
+.userOrdersTable .redColor {
   color: red;
 }
 
-.myOrdersTable a {
+.userOrdersTable a {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -60,32 +60,37 @@
   transition: background-color 0.3s ease;
 }
 
-.myOrdersTable a:hover {
+.userOrdersTable a:hover {
   background-color: #0062cc;
 }
 
-.myOrdersTable .MuiDataGrid-colCellWrapper {
+.userOrdersTable .MuiDataGrid-colCellWrapper {
   display: flex;
   align-items: center;
 }
 
-.myOrdersTable .MuiDataGrid-colCell {
+.userOrdersTable .MuiDataGrid-colCell {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 @media screen and (max-width: 768px) {
-  .myOrdersTable {
-    font-size: 14px;
+  .userOrderContainer {
+    padding: 0;
+    height: 93vh;
   }
 
-  .myOrdersTable th,
-  .myOrdersTable td {
+  .userOrdersTable {
+    font-size: 16px;
+  }
+
+  .userOrdersTable th,
+  .userOrdersTable td {
     padding: 8px;
   }
 
-  .myOrdersTable a {
+  .userOrdersTable a {
     font-size: 12px;
     height: 25px;
     max-width: 80px;

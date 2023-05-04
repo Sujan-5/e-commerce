@@ -188,51 +188,52 @@ const ProductDetails = () => {
               <button className="Review" onClick={submitReviewToggle}>
                 Review this product
               </button>
+              <Dialog
+                aria-labelledby="simple-dialog-title"
+                open={open}
+                onClose={submitReviewToggle}
+              >
+                <DialogTitle>Submit Review</DialogTitle>
+                <DialogContent className="submitDialog">
+                  <Rating
+                    onChange={(e) => setRating(e.target.value)}
+                    value={rating}
+                    size="large"
+                  />
+
+                  <textarea
+                    className="submitDialogTextArea"
+                    cols="30"
+                    rows="5"
+                    value={comment}
+                    onChange={(e) => setComment(e.target.value)}
+                  ></textarea>
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={submitReviewToggle} color="secondary">
+                    Cancel
+                  </Button>
+                  <Button onClick={reviewSubmitHandler} color="primary">
+                    Submit
+                  </Button>
+                </DialogActions>
+              </Dialog>
             </div>
           </div>
-          <h3 className="reviewHead">Ratings & Reviews</h3>
+          <div className="ReviewSection">
+            <h3 className="reviewHead">Ratings & Reviews</h3>
 
-          <Dialog
-            aria-labelledby="simple-dialog-title"
-            open={open}
-            onClose={submitReviewToggle}
-          >
-            <DialogTitle>Submit Review</DialogTitle>
-            <DialogContent className="submitDialog">
-              <Rating
-                onChange={(e) => setRating(e.target.value)}
-                value={rating}
-                size="large"
-              />
-
-              <textarea
-                className="submitDialogTextArea"
-                cols="30"
-                rows="5"
-                value={comment}
-                onChange={(e) => setComment(e.target.value)}
-              ></textarea>
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={submitReviewToggle} color="secondary">
-                Cancel
-              </Button>
-              <Button onClick={reviewSubmitHandler} color="primary">
-                Submit
-              </Button>
-            </DialogActions>
-          </Dialog>
-
-          {product.reviews && product.reviews[0] ? (
-            <div className="reviews">
-              {product.reviews &&
-                product.reviews.map((review) => (
-                  <ReviewSection key={review._id} review={review} />
-                ))}
-            </div>
-          ) : (
-            <p className="noReviews">No Reviews in this Product</p>
-          )}
+            {product.reviews && product.reviews[0] ? (
+              <div className="reviews">
+                {product.reviews &&
+                  product.reviews.map((review) => (
+                    <ReviewSection key={review._id} review={review} />
+                  ))}
+              </div>
+            ) : (
+              <p className="noReviews">No Reviews in this Product</p>
+            )}
+          </div>
         </Fragment>
       )}
     </Fragment>

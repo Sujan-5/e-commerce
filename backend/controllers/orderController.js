@@ -10,9 +10,10 @@ exports.createOrder = catchAsyncError(async (req, res, next) => {
     address,
     city,
     province,
+    contact,
     orderItems,
     paymentInfo,
-    itemPrice,
+
     totalPrice,
   } = req.body;
 
@@ -22,9 +23,9 @@ exports.createOrder = catchAsyncError(async (req, res, next) => {
     address,
     city,
     province,
+    contact,
     orderItems,
     paymentInfo,
-    itemPrice,
 
     totalPrice,
     paidAt: Date.now(),

@@ -1,14 +1,11 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import './orderDetails.css';
 import MultiSteps from './MultiSteps';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import KhaltiPayment from '../KhaltiApi/KhaltiPayment';
-import axios from 'axios';
 
 const OrderDetails = () => {
-  const navigate = useNavigate();
-
   const [order, setOrder] = useState('');
 
   const { shippingDetails, cartItems } = useSelector((state) => state.cart);
@@ -35,10 +32,11 @@ const OrderDetails = () => {
       city: shippingDetails.city,
       province: shippingDetails.province,
       contact: shippingDetails.contact,
-
       orderItems: cartItems,
 
+      shippingPrice: shippingCharges,
       totalPrice: totalPrice,
+
       orderStatus: 'processing',
     };
     console.log('check', orderObject);
@@ -113,7 +111,11 @@ const OrderDetails = () => {
                 <span>Rs. {totalPrice}</span>
               </div>
               {/* <button onClick={handleOrder}>pay</button> */}
-              <KhaltiPayment order={order} cartItems={cartItems} totalPrice={totalPrice} />
+              <KhaltiPayment
+                order={order}
+                cartItems={cartItems}
+                totalPrice={totalPrice}
+              />
             </div>
           </div>
         </div>

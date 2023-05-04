@@ -12,41 +12,32 @@ const KhaltiPayment = ({ order, cartItems, totalPrice }) => {
       async onSuccess(payload) {
         // hit merchant api for initiating verfication
         console.log(payload);
+        order.orderItems = JSON.stringify(cartItems);
         const ord = {
           ...order,
-          paymentInfo: { id: payload.idx, status: 'succeed' },
-        };
 
+          paymentInfo: { id: payload.idx, status: 'succeed' },
+          type: 'multipart/form-data',
+        };
+        console.log(ord);
         try {
-          const config = { headers: { 'Content-Type': 'multipart/form-data' } };
-          order.orderItems = JSON.stringify(cartItems);
+          const config = { headers: { 'Content-Type': 'application/json' } };
+
           const { data } = await axios.post(
             `/api/ord/order/create`,
-            order,
+            ord,
             config
           );
-
-          //Update stock and remove item from cart
-          console.log('Updating stock and removing item from cart');
-          console.log('cartItems before update: ', cartItems);
-          console.log('order.orderItems[0]: ', order.orderItems[0]);
+          console.log(data);
 
           cartItems.forEach((item, index) => {
             if (item.productId === ord.orderItems[0].productId) {
-              console.log('item before update: ', item);
-              console.log(
-                'quantity to subtract: ',
-                order.orderItems[0].quantity
-              );
               item.stock -= order.orderItems[0].quantity;
-              console.log('item after update: ', item);
-              // const index = cartItems.findIndex(
-              //   (cartItem) => cartItem.productId === item.productId
-              // );
+
               cartItems.splice(index, 1);
             }
           });
-          console.log('cartItems after update: ', cartItems);
+
           localStorage.setItem('cartItems', JSON.stringify(cartItems));
           // redirect to success page
           window.location.href = '/order/success';

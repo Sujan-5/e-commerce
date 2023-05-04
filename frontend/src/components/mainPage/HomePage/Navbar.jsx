@@ -30,6 +30,7 @@ const FlexBetween = styled(Box)({
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
+  position: 'sticky',
 });
 
 const Text = styled('div')`
@@ -286,7 +287,7 @@ const Navbar = () => {
                     </Link>
                   ) : (
                     <Link
-                      to="/dashboard"
+                      to="/admin/dashboard"
                       style={{ textDecoration: 'none', color: 'black' }}
                     >
                       {' '}
