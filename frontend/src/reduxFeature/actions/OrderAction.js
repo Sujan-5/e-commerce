@@ -9,11 +9,6 @@ import {
   ORDER_UPDATE_REQUEST,
   ORDER_UPDATE_SUCCESS,
   ORDER_UPDATE_FAIL,
-
-  //delete order
-  ORDER_DELETE_REQUEST,
-  ORDER_DELETE_SUCCESS,
-  ORDER_DELETE_FAIL,
   ERRORS_CLEAR,
 
   //details
@@ -59,20 +54,20 @@ export const updateOrdersAdmin = (id, order) => async (dispatch) => {
   }
 };
 
-export const deleteOrdersAdmin = (id) => async (dispatch) => {
-  try {
-    dispatch({ type: ORDER_DELETE_REQUEST });
+// export const deleteOrdersAdmin = (id) => async (dispatch) => {
+//   try {
+//     dispatch({ type: ORDER_DELETE_REQUEST });
 
-    const { data } = await axios.delete(`/api/ord/admin/order/${id}`);
+//     const { data } = await axios.delete(`/api/ord/admin/order/${id}`);
 
-    dispatch({ type: ORDER_DELETE_SUCCESS, payload: data.success });
-  } catch (error) {
-    dispatch({
-      type: ORDER_DELETE_FAIL,
-      payload: error.response.data.message,
-    });
-  }
-};
+//     dispatch({ type: ORDER_DELETE_SUCCESS, payload: data.success });
+//   } catch (error) {
+//     dispatch({
+//       type: ORDER_DELETE_FAIL,
+//       payload: error.response.data.message,
+//     });
+//   }
+// };
 
 // Get Order Details
 export const allOrderDetails = (id) => async (dispatch) => {

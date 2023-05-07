@@ -18,6 +18,16 @@ import {
   LOGOUT_SUCCESS,
   LOGOUT_FAIL,
 
+  //user list
+  USER_LIST_REQUEST,
+  USER_LIST_SUCCESS,
+  USER_LIST_FAIL,
+
+  //admin -- user details
+  USER_DETAILS_REQUEST,
+  USER_DETAILS_SUCCESS,
+  USER_DETAILS_FAIL,
+
   //error
   ERROR_CLEAR,
 } from './userConstants';
@@ -77,6 +87,71 @@ export const userReducer = (state = { user: {} }, action) => {
         ...state,
         error: null,
       };
+    default:
+      return state;
+  }
+};
+
+export const usersListReducer = (state = { users: [] }, action) => {
+  switch (action.type) {
+    case USER_LIST_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case USER_LIST_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        users: action.payload,
+      };
+
+    case USER_LIST_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+
+    case ERROR_CLEAR:
+      return {
+        ...state,
+        error: null,
+      };
+
+    default:
+      return state;
+  }
+};
+
+//admin
+export const userDetailsReducer = (state = { user: {} }, action) => {
+  switch (action.type) {
+    case USER_DETAILS_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case USER_DETAILS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        user: action.payload,
+      };
+
+    case USER_DETAILS_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+
+    case ERROR_CLEAR:
+      return {
+        ...state,
+        error: null,
+      };
+
     default:
       return state;
   }

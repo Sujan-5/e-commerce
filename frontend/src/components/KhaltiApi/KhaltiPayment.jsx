@@ -16,7 +16,7 @@ const KhaltiPayment = ({ order, cartItems, totalPrice }) => {
         const ord = {
           ...order,
 
-          paymentInfo: { id: payload.idx, status: 'succeed' },
+          paymentInfo: { id: payload.idx, status: 'succeeded' },
           type: 'multipart/form-data',
         };
         console.log(ord);

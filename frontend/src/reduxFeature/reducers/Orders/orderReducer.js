@@ -9,12 +9,6 @@ import {
   ORDER_UPDATE_SUCCESS,
   ORDER_UPDATE_RESET,
   ORDER_UPDATE_FAIL,
-
-  //delete order
-  ORDER_DELETE_REQUEST,
-  ORDER_DELETE_SUCCESS,
-  ORDER_DELETE_RESET,
-  ORDER_DELETE_FAIL,
   ERRORS_CLEAR,
 
   //details
@@ -54,10 +48,9 @@ export const adminOrdersReducer = (state = { orders: [] }, action) => {
   }
 };
 
-export const upAndDelOrdersReducer = (state = {}, action) => {
+export const updateOrdersReducer = (state = {}, action) => {
   switch (action.type) {
     case ORDER_UPDATE_REQUEST:
-    case ORDER_DELETE_REQUEST:
       return {
         ...state,
         loading: true,
@@ -68,14 +61,8 @@ export const upAndDelOrdersReducer = (state = {}, action) => {
         loading: false,
         isUpdated: action.payload,
       };
-    case ORDER_DELETE_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        isDeleted: action.payload,
-      };
+
     case ORDER_UPDATE_FAIL:
-    case ORDER_DELETE_FAIL:
       return {
         ...state,
         loading: false,
@@ -87,11 +74,7 @@ export const upAndDelOrdersReducer = (state = {}, action) => {
         ...state,
         isUpdated: false,
       };
-    case ORDER_DELETE_RESET:
-      return {
-        ...state,
-        isDeleted: false,
-      };
+
     case ERRORS_CLEAR:
       return {
         ...state,

@@ -26,6 +26,7 @@ export const Dashboard = () => {
   // const dispatch = useDispatch();
 
   const { products } = useSelector((state) => state.products);
+  const { orders } = useSelector((state) => state.orders);
 
   return (
     <div className="dashboard">
@@ -77,7 +78,10 @@ export const Dashboard = () => {
                 />
                 Orders
               </p>
-              <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1</p>
+              <p>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                {orders && orders.length}
+              </p>
             </Link>
             <Link to="/admin/users">
               <p>

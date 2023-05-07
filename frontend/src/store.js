@@ -19,7 +19,11 @@ import {
 } from './reduxFeature/reducers/category/categoryReducer';
 
 //user
-import { userReducer } from './reduxFeature/reducers/Users/userReducer';
+import {
+  userDetailsReducer,
+  userReducer,
+  usersListReducer,
+} from './reduxFeature/reducers/Users/userReducer';
 import {
   accountReducer,
   passwordForgotReducer,
@@ -31,7 +35,7 @@ import {
   adminOrdersReducer,
   usersOrdersReducer,
   orderDetailsReducer,
-  upAndDelOrdersReducer,
+  updateOrdersReducer,
 } from './reduxFeature/reducers/Orders/orderReducer';
 
 const reducer = combineReducers({
@@ -44,7 +48,7 @@ const reducer = combineReducers({
 
   //orders
   orders: adminOrdersReducer,
-  order: upAndDelOrdersReducer,
+  order: updateOrdersReducer,
   orderDetails: orderDetailsReducer,
   myOrders: usersOrdersReducer,
 
@@ -58,6 +62,8 @@ const reducer = combineReducers({
   user: userReducer,
   account: accountReducer,
   forgotPassword: passwordForgotReducer,
+  userList: usersListReducer,
+  userDetails: userDetailsReducer,
 
   //cart
   cart: cartReducer,

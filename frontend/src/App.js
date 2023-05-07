@@ -37,6 +37,7 @@ import UpdateOrder from './components/admin/Orders/UpdateOrder';
 import { getAllCategory } from './reduxFeature/actions/categoryAction';
 import CategoryCard from './components/mainPage/HomePage/CategoryCard';
 import UserOrderDetails from './components/mainPage/Orders/UserOrderDetails';
+import UpdateUser from './components/admin/Users/UpdateUser';
 
 function App() {
   const dispatch = useDispatch();
@@ -80,6 +81,7 @@ function App() {
         <Route path="/admin/product" element={<CreateProduct />} />
         <Route path="/admin/orders" element={<OrdersList />} />
         <Route path="/admin/users" element={<AllUsers />} />
+        <Route path="/admin/user/:id" element={<UpdateUser />} />
         <Route path="/admin/reviews" element={<ProductReviews />} />
         <Route path="/admin/category" element={<Category />} />
         <Route path="/admin/categories" element={<CategoryList />} />

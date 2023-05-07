@@ -2,19 +2,17 @@ import React, { Fragment, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { LeftSidebar } from '../LeftSidebar';
 import { DataGrid } from '@material-ui/data-grid';
-import { Button } from '@material-ui/core';
+
 import EditIcon from '@material-ui/icons/Edit';
-import DeleteIcon from '@material-ui/icons/Delete';
+
 import { useSelector, useDispatch } from 'react-redux';
 import {
   allOrdersAdmin,
   // updateOrdersAdmin,
-  deleteOrdersAdmin,
   errorClear,
 } from '../../../reduxFeature/actions/OrderAction';
 import './orders.css';
 import { useAlert } from 'react-alert';
-import { ORDER_DELETE_RESET } from '../../../reduxFeature/reducers/Orders/orderConstants';
 
 export const OrdersList = () => {
   const dispatch = useDispatch();
@@ -23,11 +21,6 @@ export const OrdersList = () => {
   const alert = useAlert();
 
   const { error, orders } = useSelector((state) => state.orders);
-  const { error: deleteError, isDeleted } = useSelector((state) => state.order);
-
-  const deleteOrderHandler = (id) => {
-    dispatch(deleteOrdersAdmin(id));
-  };
 
   useEffect(() => {
     if (error) {
@@ -35,19 +28,8 @@ export const OrdersList = () => {
       dispatch(errorClear());
     }
 
-    if (deleteError) {
-      alert.error(deleteError);
-      dispatch(errorClear());
-    }
-
-    if (isDeleted) {
-      alert.success('Order Deleted Successfully');
-      navigate('/admin/orders');
-      dispatch({ type: ORDER_DELETE_RESET });
-    }
-
     dispatch(allOrdersAdmin());
-  }, [dispatch, alert, error, deleteError, navigate, isDeleted]);
+  }, [dispatch, alert, error, navigate]);
 
   const columns = [
     {
@@ -98,14 +80,6 @@ export const OrdersList = () => {
             >
               <EditIcon />
             </Link>
-
-            <Button
-              onClick={() =>
-                deleteOrderHandler(params.getValue(params.id, 'id'))
-              }
-            >
-              <DeleteIcon />
-            </Button>
           </Fragment>
         );
       },
