@@ -305,6 +305,23 @@ exports.getUser = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
+// update User Role -- Admin
+exports.updateUserRole = catchAsyncErrors(async (req, res, next) => {
+  const newUserData = {
+    role: req.body.role,
+  };
+
+  await User.findByIdAndUpdate(req.params.id, newUserData, {
+    new: true,
+    runValidators: true,
+    useFindAndModify: false,
+  });
+
+  res.status(200).json({
+    success: true,
+  });
+});
+
 //delete user
 exports.getDeleteUser = catchAsyncErrors(async (req, res, next) => {
   const user = await User.findById(req.params.id);

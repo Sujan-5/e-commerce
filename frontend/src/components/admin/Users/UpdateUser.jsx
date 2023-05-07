@@ -6,7 +6,7 @@ import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
 import { LeftSidebar } from '../LeftSidebar';
 import { USER_UPDATE_RESET } from '../../../reduxFeature/reducers/Users/userConstants';
 import { useNavigate, useParams } from 'react-router-dom';
-
+import './update.css';
 import Loader from '../../mainPage/FrontFeatures/Loading/Loader';
 import {
   errorClear,
@@ -26,7 +26,7 @@ const UpdateUser = () => {
     loading: updateLoading,
     error: updateError,
     isUpdated,
-  } = useSelector((state) => state.profile);
+  } = useSelector((state) => state.account);
 
   const [role, setRole] = useState('');
 
@@ -69,15 +69,12 @@ const UpdateUser = () => {
     <Fragment>
       <div className="dashboard">
         <LeftSidebar />
-        <div className="newProductContainer">
+        <div className="newroleContainer">
           {loading ? (
             <Loader />
           ) : (
-            <form
-              className="createProductForm"
-              onSubmit={updateUserSubmitHandler}
-            >
-              <h1>Update User</h1>
+            <form className="createUserRole" onSubmit={updateUserSubmitHandler}>
+              <h1>Update User Role</h1>
 
               <div>
                 <VerifiedUserIcon />
@@ -89,7 +86,7 @@ const UpdateUser = () => {
               </div>
 
               <Button
-                id="createProductBtn"
+                id="roleUserBtn"
                 type="submit"
                 disabled={
                   updateLoading ? true : false || role === '' ? true : false
