@@ -117,15 +117,17 @@ export const AllProducts = ({ history }) => {
   const rows = [];
 
   products &&
-    products.forEach((prod) => {
-      rows.push({
-        id: counter++,
-        stock: prod.stock,
-        price: prod.price,
-        name: prod.name,
-        productId: prod._id,
+    products
+      .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+      .forEach((prod) => {
+        rows.push({
+          id: counter++,
+          stock: prod.stock,
+          price: prod.price,
+          name: prod.name,
+          productId: prod._id,
+        });
       });
-    });
 
   return (
     <Fragment>

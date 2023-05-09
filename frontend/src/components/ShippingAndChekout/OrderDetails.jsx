@@ -115,6 +115,7 @@ const OrderDetails = () => {
                 order={order}
                 cartItems={cartItems}
                 totalPrice={totalPrice}
+                user={user}
               />
             </div>
           </div>

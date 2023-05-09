@@ -22,6 +22,7 @@
 .productcontainer > a {
   text-decoration: none;
   width: 7%;
+  margin-bottom: 5px;
 }
 
 .productcontainer > a > button {

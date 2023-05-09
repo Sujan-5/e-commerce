@@ -89,14 +89,16 @@ export const OrdersList = () => {
   const rows = [];
 
   orders &&
-    orders.forEach((item) => {
-      rows.push({
-        id: item._id,
-        items_quantity: item.orderItems.length,
-        amount: item.totalPrice,
-        status: item.orderStatus,
+    orders
+      .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+      .forEach((item) => {
+        rows.push({
+          id: item._id,
+          items_quantity: item.orderItems.length,
+          amount: item.totalPrice,
+          status: item.orderStatus,
+        });
       });
-    });
 
   return (
     <Fragment>

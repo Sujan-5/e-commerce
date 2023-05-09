@@ -31,6 +31,11 @@ const Shipping = () => {
   const handleShippingSubmit = (e) => {
     e.preventDefault();
 
+    if (user && user.role === 'admin') {
+      alert.error('You are not authorized to order items.');
+      return;
+    }
+
     if (contact.length < 10 || contact.length > 10) {
       alert.error('Phone number should be 10 digits long');
       return;

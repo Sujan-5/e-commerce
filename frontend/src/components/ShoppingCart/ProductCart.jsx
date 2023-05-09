@@ -8,16 +8,16 @@ const ProductCart = ({ item, deleteCartItems }) => {
     <div className="bottom">
       <img className="productimage" src={item?.image} alt="ssa" />
       <div className="productCartdetails">
-        <Link tp={`/product/${item.product}`} className="productName">
+        <Link to={`/product/${item.product}`} className="productName">
           {item.name}
         </Link>
-        <span className="productPrice">{`Price: Rs${item.price}`}</span>
-        <p
+        <span className="productPrice">{`Price: Rs ${item.price}`}</span>
+        {/* <p
           onClick={() => deleteCartItems(item.product)}
           className="cartdeleteButton"
         >
           <DeleteOutlineIcon sx={{ color: 'red', width: '50px' }} />
-        </p>
+        </p> */}
       </div>
     </div>
   );

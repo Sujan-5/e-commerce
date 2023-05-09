@@ -224,7 +224,11 @@ const Signup = () => {
                 <div className="aregister">
                   <span className="aregister_span">
                     Already Register?{' '}
-                    <Link className="alogin" to="/login">
+                    <Link
+                      className="alogin"
+                      to="/login"
+                      style={{ textDecoration: 'none' }}
+                    >
                       Login Now
                     </Link>
                   </span>

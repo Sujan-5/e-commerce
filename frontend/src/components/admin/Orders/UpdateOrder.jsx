@@ -159,7 +159,7 @@ const UpdateOrder = () => {
                   <div>
                     <AccountTreeIcon />
                     <select onChange={(e) => setStatus(e.target.value)}>
-                      <option value="">Choose Category</option>
+                      <option value="">Choose Action</option>
                       {order.orderStatus === 'Processing' && (
                         <option value="Shipped">Shipped</option>
                       )}

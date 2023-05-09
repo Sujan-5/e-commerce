@@ -93,14 +93,16 @@ export const CategoryList = () => {
   const rows = [];
 
   categories &&
-    categories.forEach((cate) => {
-      rows.push({
-        id: counter++,
-        title: cate.title,
-        slug: cate.slug,
-        categoryId: cate._id,
+    categories
+      .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+      .forEach((cate) => {
+        rows.push({
+          id: counter++,
+          title: cate.title,
+          slug: cate.slug,
+          categoryId: cate._id,
+        });
       });
-    });
 
   return (
     <Fragment>

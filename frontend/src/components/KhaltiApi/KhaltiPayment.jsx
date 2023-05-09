@@ -1,7 +1,10 @@
 import KhaltiCheckout from 'khalti-checkout-web';
 import axios from 'axios';
+import { useAlert } from 'react-alert';
 
-const KhaltiPayment = ({ order, cartItems, totalPrice }) => {
+const KhaltiPayment = ({ order, cartItems, totalPrice, user }) => {
+  const alert = useAlert();
+
   let config = {
     // replace this key with yours
     publicKey: 'test_public_key_c2096a11f2e14e6890e19eeab87e78c1',
@@ -40,6 +43,7 @@ const KhaltiPayment = ({ order, cartItems, totalPrice }) => {
 
           localStorage.setItem('cartItems', JSON.stringify(cartItems));
           // redirect to success page
+
           window.location.href = '/order/success';
         } catch (error) {
           console.log(error);
@@ -65,6 +69,10 @@ const KhaltiPayment = ({ order, cartItems, totalPrice }) => {
   const wholeTotal = totalPrice * 100;
 
   const handleCheckout = () => {
+    if (user.role === 'admin') {
+      alert.error('You are not authorized to order items.');
+      return;
+    }
     checkout.show({ amount: wholeTotal });
   };
 

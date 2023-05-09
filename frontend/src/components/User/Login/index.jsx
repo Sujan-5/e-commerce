@@ -89,7 +89,11 @@ const Login = () => {
                 <div className="aregister">
                   <span className="aregister_span">
                     New Here?{' '}
-                    <Link className="alogin" to="/signup">
+                    <Link
+                      className="alogin"
+                      to="/signup"
+                      style={{ textDecoration: 'none' }}
+                    >
                       SignUp
                     </Link>
                   </span>

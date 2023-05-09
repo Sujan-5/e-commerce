@@ -88,7 +88,7 @@ const UserProfile = () => {
                 </Link>
               </div>
               <div className="buttons">
-                <Link to="/orders">My Orders</Link>
+                <Link to="/myorder">My Orders</Link>
                 <Link to="/update/password">Change Password</Link>
               </div>
             </div>

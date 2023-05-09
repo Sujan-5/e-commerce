@@ -48,7 +48,7 @@ const OrderDetails = () => {
                   <p>Address:</p>
                   <span>
                     {order &&
-                      `${order.address}, ${order.city}, ${order.province}}`}
+                      `${order.address}, ${order.city}, ${order.province}`}
                   </span>
                 </div>
               </div>

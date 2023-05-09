@@ -43,9 +43,13 @@ export const CartS = () => {
 
   const checkOutHandler = () => {
     if (user) {
+      if (user.role === 'admin') {
+        alert.error('You are not authorized to order items.');
+        return;
+      }
       navigate('/shipping');
     } else {
-      alert.error('Please Login to access this resouces');
+      alert.error('Please login to access this resource');
       navigate('/login');
     }
   };
@@ -71,7 +75,6 @@ export const CartS = () => {
             <div className="cartheading">
               <p>Product</p>
               <p>Quantity</p>
-              <p>SubTotal</p>
             </div>
 
             {cartItems &&

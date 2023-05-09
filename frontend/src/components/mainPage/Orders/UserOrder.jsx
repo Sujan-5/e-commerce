@@ -20,6 +20,13 @@ const UserOrder = () => {
 
   const columns = [
     {
+      field: 'name',
+      headerName: 'Product Name',
+      type: 'text',
+      minWidth: 150,
+      flex: 0.2,
+    },
+    {
       field: 'status',
       headerName: 'Status',
       minWidth: 150,
@@ -35,7 +42,7 @@ const UserOrder = () => {
       headerName: 'Items Qty',
       type: 'number',
       minWidth: 150,
-      flex: 0.25,
+      flex: 0.2,
     },
 
     {
@@ -64,14 +71,21 @@ const UserOrder = () => {
   ];
   const rows = [];
   myorders &&
-    myorders.forEach((item, index) => {
-      rows.push({
-        itemsQty: item.orderItems.length,
-        id: item._id,
-        status: item.orderStatus,
-        amount: item.totalPrice,
+    myorders
+      .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+      .forEach((item, index) => {
+        const itemNames = item.orderItems.map((orderItem) => orderItem.name);
+        const nameString = itemNames.join(', ');
+        rows.push({
+          itemsQty: item.orderItems.length,
+          id: item._id,
+          name: nameString,
+          status: item.orderStatus,
+          amount: item.totalPrice,
+        });
       });
-    });
+
+  console.log();
 
   useEffect(() => {
     if (error) {

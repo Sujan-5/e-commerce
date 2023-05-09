@@ -109,14 +109,16 @@ export const AllUser = () => {
   const rows = [];
 
   users &&
-    users.forEach((item) => {
-      rows.push({
-        id: item._id,
-        role: item.role,
-        email: item.email,
-        name: item.firstName,
+    users
+      .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+      .forEach((item) => {
+        rows.push({
+          id: item._id,
+          role: item.role,
+          email: item.email,
+          name: item.firstName,
+        });
       });
-    });
 
   return (
     <Fragment>

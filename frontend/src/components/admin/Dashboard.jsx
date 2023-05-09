@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { LeftSidebar } from './LeftSidebar';
 import './dashboard.css';
 import { Link } from 'react-router-dom';
@@ -6,27 +6,44 @@ import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
 import PeopleIcon from '@mui/icons-material/People';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Line } from 'react-chartjs-2';
 import { Chart, registerables } from 'chart.js';
+import { getAdminProduct } from '../../reduxFeature/actions/productAction';
+import { allOrdersAdmin } from '../../reduxFeature/actions/OrderAction';
+import { usersList } from '../../reduxFeature/actions/userAction';
 
 export const Dashboard = () => {
   Chart.register(...registerables);
+
+  const dispatch = useDispatch();
+
+  const { products } = useSelector((state) => state.products);
+  const { orders } = useSelector((state) => state.orders);
+  const { users } = useSelector((state) => state.userList);
+
+  useEffect(() => {
+    dispatch(getAdminProduct());
+    dispatch(allOrdersAdmin());
+    dispatch(usersList());
+  }, [dispatch]);
+
+  let revenue = 0;
+  orders &&
+    orders.forEach((item) => {
+      revenue += item.totalPrice;
+    });
+
   const lineState = {
     labels: ['Initial Amount', 'Amount Earned'],
     datasets: [
       {
         label: 'Total Amount',
         backgroundColor: ['Black'],
-        data: [0, 4000],
+        data: [0, revenue],
       },
     ],
   };
-
-  // const dispatch = useDispatch();
-
-  const { products } = useSelector((state) => state.products);
-  const { orders } = useSelector((state) => state.orders);
 
   return (
     <div className="dashboard">
@@ -47,7 +64,12 @@ export const Dashboard = () => {
                 />
                 Revenue{' '}
               </p>
-              <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rs. 1 </p>
+              <p>
+                {' '}
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rs. {
+                  revenue
+                }{' '}
+              </p>
             </Link>
             <Link to="/admin/products">
               <p>
@@ -95,7 +117,10 @@ export const Dashboard = () => {
                 />
                 Users
               </p>
-              <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1</p>
+              <p>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{' '}
+                {users && users.length}
+              </p>
             </Link>
           </div>
         </div>
