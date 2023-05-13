@@ -7,13 +7,13 @@ import {
 } from '../../../reduxFeature/actions/productAction';
 import Loader from '../FrontFeatures/Loading/Loader';
 import Product from './Productcard';
-import PageNavigation from '../FrontFeatures/PageNavigation/PageNavigation';
-// import { useParams } from 'react-router-dom';
-// import RangeSlider from '@material-ui/core/Slider';
+
 import Pagination from 'react-js-pagination';
+import { useParams } from 'react-router-dom';
 
 export const ProductsPage = () => {
   const dispatch = useDispatch();
+  const params = useParams();
 
   const [currentPage, setCurrentPage] = useState(1);
   const [price, setPrice] = useState([0, 2000]);
@@ -36,13 +36,15 @@ export const ProductsPage = () => {
     setMaxPrice(event.target.value);
   };
 
-  const { loading, products, error, productsCount, resPerPage } = useSelector(
+  const { loading, products, productsCount, resPerPage } = useSelector(
     (state) => state.products
   );
 
+  const keyword = params.search;
+
   useEffect(() => {
-    dispatch(getProduct(currentPage, minPrice, maxPrice));
-  }, [dispatch, currentPage, minPrice, maxPrice]);
+    dispatch(getProduct(keyword, currentPage, minPrice, maxPrice));
+  }, [dispatch, keyword, currentPage, minPrice, maxPrice]);
 
   return (
     <Fragment>
@@ -50,6 +52,9 @@ export const ProductsPage = () => {
         <Loader />
       ) : (
         <Fragment>
+          <div className="wrapper">
+            {/* <PageNavigation title={product.name} /> */}
+          </div>
           <h2 className="productsHeading">Products</h2>
           <div className="productContainer">
             {products &&

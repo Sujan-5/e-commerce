@@ -1,32 +1,50 @@
-import React, { useState } from 'react';
-import { IconButton, InputBase } from '@mui/material';
-import { Search } from '@mui/icons-material';
-import { useNavigate } from 'react-router-dom';
+import React, { Fragment, useEffect, useState } from 'react';
+
+import Productcard from '../Products/Productcard';
+import { useParams } from 'react-router-dom';
+
+import axios from 'axios';
 
 const SearchFilter = () => {
-  const navigate = useNavigate();
+  const params = useParams();
+  const keyword = params.search;
+  const [productList, setProductList] = useState();
 
-  const [keyword, setKeyword] = useState('');
-
-  const searchHandler = (e) => {
-    e.preventDefault();
-    if (keyword.trim()) {
-      navigate(`/search/${keyword}`);
-    } else {
-      navigate('/');
-    }
-  };
+  useEffect(() => {
+    const getSearch = async () => {
+      try {
+        const { data } = await axios.get(
+          `http://localhost:8080/api/v1/products?keyword=${keyword}`
+        );
+        console.log(data.products);
+        setProductList(data.products);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getSearch();
+  }, [keyword]);
 
   return (
-    <form onSubmit={searchHandler}>
-      <InputBase
-        placeholder="Search..."
-        onChange={(e) => setKeyword(e.target.value)}
-      />
-      <IconButton>
-        <Search />
-      </IconButton>
-    </form>
+    <Fragment>
+      <div>
+        <h2 className="productsHeading">Products</h2>
+        <div
+          style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            padding: '0 5vmax',
+            justifyContent: 'center',
+            minHeight: '30vh',
+          }}
+        >
+          {productList &&
+            productList.map((product) => (
+              <Productcard key={product._id} product={product} />
+            ))}
+        </div>
+      </div>
+    </Fragment>
   );
 };
 

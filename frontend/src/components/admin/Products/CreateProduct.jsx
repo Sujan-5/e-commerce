@@ -115,7 +115,15 @@ const CreateProduct = () => {
                 type="text"
                 placeholder="Product Name"
                 value={name}
-                onChange={(e) => setName(e.target.value)}
+                // maxLength={100}
+                onChange={(e) => {
+                  if (e.target.value.length > 100) {
+                    alert.error('Product name cannot exceed 100 characters');
+                  } else {
+                    setName(e.target.value);
+                  }
+                }}
+                // onChange={(e) => setName(e.target.value)}
               />
             </div>
             <div>

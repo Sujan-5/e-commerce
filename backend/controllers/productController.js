@@ -117,7 +117,7 @@ exports.updateProductStock = catchAsyncError(async (req, res, next) => {
 
 //Get all products => /api/v1/products **************************************************************************************************************
 exports.getProducts = catchAsyncError(async (req, res, next) => {
-  const resPerPage = 2;
+  const resPerPage = 3;
   const productsCount = await Product.countDocuments();
   const keyFeature = new features(Product.find(), req.query)
     .search()

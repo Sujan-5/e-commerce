@@ -14,7 +14,6 @@ import FaceIcon from '@material-ui/icons/Face';
 const Signup = () => {
   const dispatch = useDispatch();
   const alert = useAlert();
-  const [setError] = useState();
 
   const { error, loading, success } = useSelector((state) => state.user);
 
@@ -42,6 +41,7 @@ const Signup = () => {
 
   const [avatar, setAvatar] = useState('/profile.png');
   const [avatarPreview, setAvatarPreview] = useState('/profile.png');
+  const [passwordError, setPasswordError] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -54,17 +54,26 @@ const Signup = () => {
     form.set('password', password);
     form.set('confirmPassword', confirmPassword);
     form.set('avatar', avatar);
-    dispatch(register(form));
+    // dispatch(register(form));
 
     if (password !== confirmPassword) {
-      setError('Password does not match');
-    } else {
-      resetFormData();
+      setPasswordError('Password does not match');
+      return;
     }
 
     if (contact.length < 10 || contact.length > 10) {
       alert.error('Phone Number should be 10 digits Long');
       return;
+    }
+
+    try {
+      await dispatch(register(form));
+      resetFormData();
+    } catch (error) {
+      if (error.response && error.response.data && error.response.data.errors) {
+        const passwordError = error.response.data.errors.password;
+        setPasswordError(passwordError);
+      }
     }
   };
 
@@ -112,132 +121,133 @@ const Signup = () => {
 
   return (
     <Fragment>
-      {loading ? (
+      {/* {loading ? (
         <Loader />
-      ) : (
-        <div className={styles.signup_container}>
-          <div className={styles.signup_form_container}>
-            <div className={styles.right}>
-              <form
-                className={styles.form_container}
-                onSubmit={handleSubmit}
-                encType="multipart/form-data"
-              >
-                <h2>Create Account</h2>
-                <div className={styles.nameInRow}>
-                  <div className={styles.signUpName}>
-                    <FaceIcon className={styles.icon} />
-                    <input
-                      type="text"
-                      placeholder="First Name"
-                      name="firstName"
-                      onChange={registerHandleChange}
-                      value={firstName}
-                      required
-                      className={styles.nameinput}
-                    />
-                  </div>
-                  <div className={styles.signUpName}>
-                    <input
-                      type="text"
-                      placeholder="Last Name"
-                      name="lastName"
-                      onChange={registerHandleChange}
-                      value={lastName}
-                      required
-                      className={styles.nameinput}
-                    />
-                    <FaceIcon className={styles.icon} />
-                  </div>
-                </div>
+      ) : ( */}
+      <div className={styles.signup_container}>
+        <div className={styles.signup_form_container}>
+          <div className={styles.right}>
+            <form
+              className={styles.form_container}
+              onSubmit={handleSubmit}
+              encType="multipart/form-data"
+            >
+              <h2>Create Account</h2>
+              <div className={styles.nameInRow}>
                 <div className={styles.signUpName}>
-                  <MailOutlineIcon className={styles.icon} />
-                  <input
-                    type="email"
-                    placeholder="Email "
-                    name="email"
-                    onChange={registerHandleChange}
-                    value={email}
-                    required
-                    className={styles.input}
-                  />
-                </div>
-                <div className={styles.signUpName}>
-                  <LocationCityIcon className={styles.icon} />
+                  <FaceIcon className={styles.icon} />
                   <input
                     type="text"
-                    placeholder="Address"
-                    name="address"
+                    placeholder="First Name"
+                    name="firstName"
                     onChange={registerHandleChange}
-                    value={address}
+                    value={firstName}
                     required
-                    className={styles.input}
+                    className={styles.nameinput}
                   />
                 </div>
                 <div className={styles.signUpName}>
-                  <SmartphoneIcon className={styles.icon} />
                   <input
-                    type="Number"
-                    placeholder="Contacts"
-                    name="contact"
+                    type="text"
+                    placeholder="Last Name"
+                    name="lastName"
                     onChange={registerHandleChange}
-                    value={contact}
+                    value={lastName}
                     required
-                    className={styles.input}
-                    size="10"
+                    className={styles.nameinput}
                   />
+                  <FaceIcon className={styles.icon} />
                 </div>
+              </div>
+              <div className={styles.signUpName}>
+                <MailOutlineIcon className={styles.icon} />
+                <input
+                  type="email"
+                  placeholder="Email "
+                  name="email"
+                  onChange={registerHandleChange}
+                  value={email}
+                  required
+                  className={styles.input}
+                />
+              </div>
+              <div className={styles.signUpName}>
+                <LocationCityIcon className={styles.icon} />
+                <input
+                  type="text"
+                  placeholder="Address"
+                  name="address"
+                  onChange={registerHandleChange}
+                  value={address}
+                  required
+                  className={styles.input}
+                />
+              </div>
+              <div className={styles.signUpName}>
+                <SmartphoneIcon className={styles.icon} />
+                <input
+                  type="Number"
+                  placeholder="Contacts"
+                  name="contact"
+                  onChange={registerHandleChange}
+                  value={contact}
+                  required
+                  className={styles.input}
+                  size="10"
+                />
+              </div>
 
-                <div className={styles.signUpName}>
-                  <PasswordInput
-                    placeholder="Password"
-                    name="password"
-                    onChange={registerHandleChange}
-                    value={password}
-                    required
-                  />
-                </div>
-                <div className={styles.signUpName}>
-                  <PasswordInput
-                    placeholder="Confirm Password"
-                    name="confirmPassword"
-                    onChange={registerHandleChange}
-                    value={confirmPassword}
-                    required
-                  />
-                </div>
+              <div className={styles.signUpName}>
+                <PasswordInput
+                  placeholder="Password"
+                  name="password"
+                  onChange={registerHandleChange}
+                  value={password}
+                  required
+                />
+              </div>
 
-                <div id={styles.registerImage}>
-                  <img src={avatarPreview} alt="Avatar Preview" />
-                  <input
-                    type="file"
-                    name="avatar"
-                    accept="image/*"
-                    onChange={registerHandleChange}
-                  />
-                </div>
+              <div className={styles.signUpName}>
+                <PasswordInput
+                  placeholder="Confirm Password"
+                  name="confirmPassword"
+                  onChange={registerHandleChange}
+                  value={confirmPassword}
+                  required
+                />
+              </div>
 
-                <button type="submit" className={styles.green_btn}>
-                  Sign Up
-                </button>
+              <div id={styles.registerImage}>
+                <img src={avatarPreview} alt="Avatar Preview" />
+                <input
+                  type="file"
+                  name="avatar"
+                  accept="image/*"
+                  onChange={registerHandleChange}
+                />
+              </div>
 
-                <div className="aregister">
-                  <span className="aregister_span">
-                    Already Register?{' '}
-                    <Link
-                      className="alogin"
-                      to="/login"
-                      style={{ textDecoration: 'none' }}
-                    >
-                      Login Now
-                    </Link>
-                  </span>
-                </div>
-              </form>
-            </div>
+              <button type="submit" className={styles.green_btn}>
+                Sign Up
+              </button>
+
+              <div className="aregister">
+                <span className="aregister_span">
+                  Already Register?{' '}
+                  <Link
+                    className="alogin"
+                    to="/login"
+                    style={{ textDecoration: 'none' }}
+                  >
+                    Login Now
+                  </Link>
+                </span>
+              </div>
+            </form>
           </div>
         </div>
-      )}
+      </div>
+      {/* )} */}
     </Fragment>
   );
 };

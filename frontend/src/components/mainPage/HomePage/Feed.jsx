@@ -116,19 +116,19 @@ const sliderItems = [
   {
     id: 1,
     title: 'Milk',
-    img: '/images/banner/milkB.png',
+    img: '/images/banner/logo.png',
     desc: 'Fresh Everyday',
   },
   {
     id: 2,
     title: 'Dahi',
-    img: '/images/dahi1.jpg',
+    img: '/images/dahi.png',
     desc: 'Fresh Everyday',
   },
   {
     id: 3,
     title: 'Ghee',
-    img: 'https://cdn.apartmenttherapy.info/image/upload/f_jpg,q_auto:eco,c_fill,g_auto,w_1500,ar_4:3/k%2Farchive%2F143f3f127ade44d817efbf645606142e56c66317',
+    img: '/images/ghee.png',
     desc: 'Fresh Everyday',
   },
 ];

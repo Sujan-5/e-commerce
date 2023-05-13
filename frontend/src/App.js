@@ -38,6 +38,7 @@ import { getAllCategory } from './reduxFeature/actions/categoryAction';
 import CategoryCard from './components/mainPage/HomePage/CategoryCard';
 import UserOrderDetails from './components/mainPage/Orders/UserOrderDetails';
 import UpdateUser from './components/admin/Users/UpdateUser';
+import SearchFilter from './components/mainPage/Filters/SearchFilter';
 
 function App() {
   const dispatch = useDispatch();
@@ -59,6 +60,7 @@ function App() {
         <Route path="/password/reset/:token" element={<ResetPassword />} />
         <Route path="/" exact element={<Navigate replace to="/home" />} />
         <Route path="/allProducts" element={<ProductsPage />} />
+        <Route path="/allProducts/:search" element={<SearchFilter />} />
         <Route path="/cart" element={<CartS />} />
         <Route path="/product/:id" element={<ProductDetails />} />
 

@@ -11,6 +11,7 @@ import {
   Badge,
 } from '@mui/material';
 import {
+  Search,
   DarkMode,
   LightMode,
   Menu,
@@ -24,9 +25,16 @@ import Login from '@mui/icons-material/Login';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAlert } from 'react-alert';
 import { logout } from '../../../reduxFeature/actions/userAction';
-import Search from '../Filters/SearchFilter';
+import logoImage from '../../../displayProductImages/logo.png';
 
 const FlexBetween = styled(Box)({
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  position: 'sticky',
+});
+
+const FlexB = styled(Box)({
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
@@ -73,6 +81,8 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const alert = useAlert();
 
+  const [keyword, setKeyword] = useState('');
+
   const { user, loading } = useSelector((state) => state.user);
 
   const { cartItems } = useSelector((state) => state.cart);
@@ -96,6 +106,15 @@ const Navbar = () => {
 
   const fullName = `${user && user.firstName}`;
 
+  const searchSubmitHandler = (e) => {
+    e.preventDefault();
+    if (keyword.trim()) {
+      navigate(`/allProducts/${keyword}`);
+    } else {
+      navigate('/allProducts');
+    }
+  };
+
   return (
     <FlexBetween padding="1rem 6%" backgroundColor={alt}>
       <FlexBetween gap="1.75rem">
@@ -108,17 +127,30 @@ const Navbar = () => {
           }}
           onClick={() => navigate('/')}
         >
-          CityWide
+          <img
+            src={logoImage}
+            style={{
+              width: '45px',
+            }}
+          />
         </Logo>
         {isNonMobileScreens && (
-          <FlexBetween
-            backgroundColor="#f7f8f9"
-            borderRadius="9px"
-            gap="3rem"
-            padding="0.1rem 1.5rem"
-          >
-            {/* <Outlet render={(props) => return <Search {...props}/>} /> */}
-            <Search />
+          <FlexBetween>
+            <FlexB
+              backgroundColor={neutralLight}
+              borderRadius="9px"
+              padding="0.2rem 1.5rem"
+            >
+              <InputBase
+                placeholder="Search..."
+                onChange={(e) => setKeyword(e.target.value)}
+              />
+            </FlexB>
+            <IconButton onClick={searchSubmitHandler}>
+              <Button variant="contained" onClick={searchSubmitHandler}>
+                <Search />
+              </Button>
+            </IconButton>
           </FlexBetween>
         )}
       </FlexBetween>
