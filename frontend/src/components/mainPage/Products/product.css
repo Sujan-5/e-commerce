@@ -1,6 +1,7 @@
 .productCard {
   width: 14vmax;
   display: flex;
+  height: auto;
   flex-direction: column;
   text-decoration: none;
   background-color: rgb(255, 255, 255);
@@ -12,7 +13,9 @@
 
 .productCard > img {
   width: 14vmax;
-  height: 100%;
+  height: 16vmax;
+  object-fit: cover;
+  object-position: center;
 }
 
 .productCard > div {

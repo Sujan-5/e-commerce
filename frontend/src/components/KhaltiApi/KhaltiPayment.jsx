@@ -14,7 +14,7 @@ const KhaltiPayment = ({ order, cartItems, totalPrice, user }) => {
     eventHandler: {
       async onSuccess(payload) {
         // hit merchant api for initiating verfication
-        console.log(payload);
+
         order.orderItems = JSON.stringify(cartItems);
         const ord = {
           ...order,

@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const PageNavigation = ({ title, category }) => {
   const styles = {
@@ -20,12 +20,6 @@ const PageNavigation = ({ title, category }) => {
   };
 
   return (
-    // <div style={styles.wrapper}>
-    //   <NavLink to="/" style={styles.link}>
-    //     Home&nbsp;
-    //   </NavLink>{' '}
-    //   {'>'} {title}
-    // </div>
     <div style={styles.wrapper}>
       <NavLink to="/" style={styles.link}>
         Home&nbsp;
@@ -33,8 +27,8 @@ const PageNavigation = ({ title, category }) => {
       {category && (
         <>
           {' > '}
-          <NavLink to={`/${category}`} style={styles.link}>
-            {category}
+          <NavLink to={`/category/${category}`} style={styles.link}>
+            &nbsp;{category}&nbsp;
           </NavLink>
         </>
       )}

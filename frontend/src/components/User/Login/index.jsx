@@ -27,15 +27,16 @@ const Login = () => {
   };
 
   useEffect(() => {
-    if (error) {
-      alert.error(error);
-      dispatch(errorClear());
-    }
+    dispatch(errorClear());
     if (isAuthenticated) {
       alert.success('Login Successfull');
       navigate('/home');
     }
-  }, [dispatch, error, alert, navigate, isAuthenticated]);
+    if (error && error !== 'Please Login to access this resource') {
+      alert.error(error);
+      dispatch(errorClear());
+    }
+  }, [error, isAuthenticated]);
 
   const queryParams = new URLSearchParams(location.search);
   const verified = queryParams.get('verified');

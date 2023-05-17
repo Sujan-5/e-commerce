@@ -56,6 +56,7 @@ export const userReducer = (state = { user: {} }, action) => {
         loading: false,
         user: null,
         isAuthenticated: false,
+        error: null,
       };
 
     case LOGIN_FAIL:

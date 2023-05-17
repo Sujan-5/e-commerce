@@ -97,7 +97,7 @@ export const CartS = () => {
                     </button>
                   </div>
                   <p className="cartsubtotal">
-                    {`Rs${item.quantity * item.price}`}{' '}
+                    {`Rs ${item.quantity * item.price}`}{' '}
                   </p>
                   <p
                     onClick={() => deleteCartItems(item.product)}

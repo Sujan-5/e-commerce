@@ -29,7 +29,11 @@ import {
   passwordForgotReducer,
 } from './reduxFeature/reducers/Users/profileReducer';
 import { cartReducer } from './reduxFeature/reducers/ShoppingCart/cartReducer';
-import { writeReviewReducer } from './reduxFeature/reducers/Review/reviewReducer';
+import {
+  allReviewsReducer,
+  reviewReducer,
+  writeReviewReducer,
+} from './reduxFeature/reducers/Review/reviewReducer';
 import { productStockReducer } from './reduxFeature/reducers/Products/stockReducer';
 import {
   adminOrdersReducer,
@@ -70,6 +74,8 @@ const reducer = combineReducers({
 
   //review
   review: writeReviewReducer,
+  allreviews: allReviewsReducer,
+  deleteReview: reviewReducer,
 });
 
 let initialState = {

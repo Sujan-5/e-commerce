@@ -33,13 +33,12 @@ const OrderDetails = () => {
       province: shippingDetails.province,
       contact: shippingDetails.contact,
       orderItems: cartItems,
-
       shippingPrice: shippingCharges,
       totalPrice: totalPrice,
-
+      itemPrice: allTotal,
       orderStatus: 'processing',
     };
-    console.log('check', orderObject);
+
     setOrder(orderObject);
   }, []);
 

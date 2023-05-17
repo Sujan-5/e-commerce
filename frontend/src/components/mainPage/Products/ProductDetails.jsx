@@ -100,7 +100,7 @@ const ProductDetails = () => {
       ) : (
         <Fragment>
           <div className="wrapper">
-            <PageNavigation title={product.name} />
+            <PageNavigation category={product.category} title={product.name} />
           </div>
           <div className="ProductDetails">
             <Carousel className="Carousel">

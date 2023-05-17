@@ -7,7 +7,7 @@ import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
 import PeopleIcon from '@mui/icons-material/People';
 import { useSelector, useDispatch } from 'react-redux';
-import { Line } from 'react-chartjs-2';
+import { Line, Bar } from 'react-chartjs-2';
 import { Chart, registerables } from 'chart.js';
 import { getAdminProduct } from '../../reduxFeature/actions/productAction';
 import { allOrdersAdmin } from '../../reduxFeature/actions/OrderAction';
@@ -34,6 +34,15 @@ export const Dashboard = () => {
       revenue += item.totalPrice;
     });
 
+  // let cogs = 0;
+  // orders.forEach((order) => {
+  //   order.products.forEach((product) => {
+  //     cogs += product.costPrice * product.quantity;
+  //   });
+  // });
+
+  // let profit = revenue - cogs;
+
   const lineState = {
     labels: ['Initial Amount', 'Amount Earned'],
     datasets: [
@@ -43,6 +52,39 @@ export const Dashboard = () => {
         data: [0, revenue],
       },
     ],
+  };
+
+  const data = {
+    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+    datasets: [
+      {
+        label: 'Revenue',
+        backgroundColor: '#3f51b5',
+        borderColor: '#3f51b5',
+        borderWidth: 1,
+        hoverBackgroundColor: '#1a237e',
+        hoverBorderColor: '#1a237e',
+        data: [0, revenue],
+      },
+      {
+        label: 'Profit',
+        backgroundColor: '#4caf50',
+        borderColor: '#4caf50',
+        borderWidth: 1,
+        hoverBackgroundColor: '#1b5e20',
+        hoverBorderColor: '#1b5e20',
+        data: [0, 100],
+      },
+    ],
+  };
+
+  const options = {
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      xAxes: [{ stacked: true }],
+      yAxes: [{ stacked: true }],
+    },
   };
 
   return (
@@ -126,6 +168,9 @@ export const Dashboard = () => {
         </div>
         <div className="lineChart1">
           <Line data={lineState} />
+        </div>
+        <div style={{ height: '300px', width: '100%' }}>
+          <Bar data={data} options={options} />
         </div>
       </div>
     </div>

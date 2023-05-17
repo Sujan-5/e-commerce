@@ -25,7 +25,6 @@ exports.createOrder = catchAsyncError(async (req, res, next) => {
     contact,
     orderItems,
     paymentInfo,
-
     totalPrice,
     paidAt: Date.now(),
     user: req.user._id,
@@ -95,14 +94,15 @@ exports.updateOrders = catchAsyncError(async (req, res, next) => {
     return next(new ErrorHandler('Already delivered the order', 400));
   }
 
-  order.orderItems.forEach(async (ord) => {
-    await updateStock(ord.product, ord.quantity);
-  });
-
   order.orderStatus = req.body.status;
 
   if (req.body.status === 'Delivered') {
     order.deliveredAt = Date.now();
+    order.orderItems.forEach(async (ord) => {
+      const product = await Product.findById(ord.product);
+      product.stock -= ord.quantity;
+      await product.save({ validateBeforeSave: false });
+    });
   }
 
   await order.save({ validateBeforeSave: false });
@@ -111,14 +111,6 @@ exports.updateOrders = catchAsyncError(async (req, res, next) => {
     success: true,
   });
 });
-
-async function updateStock(id, quantity) {
-  const product = await Product.findById(id);
-
-  product.stock -= quantity;
-
-  await product.save({ validateBeforeSave: false });
-}
 
 // order delete
 exports.deleteOrder = catchAsyncError(async (req, res, next) => {
