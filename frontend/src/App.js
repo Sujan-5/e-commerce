@@ -42,12 +42,11 @@ import SearchFilter from './components/mainPage/Filters/SearchFilter';
 
 function App() {
   const dispatch = useDispatch();
-  const { user, isAuthenticated } = useSelector((state) => state.user);
 
   useEffect(() => {
     dispatch(getAllCategory());
     store.dispatch(userLoad());
-  }, [dispatch]);
+  }, []);
 
   return (
     <Router>

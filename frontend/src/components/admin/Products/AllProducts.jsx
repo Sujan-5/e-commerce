@@ -20,7 +20,7 @@ import { useNavigate } from 'react-router-dom';
 import { PRODUCT_DELETE_RESET } from '../../../reduxFeature/reducers/Products/productConstants';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 
-export const AllProducts = ({ history }) => {
+export const AllProducts = () => {
   const dispatch = useDispatch();
 
   const alert = useAlert();

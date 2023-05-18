@@ -31,14 +31,18 @@ import {
 
 //get products for product page
 export const getProduct =
-  (keyword = '', currentPage = 1, price = [0, 2000]) =>
+  (keyword = '', currentPage = 1, price = [0, 2000], category, ratings = 0) =>
   async (dispatch) => {
     try {
       dispatch({
         type: PRODUCT_ALL_REQUEST,
       });
 
-      let urll = `/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}`;
+      let urll = `/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}`;
+
+      if (category) {
+        urll = `/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category.title}&ratings[gte]=${ratings}`;
+      }
 
       const { data } = await axios.get(urll);
 

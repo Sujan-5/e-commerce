@@ -20,6 +20,11 @@ import {
   OWN_ORDER_REQUEST,
   OWN_ORDER_SUCCESS,
   OWN_ORDER_FAIL,
+
+  //cancel order
+  CANCEL_ORDER_REQUEST,
+  CANCEL_ORDER_SUCCESS,
+  CANCEL_ORDER_FAIL,
 } from '../reducers/Orders/orderConstants';
 
 export const allOrdersAdmin = () => async (dispatch) => {
@@ -96,6 +101,23 @@ export const myOrders = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: OWN_ORDER_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const cancelOrder = (orderId) => async (dispatch) => {
+  try {
+    dispatch({ type: CANCEL_ORDER_REQUEST });
+
+    await axios.post(`/api/ord/order/cancel/${orderId}`);
+
+    dispatch({ type: CANCEL_ORDER_SUCCESS, payload: orderId });
+    window.location.reload(false);
+  } catch (error) {
+    console.log(error);
+    dispatch({
+      type: CANCEL_ORDER_FAIL,
       payload: error.response.data.message,
     });
   }

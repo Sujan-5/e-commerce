@@ -100,6 +100,7 @@ export const deleteCategory = (id) => async (dispatch) => {
       type: CATEGORY_DELETE_SUCCESS,
       payload: data.success,
     });
+    window.location.reload(false);
   } catch (error) {
     dispatch({
       type: CATEGORY_DELETE_FAIL,

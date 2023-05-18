@@ -122,13 +122,13 @@ const sliderItems = [
   {
     id: 2,
     title: 'Dahi',
-    img: '/images/dahi.png',
+    img: '/images/banner/dahi.png',
     desc: 'Fresh Everyday',
   },
   {
     id: 3,
     title: 'Ghee',
-    img: '/images/ghee.png',
+    img: '/images/banner/ghee.png',
     desc: 'Fresh Everyday',
   },
 ];

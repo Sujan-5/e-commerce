@@ -123,6 +123,7 @@ exports.getProducts = catchAsyncError(async (req, res, next) => {
     .search()
     .filter()
     .pagination(resPerPage);
+
   const products = await keyFeature.query;
 
   res.status(200).json({
@@ -245,9 +246,13 @@ exports.createNewReview = catchAsyncError(async (req, res, next) => {
     product.numofReviews = product.reviews.length;
   }
 
-  product.ratings =
-    product.reviews.reduce((acc, item) => item.rating + acc, 0) /
-    product.reviews.length;
+  let avg = 0;
+
+  product.reviews.forEach((rev) => {
+    avg += rev.rating;
+  });
+
+  product.ratings = avg / product.reviews.length;
 
   await product.save({ validateBeforeSave: false });
 

@@ -20,6 +20,9 @@ import {
   OWN_ORDER_REQUEST,
   OWN_ORDER_SUCCESS,
   OWN_ORDER_FAIL,
+  CANCEL_ORDER_REQUEST,
+  CANCEL_ORDER_SUCCESS,
+  CANCEL_ORDER_FAIL,
 } from './orderConstants';
 
 export const adminOrdersReducer = (state = { orders: [] }, action) => {
@@ -117,6 +120,7 @@ export const orderDetailsReducer = (state = { order: {} }, action) => {
 export const usersOrdersReducer = (state = { orders: [] }, action) => {
   switch (action.type) {
     case OWN_ORDER_REQUEST:
+    case CANCEL_ORDER_REQUEST:
       return {
         loading: true,
       };
@@ -127,7 +131,21 @@ export const usersOrdersReducer = (state = { orders: [] }, action) => {
         myorders: action.payload,
       };
 
+    case CANCEL_ORDER_SUCCESS:
+      const updatedOrders = state.orders.map((order) =>
+        order._id === action.payload
+          ? { ...order, orderStatus: 'Cancelled' }
+          : order
+      );
+
+      return {
+        ...state,
+        loading: false,
+        myorders: updatedOrders,
+      };
+
     case OWN_ORDER_FAIL:
+    case CANCEL_ORDER_FAIL:
       return {
         loading: false,
         error: action.payload,

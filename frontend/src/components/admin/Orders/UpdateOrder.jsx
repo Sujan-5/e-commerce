@@ -104,7 +104,7 @@ const UpdateOrder = () => {
                       </p>
                     </div>
 
-                    <div>
+                    <div className="amountContainer">
                       <p>Amount:</p>
                       <span>{order.totalPrice && order.totalPrice}</span>
                     </div>

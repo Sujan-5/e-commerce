@@ -31,17 +31,11 @@ export const Dashboard = () => {
   let revenue = 0;
   orders &&
     orders.forEach((item) => {
-      revenue += item.totalPrice;
+      console.log(item);
+      if (item.orderStatus !== 'Cancelled') {
+        revenue += item.totalPrice;
+      }
     });
-
-  // let cogs = 0;
-  // orders.forEach((order) => {
-  //   order.products.forEach((product) => {
-  //     cogs += product.costPrice * product.quantity;
-  //   });
-  // });
-
-  // let profit = revenue - cogs;
 
   const lineState = {
     labels: ['Initial Amount', 'Amount Earned'],
@@ -64,16 +58,7 @@ export const Dashboard = () => {
         borderWidth: 1,
         hoverBackgroundColor: '#1a237e',
         hoverBorderColor: '#1a237e',
-        data: [0, revenue],
-      },
-      {
-        label: 'Profit',
-        backgroundColor: '#4caf50',
-        borderColor: '#4caf50',
-        borderWidth: 1,
-        hoverBackgroundColor: '#1b5e20',
-        hoverBorderColor: '#1b5e20',
-        data: [0, 100],
+        data: [revenue],
       },
     ],
   };

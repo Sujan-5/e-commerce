@@ -47,7 +47,6 @@ export const productsReducer = (state = { products: [] }, action) => {
         products: action.payload.products,
         productsCount: action.payload.productsCount,
         resPerPage: action.payload.resPerPage,
-        productFilteredCount: action.payload.productFilteredCount,
       };
 
     case ADMIN_PRODUCT_SUCCESS: //admin

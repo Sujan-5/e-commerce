@@ -4,7 +4,6 @@
   gap: 30px;
   margin: 30px auto;
   padding: 20px;
-  /* background-color: #f4f4f4; */
 }
 
 .updateshippingArea {
@@ -23,6 +22,11 @@
   margin-right: 10px;
 }
 
+.amountContainer {
+  display: flex;
+  align-items: center;
+}
+
 .updateorderDetailsBox {
   display: flex;
   flex-direction: column;
@@ -31,7 +35,6 @@
 .updateorderDetailsBox > div {
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
 }
 
 .updateorderDetailsBox p {

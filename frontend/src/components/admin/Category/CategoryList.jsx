@@ -27,8 +27,8 @@ export const CategoryList = () => {
 
   const { error, categories } = useSelector((state) => state.categories);
 
-  const { category } = useSelector((state) => state.category) || {};
-  const { error: deleteError, isDeleted } = category || {};
+  const { error: deleteError, isDeleted } =
+    useSelector((state) => state.category) || {};
 
   const deleteCategoryHandler = (id) => {
     dispatch(deleteCategory(id));
@@ -39,6 +39,7 @@ export const CategoryList = () => {
       alert.error(error);
       dispatch(errorClear());
     }
+
     if (deleteError) {
       alert.error(deleteError);
       dispatch(errorClear());

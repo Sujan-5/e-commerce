@@ -25,8 +25,18 @@ const ResetPassword = () => {
 
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [passwordError, setPasswordError] = useState('');
 
   const handleResetPassSubmit = async (e) => {
+    if (password !== confirmPassword) {
+      setPasswordError('Password does not match');
+      return;
+    }
+
+    if (password.length < 8) {
+      setPasswordError(' Password should be at least 8 Characters');
+    }
+
     e.preventDefault();
 
     const form = new FormData();
@@ -70,6 +80,17 @@ const ResetPassword = () => {
                   className="reNewPass"
                 />
               </div>
+              {passwordError && (
+                <div
+                  style={{
+                    fontSize: '0.5rem',
+                    alignItems: 'flex-start',
+                    color: 'red',
+                  }}
+                >
+                  {passwordError}
+                </div>
+              )}
               <div className="resetConfirmPass">
                 <LockIcon />
                 <PasswordInput
@@ -81,7 +102,17 @@ const ResetPassword = () => {
                   className="confNewPass"
                 />
               </div>
-
+              {passwordError && (
+                <div
+                  style={{
+                    fontSize: '0.5rem',
+                    alignItems: 'flex-start',
+                    color: 'red',
+                  }}
+                >
+                  {passwordError}
+                </div>
+              )}
               <button type="submit" className="green_btn">
                 Send
               </button>

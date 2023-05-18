@@ -33,8 +33,8 @@ export const OrdersList = () => {
 
   const columns = [
     {
-      field: 'id',
-      headerName: 'Order Id',
+      field: 'name',
+      headerName: 'Product Name',
       minWidth: 250,
       flex: 0.3,
     },
@@ -92,8 +92,11 @@ export const OrdersList = () => {
     orders
       .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
       .forEach((item) => {
+        const itemNames = item.orderItems.map((orderItem) => orderItem.name);
+        const nameString = itemNames.join(', ');
         rows.push({
           id: item._id,
+          name: nameString,
           items_quantity: item.orderItems.length,
           amount: item.totalPrice,
           status: item.orderStatus,

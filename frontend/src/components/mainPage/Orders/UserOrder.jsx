@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { DataGrid } from '@material-ui/data-grid';
 // import { DataGrid } from '@mui/x-data-grid';
 import './userOrder.css';
@@ -6,11 +6,20 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useAlert } from 'react-alert';
 import LaunchIcon from '@material-ui/icons/Launch';
+import IconButton from '@material-ui/core/IconButton';
+import CancelIcon from '@material-ui/icons/Cancel';
 import {
+  cancelOrder,
   errorClear,
   myOrders,
 } from '../../../reduxFeature/actions/OrderAction';
 import Loader from '../FrontFeatures/Loading/Loader';
+import Dialog from '@material-ui/core/Dialog';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogActions from '@material-ui/core/DialogActions';
+import Button from '@material-ui/core/Button';
 
 const UserOrder = () => {
   const dispatch = useDispatch();
@@ -18,6 +27,21 @@ const UserOrder = () => {
   const alert = useAlert();
 
   const { loading, error, myorders } = useSelector((state) => state.myOrders);
+
+  const [openDialog, setOpenDialog] = useState(false);
+
+  const handleCancelOrder = () => {
+    setOpenDialog(true);
+  };
+
+  const handleConfirmCancel = (orderId) => {
+    setOpenDialog(false);
+    dispatch(cancelOrder(orderId));
+  };
+
+  const handleCancel = () => {
+    setOpenDialog(false);
+  };
 
   const columns = [
     {
@@ -32,6 +56,7 @@ const UserOrder = () => {
       headerName: 'Status',
       minWidth: 150,
       flex: 0.2,
+      type: 'text',
       cellClassName: (params) => {
         return params.getValue(params.id, 'status') === 'Delivered'
           ? 'greenColor'
@@ -62,15 +87,45 @@ const UserOrder = () => {
       type: 'number',
       sortable: false,
       renderCell: (params) => {
+        const orderId = params.getValue(params.id, 'id');
+        const orderStatus = params.getValue(params.id, 'status');
+
         return (
-          <Link to={`/myorder/details/${params.getValue(params.id, 'id')}`}>
-            <LaunchIcon />
-          </Link>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <Link to={`/myorder/details/${orderId}`}>
+              <LaunchIcon />
+            </Link>
+            {orderStatus !== 'Cancelled' && (
+              <Fragment>
+                <IconButton onClick={handleCancelOrder}>
+                  <CancelIcon />
+                </IconButton>
+                <Dialog open={openDialog} onClose={handleCancel}>
+                  <DialogTitle>Confirmation</DialogTitle>
+                  <DialogContent>
+                    <DialogContentText>
+                      Are you sure you want to cancel this order?
+                    </DialogContentText>
+                  </DialogContent>
+                  <DialogActions>
+                    <Button onClick={handleCancel}>Cancel</Button>
+                    <Button
+                      onClick={() => handleConfirmCancel(orderId)}
+                      color="primary"
+                    >
+                      Confirm
+                    </Button>
+                  </DialogActions>
+                </Dialog>
+              </Fragment>
+            )}
+          </div>
         );
       },
     },
   ];
   const rows = [];
+
   myorders &&
     myorders
       .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
@@ -85,8 +140,6 @@ const UserOrder = () => {
           amount: item.totalPrice,
         });
       });
-
-  console.log();
 
   useEffect(() => {
     if (error) {

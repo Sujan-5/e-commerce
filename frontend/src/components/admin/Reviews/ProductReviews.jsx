@@ -134,7 +134,7 @@ export const ProductReviews = () => {
               <SearchIcon />
               <input
                 type="text"
-                placeholder="Product Name"
+                placeholder="Product Id"
                 required
                 value={productId}
                 onChange={(e) => setProductId(e.target.value)}

@@ -15,7 +15,7 @@ const Signup = () => {
   const dispatch = useDispatch();
   const alert = useAlert();
 
-  const { error, loading, success } = useSelector((state) => state.user);
+  const { error, success } = useSelector((state) => state.user);
 
   const [data, setData] = useState({
     firstName: '',
@@ -44,6 +44,14 @@ const Signup = () => {
   const [passwordError, setPasswordError] = useState('');
 
   const handleSubmit = async (e) => {
+    if (password !== confirmPassword) {
+      setPasswordError('Password does not match');
+      return;
+    }
+
+    if (password.length < 8) {
+      setPasswordError(' Password should be at least 8 Characters');
+    }
     e.preventDefault();
     const form = new FormData();
     form.set('firstName', firstName);
@@ -54,27 +62,14 @@ const Signup = () => {
     form.set('password', password);
     form.set('confirmPassword', confirmPassword);
     form.set('avatar', avatar);
-    // dispatch(register(form));
-
-    if (password !== confirmPassword) {
-      setPasswordError('Password does not match');
-      return;
-    }
 
     if (contact.length < 10 || contact.length > 10) {
       alert.error('Phone Number should be 10 digits Long');
       return;
     }
 
-    try {
-      await dispatch(register(form));
-      resetFormData();
-    } catch (error) {
-      if (error.response && error.response.data && error.response.data.errors) {
-        const passwordError = error.response.data.errors.password;
-        setPasswordError(passwordError);
-      }
-    }
+    dispatch(register(form));
+    resetFormData();
   };
 
   const resetFormData = () => {
@@ -113,7 +108,7 @@ const Signup = () => {
       alert.error(error);
       dispatch(errorClear());
     }
-
+    console.log(success);
     if (success) {
       alert.success(success);
     }
@@ -206,6 +201,18 @@ const Signup = () => {
                   required
                 />
               </div>
+              {passwordError && (
+                <div
+                  className={styles.error_message}
+                  style={{
+                    fontSize: '0.5rem',
+                    alignItems: 'flex-start',
+                    color: 'red',
+                  }}
+                >
+                  {passwordError}
+                </div>
+              )}
 
               <div className={styles.signUpName}>
                 <PasswordInput
@@ -216,6 +223,18 @@ const Signup = () => {
                   required
                 />
               </div>
+              {passwordError && (
+                <div
+                  className={styles.error_message}
+                  style={{
+                    fontSize: '0.5rem',
+
+                    color: 'red',
+                  }}
+                >
+                  {passwordError}
+                </div>
+              )}
 
               <div id={styles.registerImage}>
                 <img src={avatarPreview} alt="Avatar Preview" />

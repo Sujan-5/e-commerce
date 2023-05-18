@@ -27,14 +27,13 @@ const Login = () => {
   };
 
   useEffect(() => {
-    dispatch(errorClear());
+    if (error) {
+      alert.error(error);
+      dispatch(errorClear());
+    }
     if (isAuthenticated) {
       alert.success('Login Successfull');
       navigate('/home');
-    }
-    if (error && error !== 'Please Login to access this resource') {
-      alert.error(error);
-      dispatch(errorClear());
     }
   }, [error, isAuthenticated]);
 

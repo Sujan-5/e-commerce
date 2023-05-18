@@ -100,8 +100,9 @@ const OrderDetails = () => {
                     <div key={item.product}>
                       <img src={item.image} alt="Product" />
                       <Link to={`/product/${item.product}`}>
-                        {item.name}
+                        {item.name}&nbsp;
                       </Link>{' '}
+                      <hr />
                       <span>
                         {item.quantity} X ₹{item.price} = <b>₹{item.price}</b>
                       </span>

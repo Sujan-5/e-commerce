@@ -10,6 +10,7 @@ import {
 } from '../../reduxFeature/actions/cartAction';
 import { useAlert } from 'react-alert';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
 export const CartS = () => {
   const navigate = useNavigate();
@@ -67,9 +68,9 @@ export const CartS = () => {
         <Fragment>
           <div className="top">
             <Link to="/">
+              <ArrowBackIosIcon />
               <button className="shopbutton">More Shopping</button>
             </Link>
-            <button className="checkOut">CheckOut</button>
           </div>
           <div className="cartContainer">
             <div className="cartheading">

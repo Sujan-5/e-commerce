@@ -73,11 +73,10 @@ const UpdateProfile = () => {
     if (isUpdated) {
       alert.success('Profile Updated Successfully');
       dispatch(userLoad());
-      navigate('/account');
 
       dispatch({ type: UPDATE_DETAILS_RESET });
     }
-  }, [dispatch, error, alert, navigate, user, isUpdated]);
+  }, [dispatch, error, alert, user, isUpdated]);
 
   return (
     <Fragment>
