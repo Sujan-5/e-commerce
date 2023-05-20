@@ -3,7 +3,7 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 120vh;
 }
 
 .headingUpdateProd {
@@ -21,8 +21,8 @@
   margin: auto;
   padding: 3vmax;
   justify-content: space-evenly;
-  height: 80%;
-  width: 40vh;
+  height: 100%;
+  width: 60vh;
   background-color: #fff;
   border: 1px solid rgba(0, 0, 0, 0.267);
   border-radius: 8px;
@@ -44,7 +44,6 @@
   box-sizing: border-box;
   border: none;
   border-bottom: 2px solid rgba(0, 0, 0, 0.267);
-  font: 300 0.9vmax;
   outline: none;
   transition: all 0.2s;
 }
@@ -63,10 +62,10 @@
 }
 
 #productUpdateformfile > input {
-  display: none;
+  display: block;
 }
 
-#productUpdateformfile > input::file-selector-button {
+#productUpdateformfile > .file-selector-button {
   cursor: pointer;
   width: 100%;
   z-index: 2;

@@ -61,7 +61,9 @@ const CreateProduct = () => {
     formData.set('description', description);
     formData.set('category', category);
     formData.set('stock', Stock);
-
+    // for (let x of formData.entries()) {
+    //   console.log(x);
+    // }
     dispatch(createProduct(formData));
   };
 

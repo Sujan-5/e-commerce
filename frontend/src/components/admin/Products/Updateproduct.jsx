@@ -121,6 +121,8 @@ const Updateproduct = () => {
         if (reader.readyState === 2) {
           setImagesPreview((old) => [...old, reader.result]);
           setImages((old) => [...old, reader.result]);
+          // setImagesPreview([reader.result]);
+          // setImages([reader.result]);
         }
       };
 
@@ -198,7 +200,7 @@ const Updateproduct = () => {
             <div id="productUpdateformfile">
               <input
                 type="file"
-                name="avatar"
+                name="product"
                 accept="image/*"
                 onChange={productImageChange}
                 multiple
@@ -217,9 +219,10 @@ const Updateproduct = () => {
             </div>
 
             <div id="updateProductFormImage">
-              {imagesPreview.map((image, index) => (
-                <img key={index} src={image} alt="Product Preview" />
-              ))}
+              {imagesPreview &&
+                imagesPreview?.map((image, index) => (
+                  <img key={index} src={image} alt="Product Preview" />
+                ))}
             </div>
 
             <Button

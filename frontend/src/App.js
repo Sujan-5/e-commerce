@@ -62,7 +62,6 @@ function App() {
         <Route path="/allProducts/:search" element={<SearchFilter />} />
         <Route path="/cart" element={<CartS />} />
         <Route path="/product/:id" element={<ProductDetails />} />
-
         <Route path="/account" element={<UserProfile />} exact />
         <Route path="/update/profile" element={<UpdateProfile />} exact />
         <Route path="/update/password" element={<UpdatePassword />} exact />

@@ -128,6 +128,7 @@ const ProductDetails = () => {
               </div>
               <div className="block3">
                 <h1>{`Rs ${product.price}`}</h1>
+                <p>{product.stock}</p>
                 <div className="block31">
                   <button
                     disabled={product.stock === 0} //for BUG previously this line was not here
